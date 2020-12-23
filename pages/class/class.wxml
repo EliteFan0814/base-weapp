@@ -1,0 +1,44 @@
+<!-- pages/class/class.wxml -->
+<view class="container">
+  <view class="class-wrap">
+    <base-search></base-search>
+    <view class="content-wrap">
+      <van-tree-select items="{{ classList }}" main-active-class="active-class" height="55vw" main-active-index="{{ mainActiveIndex }}" bind:click-nav="onClickNav" bind:click-item="onClickItem">
+        <view slot="content">
+          <view class="goods-list">
+            <view class="goods-item flex">
+              <image src="https://dummyimage.com/223x183/000/fff" class="good-img"></image>
+              <view class="goods-info flex-ds">
+                <view class="top-wrap">
+                  <view class="title omit-1">海外直采 泰国鲜虾大号泰国鲜虾大号</view>
+                  <view class="sale">已售30021份/剩214份</view>
+                </view>
+                <view class="price flex">
+                  <view class="left-price"><text class="symbol">￥</text>14.0</view>
+                  <view class="btn">
+                    <image src="/static/img/class/shop-cart.png"></image>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="goods-item flex">
+              <image src="https://dummyimage.com/223x183/000/fff" class="good-img"></image>
+              <view class="goods-info flex-ds">
+                <view class="top-wrap">
+                  <view class="title omit-1">海外直采 泰国鲜虾大号泰国鲜虾大号</view>
+                  <view class="sale">已售30021份/剩214份</view>
+                </view>
+                <view class="price flex">
+                  <view class="left-price"><text class="symbol">￥</text>14.0</view>
+                  <view class="btn">
+                    <image src="/static/img/class/shop-cart.png"></image>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </van-tree-select>
+    </view>
+  </view>
+</view>

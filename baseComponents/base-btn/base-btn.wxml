@@ -1,0 +1,4 @@
+<view wx:if="{{!disabled}}" class="base-btn btn-style {{isPushing?'is-pushing':''}}" bind:tap="handleTap">
+  {{btnName}}
+</view>
+<view wx:else class="base-btn btn-style is-pushing">{{btnName}}</view>

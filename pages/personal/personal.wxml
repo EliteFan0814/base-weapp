@@ -1,0 +1,59 @@
+<!-- pages/personal/personal.wxml -->
+<view class="container">
+  <view class="personal-wrap">
+    <view class="top-info" style="height:{{142+capsuleToTop}}px;">
+      <image src="/static/img/personal/bg.png" class="bg" style="height:{{142+capsuleToTop}}px;"></image>
+      <view class="info-wrap" style="padding-top:{{capsuleToTop}}px;">
+        <view class="title">生鲜配送</view>
+        <view class="user flex">
+          <image class="avatar"></image>
+          <view class="info">
+            <view class="name flex">
+              <view>周星星</view>
+              <view class="grade">团长</view>
+            </view>
+            <view class="phone">15000000000</view>
+          </view>
+        </view>
+        <view class="balance flex">
+          <view>余额：364.5</view>
+          <view class="flex">
+            <image src="/static/img/personal/diamond.png"></image>
+            <text class="text-info">团长信息</text>
+            <van-icon name="arrow" />
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="order-list frame flex">
+      <view wx:for="{{orderList}}" wx:key="*this" class="order-item flex-dc">
+        <image src="{{item.img}}" class="order-icon"></image>
+        <text>{{item.name}}</text>
+      </view>
+      <view class="flex">
+        <view class="slide"></view>
+        <view class="all">全部订单</view>
+      </view>
+    </view>
+    <view class="my-team frame">
+      <view class="title">我的团队</view>
+      <view class="content flex">
+        <view class="item flex-dc">
+          <view class="red">463.5</view>
+          <view>消费金额</view>
+        </view>
+        <view class="item  flex-dc">
+          <view class="gold">56.3</view>
+          <view>佣金金额</view>
+        </view>
+        <base-btn btn-name="查看团队" btn-style="btn-style"></base-btn>
+      </view>
+    </view>
+    <view class="operate-list frame">
+      <view wx:for="{{operateList}}" wx:key="*this" class="operate-item flex">
+        <text class="name">{{item.name}}</text>
+        <van-icon color="#999999" name="arrow" />
+      </view>
+    </view>
+  </view>
+</view>

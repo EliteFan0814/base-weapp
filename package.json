@@ -1,0 +1,15 @@
+{
+  "name": "shengxian_miniprogram",
+  "version": "0.0.1",
+  "description": "weapp",
+  "main": "app.js",
+  "dependencies": {
+    "@vant/weapp": "^1.6.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "elitefan",
+  "license": "ISC"
+}

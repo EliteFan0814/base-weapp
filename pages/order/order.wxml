@@ -1,0 +1,59 @@
+<!-- pages/order/order.wxml -->
+<view class="container">
+  <van-tabs active="{{ active }}" sticky bind:change="onChange">
+    <van-tab title="标签 1">内容 1</van-tab>
+    <van-tab title="标签 2">内容 2</van-tab>
+    <van-tab title="标签 3">内容 3</van-tab>
+    <van-tab title="标签 4">内容 4</van-tab>
+  </van-tabs>
+  <view class="order-list">
+    <view class="order-item">
+      <view class="title flex">
+        <text>订单号：k4234</text>
+        <text class="red">待付款</text>
+      </view>
+      <view class="info">
+        <view class="goods-list">
+          <view class="goods-item flex">
+            <image src="https://dummyimage.com/150x150/000/fff" class="good-img"></image>
+            <view class="right-info flex-dc">
+              <view class="name omit-1">台湾大香肠 超香 超大 超美味 台湾大香肠 超香 超大 超美味超香 超大</view>
+              <view class="spec">规格：500ml</view>
+              <view class="price flex">
+                <text>￥135.00</text>
+                <text class="number">x1</text>
+              </view>
+            </view>
+          </view>
+          <view class="goods-item flex">
+            <image src="https://dummyimage.com/150x150/000/fff" class="good-img"></image>
+            <view class="right-info flex-dc">
+              <view class="name omit-1">台湾大香肠 超香 超大 超美味 台湾大香肠 超香 超大 超美味超香 超大</view>
+              <view class="spec">规格：500ml</view>
+              <view class="price flex">
+                <text>￥135.00</text>
+                <text class="number">x1</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="more-btn flex">
+          <text>共2件商品</text>
+          <image src="/static/img/order/more.png"></image>
+        </view>
+        <view class="total flex">
+          <text class="left">2020年12月8日送达</text>
+          <text class="right">
+            <text class="word">合计：</text>
+            <text>￥135.00</text>
+          </text>
+        </view>
+      </view>
+      <view class="operation">
+        <text>查看配送信息</text>
+        <base-btn btn-name="申请退款" btn-style="refund"></base-btn>
+        <base-btn btn-name="确认收货" btn-style="confirm"></base-btn>
+      </view>
+    </view>
+  </view>
+</view>

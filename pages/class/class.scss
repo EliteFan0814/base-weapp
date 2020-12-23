@@ -1,0 +1,56 @@
+.container {
+  .content-wrap {
+    .active-class {
+      border-left-color: transparent;
+    }
+    .goods-list {
+      // border: 1px solid red;
+      .goods-item {
+        align-items: stretch;
+        margin-bottom: 30rpx;
+        .good-img {
+          width: 223rpx;
+          height: 183rpx;
+          border-radius: 18.12rpx;
+          // margin-right: 15rpx;
+        }
+        .goods-info {
+          justify-content: space-between;
+          align-items: stretch;
+          width: 290rpx;
+          padding: 0 15rpx;
+          .top-wrap {
+            .title {
+              font-size: 24rpx;
+              width: 300rpx;
+              margin-bottom: 20rpx;
+            }
+            .sale {
+              font-size: 20rpx;
+              color: #603b41;
+            }
+          }
+          .price {
+            justify-content: space-between;
+            .left-price{
+              color: #fb1438;
+              font-size: 26.17rpx;
+              .symbol{
+                font-size: 23.17rpx;
+              }
+            }
+            .btn {
+              padding: 3rpx 40rpx;
+              background-color: #fb1438;
+              border-radius: 20.42rpx;
+              image {
+                width: 28rpx;
+                height: 28rpx;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

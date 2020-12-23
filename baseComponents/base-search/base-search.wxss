@@ -1,0 +1,36 @@
+.search-wrap {
+  margin-bottom: 5px;
+}
+
+.search-wrap .top-search {
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  background-color: #fff;
+  padding: 0 30rpx 10rpx;
+}
+
+.search-wrap .top-search .flex-cc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-wrap .top-search .search {
+  background-color: #f3f3f3;
+  border-radius: 18.12rpx;
+  color: #666666;
+  padding: 20rpx 0;
+  display: flex;
+}
+
+.search-wrap .top-search .search image {
+  width: 25rpx;
+  height: 25rpx;
+  margin-right: 12rpx;
+}
+
+.search-wrap .holder {
+  height: 82rpx;
+}

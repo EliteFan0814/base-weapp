@@ -1,0 +1,33 @@
+.search-wrap {
+  margin-bottom: 5px;
+  .top-search {
+    box-sizing: border-box;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    background-color: #fff;
+    padding: 0 30rpx 10rpx;
+    .flex-cc {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .search {
+      // border: 1px solid red;
+      background-color: #f3f3f3;
+      border-radius: 18.12rpx;
+      color: #666666;
+      padding: 20rpx 0;
+      display: flex;
+
+      image {
+        width: 25rpx;
+        height: 25rpx;
+        margin-right: 12rpx;
+      }
+    }
+  }
+  .holder {
+    height: 82rpx;
+  }
+}

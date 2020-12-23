@@ -1,0 +1,52 @@
+/**app.wxss**/
+.container {
+  font-family: PingFang-SC-Bold;
+  box-sizing: border-box;
+  font-size: 24.15rpx;
+  color: #333333;
+  min-height: 100vh;
+}
+/* div框架 */
+.frame {
+  margin: 0 30rpx;
+}
+/* flex 水平布局 */
+.flex {
+  display: flex;
+  align-items: center;
+}
+/* flex 水平居中 */
+.flex-cc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* flex 垂直居中 */
+.flex-dc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* flex 垂直居左 */
+.flex-ds {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+/*单行省略*/
+.omit-1 {
+  width: 400rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  overflow: hidden;
+}
+/*多行省略*/
+.omit-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
