@@ -1,0 +1,93 @@
+<!-- pages/goodDetail/goodDetail.wxml -->
+<view class="container">
+  <view class="swiper-wrap">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{swiperList}}" wx:key="*this">
+        <swiper-item>
+          <view class="swiper-item">
+            <image src="https://dummyimage.com/750x690/777/fff"></image>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class="sale-wrap">
+    <view class="slogan">
+      <view class="name">限量供应，自产正宗秋月梨</view>
+      <view class="tag">好吃爽口</view>
+    </view>
+    <view class="price-wrap flex">
+      <view class="price flex">
+        <view class="red">￥99</view>
+        <view class="grey">￥138</view>
+      </view>
+      <view class="sale-num">已售30021份/剩214份</view>
+    </view>
+    <view class="promise flex">
+      <view class="left">
+        <text class="fold">服务</text>
+        <text>品质承诺，极速物流，7天退货</text>
+      </view>
+      <van-icon name="arrow" />
+    </view>
+  </view>
+  <view class="detain-wrap">
+    <van-tabs active="{{ active }}" bind:change="onChange" z-index="{{0}}">
+      <van-tab title="商品详情">
+        <view class="good-detail"></view>
+      </van-tab>
+      <van-tab title="购买记录">
+        <view class="buy-record"></view>
+      </van-tab>
+    </van-tabs>
+  </view>
+  <view class="operation-wrap flex">
+    <view class="operate-item flex-dc">
+      <image src="/static/img/goodDetail/index.png"></image>
+      <text>首页</text>
+    </view>
+    <view class="operate-item flex-dc">
+      <image src="/static/img/goodDetail/cart.png"></image>
+      <text>购物车</text>
+    </view>
+    <view class="operate-item flex-dc">
+      <image src="/static/img/goodDetail/serve.png"></image>
+      <text>客服</text>
+    </view>
+    <view class="operate-item">
+      <base-btn bind:tap="handleClose" btn-name="加入购物车" btn-style="btn-style style-left"></base-btn>
+      <base-btn bind:tap="handleClose" btn-name="立即购买" btn-style="btn-style style-right"></base-btn>
+    </view>
+    <!-- 弹框购买 -->
+    <van-popup bind:close="handleClose" show="{{ showDialog }}" closeable position="bottom" custom-style="border-radius:30rpx 30rpx 0 0;">
+      <view class="detail-wrap">
+        <view class="good-wrap flex">
+          <image class="spec-img" src="https://dummyimage.com/90x90/000/fff"></image>
+          <view class="right-text">
+            <view class="name">新疆大龙虾 超级新鲜 超级好吃</view>
+            <view class="price">
+              <text class="red">￥1000</text>
+              <text class="grey">原价：5000</text>
+            </view>
+          </view>
+        </view>
+        <view class="spec-wrap">
+          <view class="item-wrap">
+            <view class="spec-name">规格</view>
+            <view class="spec-list flex">
+              <view wx:for="{{10}}" class="spec-item">5斤</view>
+            </view>
+          </view>
+        </view>
+        <view class="buy-num flex">
+          <text>购买数量：</text>
+          <van-stepper value="{{ 1 }}" input-width="40px" button-size="32px" />
+        </view>
+        <view class="btn-wrap flex-cc">
+          <base-btn btn-name="加入购物车" btn-style="btn-style style-left"></base-btn>
+          <base-btn btn-name="立即购买" btn-style="btn-style style-right"></base-btn>
+        </view>
+      </view>
+    </van-popup>
+  </view>
+</view>

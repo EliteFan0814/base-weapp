@@ -1,7 +1,8 @@
 <!-- pages/class/class.wxml -->
 <view class="container">
+  <base-header navOpacity="{{1}}" title="生鲜分类"></base-header>
   <view class="class-wrap">
-    <base-search></base-search>
+    <base-search navOpacity="{{1}}"></base-search>
     <view class="content-wrap">
       <van-tree-select items="{{ classList }}" main-active-class="active-class" height="55vw" main-active-index="{{ mainActiveIndex }}" bind:click-nav="onClickNav" bind:click-item="onClickItem">
         <view slot="content">
@@ -14,7 +15,10 @@
                   <view class="sale">已售30021份/剩214份</view>
                 </view>
                 <view class="price flex">
-                  <view class="left-price"><text class="symbol">￥</text>14.0</view>
+                  <view class="left-price">
+                    <text class="symbol">￥</text>
+                    14.0
+                  </view>
                   <view class="btn">
                     <image src="/static/img/class/shop-cart.png"></image>
                   </view>
@@ -29,7 +33,10 @@
                   <view class="sale">已售30021份/剩214份</view>
                 </view>
                 <view class="price flex">
-                  <view class="left-price"><text class="symbol">￥</text>14.0</view>
+                  <view class="left-price">
+                    <text class="symbol">￥</text>
+                    14.0
+                  </view>
                   <view class="btn">
                     <image src="/static/img/class/shop-cart.png"></image>
                   </view>

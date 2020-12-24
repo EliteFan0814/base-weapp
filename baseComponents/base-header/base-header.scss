@@ -1,0 +1,31 @@
+/* baseComponents/base-header.wxss */
+.header-wrap {
+  .header {
+    position: fixed;
+    z-index: 999;
+    width: 750rpx;
+    padding-bottom: 6px;
+    .route-wrap {
+      // border: 1px solid red;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 17px;
+      line-height: 32px;
+      font-weight: bold;
+      text-align: center;
+      color: #000;
+      .item {
+        box-sizing: border-box;
+        width: 33.33%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .left {
+        padding-left: 7px;
+        justify-content: flex-start;
+      }
+    }
+  }
+}

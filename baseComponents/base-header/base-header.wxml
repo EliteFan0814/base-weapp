@@ -1,0 +1,12 @@
+<!--baseComponents/base-header.wxml-->
+<view class="header-wrap" style="height:{{38+capsuleToTop}}px;">
+  <view class="header" style="background-color:rgba(255,255,255,{{navOpacity}});padding-top:{{capsuleToTop}}px;">
+    <view class="route-wrap">
+        <view class="item left">
+          <van-icon wx:if="{{showLeft}}" name="arrow-left" size="36rpx" />
+        </view>
+        <view class="item title">{{title}}</view>
+        <view class="item right"></view>
+      </view>
+  </view>
+</view>

@@ -13,7 +13,7 @@ Page({
       { img: '/static/img/personal/end.png', name: '已完成', value: 3 }
     ],
     operateList: [
-      { name: '收获地址管理', url: '', isServe: false },
+      { name: '收货地址管理', url: '', isServe: false },
       { name: '平台客服', url: '', isServe: true },
       { name: '留言反馈', url: '', isServe: false },
       { name: '平台公告', url: '', isServe: false },

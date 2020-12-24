@@ -4,6 +4,10 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    navOpacity: {
+      type: Number,
+      value: 0
+    },
     btnName: {
       type: String,
       value: 'btnName'

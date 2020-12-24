@@ -21,6 +21,10 @@
   opacity: 0.97;
 }
 
+.container .order-list .order-item .info {
+  padding-bottom: 20rpx;
+}
+
 .container .order-list .order-item .info .goods-list .goods-item {
   align-items: stretch;
   margin-bottom: 20rpx;
@@ -59,7 +63,7 @@
 
 .container .order-list .order-item .info .more-btn {
   justify-content: center;
-  border-top: 1px solid red;
+  border-top: 1px solid #eeeeee;
 }
 
 .container .order-list .order-item .info .more-btn image {
@@ -86,4 +90,28 @@
 .container .order-list .order-item .info .total .right .word {
   font-weight: normal;
   color: #666;
+}
+
+.container .order-list .order-item .operation {
+  justify-content: space-between;
+}
+
+.container .order-list .order-item .operation .left-info {
+  color: #999999;
+}
+
+.container .order-list .order-item .operation .btn-wrap .base-style {
+  margin-left: 10rpx;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  border: solid 1rpx #999999;
+  background-color: #fff;
+  color: #999999;
+  padding: 10rpx 20rpx;
+  border-radius: 26.99rpx;
+}
+
+.container .order-list .order-item .operation .btn-wrap .red {
+  border: solid 1rpx #fe2448;
+  color: #fe2448;
 }

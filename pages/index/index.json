@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText":"生鲜商城"
+  "navigationBarTitleText":"生鲜商城",
+  "navigationStyle":"custom"
 }

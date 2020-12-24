@@ -1,99 +1,69 @@
-/**index.wxss**/
-.container {
+/* pages/seckill/seckill.wxss */
+.container .top-info {
   position: relative;
+  margin-bottom: 15rpx;
 }
 
-.container .search-wrap {
-  position: relative;
-  z-index: 2;
-  margin-bottom: 5px;
-}
-
-.container .bg-img {
-  top: 0;
+.container .top-info .bg {
   position: absolute;
-}
-
-.container .bg-img image {
   width: 750rpx;
+  display: block;
 }
 
-.container .swiper-wrap {
-  margin-bottom: 15px;
-}
-
-.container .swiper-wrap swiper {
-  height: 240rpx;
-}
-
-.container .swiper-wrap .swiper-item image {
-  border-radius: 18.12rpx;
-  overflow: hidden;
-  width: 690rpx;
-  height: 240rpx;
-}
-
-.container .class-wrap {
-  margin-bottom: 15px;
-}
-
-.container .class-wrap .class-list {
+.container .top-info .info-wrap .route-wrap {
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
-}
-
-.container .class-wrap .class-list .class-item {
-  width: 20%;
-  font-size: 24rpx;
-}
-
-.container .class-wrap .class-list .class-item image {
-  width: 90rpx;
-  height: 90rpx;
-  border-radius: 18.12rpx;
-}
-
-.container .seckill-wrap {
-  margin-bottom: 10px;
-}
-
-.container .seckill-wrap .seckill {
-  padding: 16rpx 30rpx;
-  background-color: #07c160;
+  align-items: center;
+  position: relative;
+  padding: 8rpx 0;
+  font-size: 34rpx;
+  line-height: 48rpx;
+  font-weight: bold;
+  text-align: center;
   color: #fff;
 }
 
-.container .seckill-wrap .seckill .left-icon {
-  margin-right: 40rpx;
+.container .top-info .info-wrap .route-wrap .item {
+  box-sizing: border-box;
+  width: 33.33%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.container .seckill-wrap .seckill .left-icon image {
-  width: 47rpx;
-  height: 44rpx;
-  margin-right: 10rpx;
+.container .top-info .info-wrap .route-wrap .left {
+  padding-left: 15rpx;
+  justify-content: flex-start;
 }
 
-.container .seckill-wrap .seckill .left-icon view {
-  width: 60rpx;
-  font-size: 30rpx;
-  line-height: 36rpx;
+.container .top-info .info-wrap .time-list {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  overflow-x: scroll;
 }
 
-.container .seckill-wrap .seckill .time-wrap .time-item {
-  margin: 0 10rpx;
+.container .top-info .info-wrap .time-list::-webkit-scrollbar {
+  display: none;
 }
 
-.container .seckill-wrap .seckill .time-wrap .time-item .time-btn {
-  background-color: #07c160;
+.container .top-info .info-wrap .time-list .time-item {
+  font-size: 26rpx;
+  width: 100rpx;
+  flex-shrink: 0;
+  text-align: center;
+  padding: 0 20rpx;
   color: #fff;
-  padding: 4rpx 10rpx;
 }
 
-.container .seckill-wrap .seckill .time-wrap .time-item .active-btn {
-  border-radius: 16.5rpx;
-  background-color: #fff;
-  color: #07c160;
+.container .top-info .info-wrap .time-list .time-item .time {
+  margin-bottom: 10rpx;
+}
+
+.container .top-info .info-wrap .time-list .active-item {
+  font-size: 28rpx;
+  font-weight: bolder;
 }
 
 .container .goods-wrap .goods-list .goods-item {
@@ -211,38 +181,4 @@
 .container .goods-wrap .goods-list .goods-item .other-user .right-text {
   border-left: 1px solid #999999;
   padding-left: 15rpx;
-}
-
-.container .rush-wrap {
-  background-color: #07c160;
-}
-
-.container .rush-wrap .rush .nav-style {
-  background-color: #07c160;
-}
-
-.container .rush-wrap .goods-wrap {
-  padding: 30rpx;
-}
-
-.container .rush-wrap .goods-wrap .goods-list .goods-item {
-  border-radius: 18.12rpx;
-  overflow: hidden;
-  background-color: #fff;
-}
-
-.container .rush-wrap .goods-wrap .goods-list .goods-item .item-content .right-info {
-  padding: 0rpx 20rpx 0 0;
-}
-
-.container .rush-wrap .goods-wrap .goods-list .goods-item:last-child {
-  margin-bottom: 0;
-}
-
-.container .rush-wrap .goods-wrap .goods-list .goods-item .other-user {
-  padding: 0 10rpx 10px;
-}
-
-.container .rush-wrap .goods-wrap .goods-list .goods-item .other-user .img-list {
-  margin-right: 8rpx;
 }

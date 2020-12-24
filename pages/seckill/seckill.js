@@ -1,16 +1,14 @@
-// pages/order/order.js
+// pages/seckill/seckill.js
+const app = getApp()
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    tabList: [
-      { title: '全部', name: 0, value: 0 },
-      { title: '待付款', name: 1, value: 0 },
-      { title: '备货中', name: 2, value: 0 },
-      { title: '配送中', name: 3, value: 0 },
-      { title: '已完成', name: 4, value: 0 }
-    ]
+    capsuleToTop: app.globalData.capsuleToTop,
+    time: 30 * 60 * 60 * 1000,
+    timeData: {},
+
   },
 
   /**
@@ -51,5 +49,10 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {}
+  onShareAppMessage: function () {},
+  onTimeChange(e) {
+    this.setData({
+      timeData: e.detail,
+    });
+  },
 })

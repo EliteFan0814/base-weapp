@@ -1,6 +1,12 @@
 <!-- index.wxml -->
 <view class="container">
- <base-search></base-search>
+  <base-header navOpacity="{{navOpacity}}" title="生鲜配送"></base-header>
+  <view class="search-wrap">
+    <base-search navOpacity="{{navOpacity}}"></base-search>
+  </view>
+  <view class="bg-img">
+    <image src="/static/img/index/bg.png" style="height:{{150+capsuleToTop}}px"></image>
+  </view>
   <view class="swiper-wrap frame">
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
       <block wx:for="{{swiperList}}" wx:key="*this">
@@ -43,108 +49,67 @@
   </view>
   <view class="goods-wrap frame">
     <view class="goods-list">
-      <view class="goods-item flex">
-        <image src="https://dummyimage.com/281x231/000/fff" class="good-img"></image>
-        <view class="right-info flex-ds">
-          <view class="title omit-1">海外直采 泰国鲜虾大号</view>
-          <view class="tag omit-1">
-            <text>每天现杀</text>
-            <text>不隔离</text>
-            <text>生态散养</text>
-            <text>生态散养</text>
-            <text>生态散养</text>
-            <text>安全</text>
-            <text>生态散养</text>
-          </view>
-          <view class="sale-info flex">
-            <image src="/static/img/index/fire.png"></image>
-            <text>已售30021份/剩214份</text>
-          </view>
-          <view class="timer flex">
-            <view class="end-text">距结束</view>
-            <van-count-down use-slot time="{{ time }}" bind:change="onTimeChange">
-              <view class="item-wrap flex">
-                <text class="item">{{ timeData.hours }}</text>
-                :
-                <text class="item">{{ timeData.minutes }}</text>
-                :
-                <text class="item">{{ timeData.seconds }}</text>
+      <view wx:for="{{1}}" wx:key="*this" class="goods-item">
+        <view class="item-content flex">
+          <image src="https://dummyimage.com/281x231/000/fff" class="good-img"></image>
+          <view class="right-info flex-ds">
+            <view class="title omit-1">海外直采 泰国鲜虾大号</view>
+            <view class="tag omit-1">
+              <text>每天现杀</text>
+              <text>不隔离</text>
+              <text>生态散养</text>
+              <text>生态散养</text>
+              <text>生态散养</text>
+              <text>安全</text>
+              <text>生态散养</text>
+            </view>
+            <view class="sale-info flex">
+              <image src="/static/img/index/fire.png"></image>
+              <text>已售30021份/剩214份</text>
+            </view>
+            <view class="timer flex">
+              <view class="end-text">距结束</view>
+              <van-count-down use-slot time="{{ time }}" bind:change="onTimeChange">
+                <view class="item-wrap flex">
+                  <text class="item">{{ timeData.hours }}</text>
+                  :
+                  <text class="item">{{ timeData.minutes }}</text>
+                  :
+                  <text class="item">{{ timeData.seconds }}</text>
+                </view>
+              </van-count-down>
+            </view>
+            <view class="price-wrap flex">
+              <view class="price">
+                <text>
+                  <text class="symbol">￥</text>
+                  <text class="price-num">18</text>
+                </text>
+                <text class="right">
+                  <text class="symbol">￥</text>
+                  <text class="price-num">18</text>
+                </text>
               </view>
-            </van-count-down>
-          </view>
-          <view class="price-wrap flex">
-            <view class="price">
-              <text>
-                <text class="symbol">￥</text>
-                <text class="price-num">18</text>
-              </text>
-              <text class="right">
-                <text class="symbol">￥</text>
-                <text class="price-num">18</text>
-              </text>
+              <base-btn btn-name="立刻买"></base-btn>
             </view>
-            <base-btn btn-name="立刻买"></base-btn>
-          </view>
-          <view class="other-user flex">
-            <view class="img-list flex">
-              <image src="https://dummyimage.com/36x36/000/fff"></image>
-              <image src="https://dummyimage.com/36x36/222/fff"></image>
-              <image src="https://dummyimage.com/36x36/777/fff"></image>
-            </view>
-            <view>等36人刚刚购买了此商品</view>
           </view>
         </view>
-      </view>
-      <view class="goods-item flex">
-        <image src="https://dummyimage.com/281x231/000/fff" class="good-img"></image>
-        <view class="right-info flex-ds">
-          <view class="title omit-1">海外直采 泰国鲜虾大号</view>
-          <view class="tag omit-1">
-            <text>每天现杀</text>
-            <text>不隔离</text>
-            <text>生态散养</text>
-            <text>生态散养</text>
-            <text>生态散养</text>
-            <text>安全</text>
-            <text>生态散养</text>
-          </view>
-          <view class="sale-info flex">
-            <image src="/static/img/index/fire.png"></image>
-            <text>已售30021份/剩214份</text>
-          </view>
-          <view class="timer flex">
-            <view class="end-text">距结束</view>
-            <van-count-down use-slot time="{{ time }}" bind:change="onTimeChange">
-              <view class="item-wrap flex">
-                <text class="item">{{ timeData.hours }}</text>
-                :
-                <text class="item">{{ timeData.minutes }}</text>
-                :
-                <text class="item">{{ timeData.seconds }}</text>
-              </view>
-            </van-count-down>
-          </view>
-          <view class="price-wrap flex">
-            <view class="price">
-              <text>
-                <text class="symbol">￥</text>
-                <text class="price-num">18</text>
-              </text>
-              <text class="right">
-                <text class="symbol">￥</text>
-                <text class="price-num">18</text>
-              </text>
-            </view>
-            <base-btn btn-name="立刻买"></base-btn>
-          </view>
-          <view class="other-user flex">
-            <view class="img-list flex">
+        <view class="other-user flex">
+          <view class="img-list flex">
+            <view class="img-item flex">
               <image src="https://dummyimage.com/36x36/000/fff"></image>
-              <image src="https://dummyimage.com/36x36/222/fff"></image>
-              <image src="https://dummyimage.com/36x36/777/fff"></image>
+              <view>李先生</view>
             </view>
-            <view>等36人刚刚购买了此商品</view>
+            <view class="img-item flex">
+              <image src="https://dummyimage.com/36x36/222/fff"></image>
+              <view>李先生</view>
+            </view>
+            <view class="img-item flex">
+              <image src="https://dummyimage.com/36x36/777/fff"></image>
+              <view>李先生</view>
+            </view>
           </view>
+          <view class="right-text">等36人刚刚购买了此商品</view>
         </view>
       </view>
     </view>
@@ -159,84 +124,67 @@
     </view>
     <view class="goods-wrap">
       <view class="goods-list">
-        <view class="goods-item flex">
-          <image src="https://dummyimage.com/280x347/000/fff" class="good-img"></image>
-          <view class="right-info flex-ds">
-            <view class="title omit-1">海外直采 泰国鲜虾大号</view>
-            <view class="tag omit-1">
-              <text>每天现杀</text>
-              <text>不隔离</text>
-              <text>生态散养</text>
-              <text>生态散养</text>
-              <text>生态散养</text>
-              <text>安全</text>
-              <text>生态散养</text>
-            </view>
-            <view class="sale-info flex">
-              <image src="/static/img/index/fire.png"></image>
-              <text>已售30021份/剩214份</text>
-            </view>
-            <view class="price-wrap flex">
-              <view class="price">
-                <text>
-                  <text class="symbol">￥</text>
-                  <text class="price-num">18</text>
-                </text>
-                <text class="right">
-                  <text class="symbol">￥</text>
-                  <text class="price-num">18</text>
-                </text>
+        <view wx:for="{{10}}" wx:key="*this" class="goods-item">
+          <view class="item-content flex">
+            <image src="https://dummyimage.com/281x231/000/fff" class="good-img"></image>
+            <view class="right-info flex-ds">
+              <view class="title omit-1">海外直采 泰国鲜虾大号</view>
+              <view class="tag omit-1">
+                <text>每天现杀</text>
+                <text>不隔离</text>
+                <text>生态散养</text>
+                <text>生态散养</text>
+                <text>生态散养</text>
+                <text>安全</text>
+                <text>生态散养</text>
               </view>
-              <base-btn btn-name="立刻买"></base-btn>
-            </view>
-            <view class="other-user flex">
-              <view class="img-list flex">
-                <image src="https://dummyimage.com/36x36/000/fff"></image>
-                <image src="https://dummyimage.com/36x36/222/fff"></image>
-                <image src="https://dummyimage.com/36x36/777/fff"></image>
+              <view class="sale-info flex">
+                <image src="/static/img/index/fire.png"></image>
+                <text>已售30021份/剩214份</text>
               </view>
-              <view>等36人刚刚购买了此商品</view>
+              <view class="timer flex">
+                <view class="end-text">距结束</view>
+                <van-count-down use-slot time="{{ time }}" bind:change="onTimeChange">
+                  <view class="item-wrap flex">
+                    <text class="item">{{ timeData.hours }}</text>
+                    :
+                    <text class="item">{{ timeData.minutes }}</text>
+                    :
+                    <text class="item">{{ timeData.seconds }}</text>
+                  </view>
+                </van-count-down>
+              </view>
+              <view class="price-wrap flex">
+                <view class="price">
+                  <text>
+                    <text class="symbol">￥</text>
+                    <text class="price-num">18</text>
+                  </text>
+                  <text class="right">
+                    <text class="symbol">￥</text>
+                    <text class="price-num">18</text>
+                  </text>
+                </view>
+                <base-btn btn-name="立刻买"></base-btn>
+              </view>
             </view>
           </view>
-        </view>
-        <view class="goods-item flex">
-          <image src="https://dummyimage.com/280x347/000/fff" class="good-img"></image>
-          <view class="right-info flex-ds">
-            <view class="title omit-1">海外直采 泰国鲜虾大号</view>
-            <view class="tag omit-1">
-              <text>每天现杀</text>
-              <text>不隔离</text>
-              <text>生态散养</text>
-              <text>生态散养</text>
-              <text>生态散养</text>
-              <text>安全</text>
-              <text>生态散养</text>
-            </view>
-            <view class="sale-info flex">
-              <image src="/static/img/index/fire.png"></image>
-              <text>已售30021份/剩214份</text>
-            </view>
-            <view class="price-wrap flex">
-              <view class="price">
-                <text>
-                  <text class="symbol">￥</text>
-                  <text class="price-num">18</text>
-                </text>
-                <text class="right">
-                  <text class="symbol">￥</text>
-                  <text class="price-num">18</text>
-                </text>
-              </view>
-              <base-btn btn-name="立刻买"></base-btn>
-            </view>
-            <view class="other-user flex">
-              <view class="img-list flex">
+          <view class="other-user flex">
+            <view class="img-list flex">
+              <view class="img-item flex">
                 <image src="https://dummyimage.com/36x36/000/fff"></image>
-                <image src="https://dummyimage.com/36x36/222/fff"></image>
-                <image src="https://dummyimage.com/36x36/777/fff"></image>
+                <view>李先生</view>
               </view>
-              <view>等36人刚刚购买了此商品</view>
+              <view class="img-item flex">
+                <image src="https://dummyimage.com/36x36/222/fff"></image>
+                <view>李先生</view>
+              </view>
+              <view class="img-item flex">
+                <image src="https://dummyimage.com/36x36/777/fff"></image>
+                <view>李先生</view>
+              </view>
             </view>
+            <view class="right-text">等36人刚刚购买了此商品</view>
           </view>
         </view>
       </view>

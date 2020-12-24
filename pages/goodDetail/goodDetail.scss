@@ -1,0 +1,140 @@
+/* pages/goodDetail/goodDetail.wxss */
+.container {
+  background-color: #f5f5f5;
+  .red {
+    font-size: 34.72rpx;
+    color: #fe2448;
+  }
+  .grey {
+    margin-left: 10rpx;
+    font-size: 26rpx;
+    color: #a6a6a6;
+    text-decoration: line-through;
+  }
+  .btn-style {
+    font-size: 24rpx;
+    width: 160rpx;
+    padding: 15rpx 20rpx;
+    box-shadow: none;
+  }
+  .style-left {
+    border-radius: 31rpx 0rpx 0rpx 31rpx;
+    background-color: #666666;
+  }
+  .style-right {
+    border-radius: 0rpx 31rpx 31rpx 0rpx;
+    background-color: #fe2448;
+  }
+  .swiper-wrap {
+    margin-bottom: 10px;
+    swiper {
+      height: 690rpx;
+    }
+    .swiper-item {
+      image {
+        // border-radius: 18.12rpx;
+        overflow: hidden;
+        width: 750rpx;
+        height: 690rpx;
+      }
+    }
+  }
+  .sale-wrap {
+    background-color: #fff;
+    margin-bottom: 10rpx;
+    padding: 0rpx 30rpx 20rpx;
+    .slogan {
+      margin-bottom: 20rpx;
+      .name {
+        font-size: 30rpx;
+        margin-bottom: 15rpx;
+      }
+      .tag {
+        font-size: 24rpx;
+        color: #666666;
+      }
+    }
+    .price-wrap {
+      justify-content: space-between;
+      margin-bottom: 10rpx;
+      .price {
+        align-items: flex-end;
+      }
+    }
+    .promise {
+      border-top: 1px solid #f2f2f2;
+      padding: 35rpx 0rpx 20rpx;
+      justify-content: space-between;
+      .left {
+        font-size: 28rpx;
+        color: #999999;
+        .fold {
+          margin-right: 20rpx;
+          color: #4d4d4d;
+        }
+      }
+    }
+  }
+  .operation-wrap {
+    background-color: #fff;
+    box-sizing: border-box;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10rpx 30rpx;
+    .operate-item {
+      font-size: 22rpx;
+      image {
+        width: 27rpx;
+        height: 29rpx;
+        margin-bottom: 5rpx;
+      }
+    }
+  }
+  .detail-wrap {
+    padding: 20rpx 30rpx;
+    position: relative;
+    .good-wrap {
+      margin-bottom: 20rpx;
+      .spec-img {
+        width: 120rpx;
+        height: 120rpx;
+        border-radius: 10rpx;
+        margin-right: 10rpx;
+      }
+      .right-text {
+        .name {
+          margin-bottom: 20rpx;
+        }
+      }
+    }
+    .spec-wrap {
+      .item-wrap {
+        .spec-name {
+          font-size: 30rpx;
+          margin-bottom: 10rpx;
+        }
+        .spec-list {
+          flex-wrap: wrap;
+          .spec-item {
+            padding: 5rpx 15rpx;
+            background-color: #b8b8b8;
+            border-radius: 20rpx;
+            margin: 0 10rpx 20rpx;
+          }
+        }
+      }
+    }
+    .buy-num {
+      justify-content: space-between;
+      font-size: 30rpx;
+      margin-bottom: 20rpx;
+    }
+    .btn-wrap{
+      .btn-style{
+        width: 200rpx;
+      }
+    }
+  }
+}

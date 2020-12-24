@@ -1,0 +1,13 @@
+<!--pages/test/test.wxml-->
+<view class="header-wrap">
+  <view class="header" style="background-color:rgba(255,255,255,{{navOpacity}});padding-top:{{capsuleToTop}}px;">
+    <view class="route-wrap">
+        <view class="item left">
+          <van-icon name="arrow-left" size="36rpx" />
+        </view>
+        <view class="item title">限时秒杀</view>
+        <view class="item right"></view>
+      </view>
+  </view>
+</view>
+<view class="content"></view>

@@ -1,0 +1,92 @@
+<!-- pages/seckill/seckill.wxml -->
+<view class="container">
+  <view class="top-info" style="height:{{90+capsuleToTop}}px;">
+    <image src="/static/img/seckill/bg.png" class="bg" style="height:{{90+capsuleToTop}}px;"></image>
+    <view class="info-wrap" style="padding-top:{{capsuleToTop}}px;">
+      <view class="route-wrap">
+        <view class="item left">
+          <van-icon name="arrow-left" size="36rpx" />
+        </view>
+        <view class="item title">限时秒杀</view>
+        <view class="item right"></view>
+      </view>
+      <view class="time-list flex">
+        <view class="time-item active-item">
+          <view class="time">00:00</view>
+          <view class="time-str">未开始</view>
+        </view>
+        <view wx:for="{{20}}" wx:key="*this" class="time-item">
+          <view class="time">00:00</view>
+          <view class="time-str">已开抢</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="goods-wrap frame">
+    <view class="goods-list">
+      <view wx:for="{{10}}" wx:key="*this" class="goods-item">
+        <view class="item-content flex">
+          <image src="https://dummyimage.com/281x231/000/fff" class="good-img"></image>
+          <view class="right-info flex-ds">
+            <view class="title omit-1">海外直采 泰国鲜虾大号</view>
+            <view class="tag omit-1">
+              <text>每天现杀</text>
+              <text>不隔离</text>
+              <text>生态散养</text>
+              <text>生态散养</text>
+              <text>生态散养</text>
+              <text>安全</text>
+              <text>生态散养</text>
+            </view>
+            <view class="sale-info flex">
+              <image src="/static/img/index/fire.png"></image>
+              <text>已售30021份/剩214份</text>
+            </view>
+            <!-- <view class="timer flex">
+              <view class="end-text">距结束</view>
+              <van-count-down use-slot time="{{ time }}" bind:change="onTimeChange">
+                <view class="item-wrap flex">
+                  <text class="item">{{ timeData.hours }}</text>
+                  :
+                  <text class="item">{{ timeData.minutes }}</text>
+                  :
+                  <text class="item">{{ timeData.seconds }}</text>
+                </view>
+              </van-count-down>
+            </view> -->
+            <view class="price-wrap flex">
+              <view class="price">
+                <text>
+                  <text class="symbol">￥</text>
+                  <text class="price-num">18</text>
+                </text>
+                <text class="right">
+                  <text class="symbol">￥</text>
+                  <text class="price-num">18</text>
+                </text>
+              </view>
+              <base-btn btn-name="立刻买"></base-btn>
+            </view>
+          </view>
+        </view>
+        <view class="other-user flex">
+          <view class="img-list flex">
+            <view class="img-item flex">
+              <image src="https://dummyimage.com/36x36/000/fff"></image>
+              <view>李先生</view>
+            </view>
+            <view class="img-item flex">
+              <image src="https://dummyimage.com/36x36/222/fff"></image>
+              <view>李先生</view>
+            </view>
+            <view class="img-item flex">
+              <image src="https://dummyimage.com/36x36/777/fff"></image>
+              <view>李先生</view>
+            </view>
+          </view>
+          <view class="right-text">等36人刚刚购买了此商品</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

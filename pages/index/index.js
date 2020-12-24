@@ -4,17 +4,19 @@ const app = getApp()
 
 Page({
   data: {
+    navOpacity:0,
     indicatorDots: false,
     autoplay: true,
     interval: 3000,
     duration: 500,
-    swiperList:5,
-    classList:10,
+    swiperList: 5,
+    classList: 10,
     time: 30 * 60 * 60 * 1000,
     timeData: {},
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    capsuleToTop: app.globalData.capsuleToTop
   },
   //事件处理函数
   bindViewTap: function () {
@@ -60,7 +62,14 @@ Page({
   },
   onTimeChange(e) {
     this.setData({
-      timeData: e.detail,
-    });
+      timeData: e.detail
+    })
   },
+  onPageScroll: function (e) {
+    let a = e.scrollTop / 60
+    if (a >= 1) a = 1
+    this.setData({
+      navOpacity: a
+    })
+  }
 })

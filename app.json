@@ -1,11 +1,14 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/test/test",
     "pages/class/class",
     "pages/cart/cart",
     "pages/personal/personal",
     "pages/logs/logs",
-    "pages/order/order"
+    "pages/order/order",
+    "pages/seckill/seckill",
+    "pages/goodDetail/goodDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -45,12 +48,15 @@
     ]
   },
   "usingComponents": {
+    "base-header": "baseComponents/base-header/base-header",
     "base-btn": "baseComponents/base-btn/base-btn",
     "base-search": "baseComponents/base-search/base-search",
     "van-count-down": "@vant/weapp/count-down/index",
     "van-tab": "@vant/weapp/tab/index",
     "van-tabs": "@vant/weapp/tabs/index",
     "van-tree-select": "@vant/weapp/tree-select/index",
-    "van-icon": "@vant/weapp/icon/index"
+    "van-icon": "@vant/weapp/icon/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-stepper": "@vant/weapp/stepper/index"
   }
 }

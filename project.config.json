@@ -79,6 +79,25 @@
         {
           "name": "订单",
           "pathName": "pages/order/order",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "秒杀",
+          "pathName": "pages/seckill/seckill",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "商品详情",
+          "pathName": "pages/goodDetail/goodDetail",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "测试",
+          "pathName": "pages/test/test",
+          "query": "",
           "scene": null
         }
       ]

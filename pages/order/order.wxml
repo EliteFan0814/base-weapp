@@ -1,10 +1,7 @@
 <!-- pages/order/order.wxml -->
 <view class="container">
   <van-tabs active="{{ active }}" sticky bind:change="onChange">
-    <van-tab title="标签 1">内容 1</van-tab>
-    <van-tab title="标签 2">内容 2</van-tab>
-    <van-tab title="标签 3">内容 3</van-tab>
-    <van-tab title="标签 4">内容 4</van-tab>
+    <van-tab wx:for="{{tabList}}" wx:key="*this" title="{{item.title}}"></van-tab>
   </van-tabs>
   <view class="order-list">
     <view class="order-item">
@@ -49,10 +46,14 @@
           </text>
         </view>
       </view>
-      <view class="operation">
-        <text>查看配送信息</text>
-        <base-btn btn-name="申请退款" btn-style="refund"></base-btn>
-        <base-btn btn-name="确认收货" btn-style="confirm"></base-btn>
+      <view class="operation flex">
+        <text class="left-info">查看配送信息</text>
+        <view class="btn-wrap">
+          <base-btn btn-name="联系平台" btn-style="base-style"></base-btn>
+          <base-btn btn-name="申请退款" btn-style="red base-style"></base-btn>
+          <base-btn btn-name="确认收货" btn-style="red base-style"></base-btn>
+          <!-- <base-btn btn-name="去付款" btn-style="red base-style"></base-btn> -->
+        </view>
       </view>
     </view>
   </view>

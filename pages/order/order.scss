@@ -17,6 +17,7 @@
         }
       }
       .info {
+        padding-bottom: 20rpx;
         .goods-list {
           .goods-item {
             align-items: stretch;
@@ -51,7 +52,7 @@
         }
         .more-btn {
           justify-content: center;
-          border-top: 1px solid red;
+          border-top: 1px solid #eeeeee;
           image {
             width: 14rpx;
             height: 14rpx;
@@ -72,6 +73,28 @@
               font-weight: normal;
               color: #666;
             }
+          }
+        }
+      }
+      .operation{
+        justify-content: space-between;
+        .left-info{
+          color: #999999;
+        }
+        .btn-wrap{
+          .base-style{
+            margin-left:10rpx;
+            font-size: 24rpx;
+            line-height: 24rpx;
+            border: solid 1rpx #999999;
+            background-color: #fff;
+            color: #999999;
+            padding: 10rpx 20rpx;
+            border-radius: 26.99rpx;
+          }
+          .red{
+            border: solid 1rpx #fe2448;
+            color: #fe2448;
           }
         }
       }
