@@ -1,13 +1,37 @@
-// pages/cart/cart.js
+// pages/withdraw/withdraw.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    myCart:{list:[]}
+    show: false,
+    balance: 689.34,
+    withdrawMoney: null,
+    showSelectWay: true,
+    payWay: '支付宝',
+    actions: [{
+        name: '支付宝',
+        value: 'aLi'
+      },
+      {
+        name: '银行卡',
+        value: 'bank'
+      },
+    ]
   },
-
+  openPayList() {
+    this.setData({
+      show: true
+    })
+  },
+  closePayList(e) {
+    console.log(e)
+    this.setData({
+      show: false,
+      payWay: e.detail.name
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -57,10 +81,5 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
-  }
 })

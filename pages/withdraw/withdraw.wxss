@@ -1,0 +1,7 @@
+.upbtn{
+  width: 710rpx;
+  margin: 200rpx auto;
+}
+.upbtn button{
+  height: 80rpx;
+}

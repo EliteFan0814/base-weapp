@@ -1,0 +1,111 @@
+<!-- pages/confirmOrder/confirmOrder.wxml -->
+<view class="container">
+  <base-header showLeft navOpacity="{{1}}" title="确认订单"></base-header>
+  <view class="confirm-order">
+    <view class="address-wrap frame">
+      <view bind:tap="openMap" class="address flex">
+        <view class="left flex">
+          <image></image>
+          <view class="text">打开地图选址</view>
+        </view>
+        <van-icon color="#999999" name="arrow" />
+      </view>
+    </view>
+    <view class="goods-wrap frame">
+      <view class="goods-list">
+        <view bind:tap="openDetail" wx:for="{{2}}" wx:key="*this" class="goods-item">
+          <view class="item-content flex">
+            <image src="https://dummyimage.com/281x231/000/fff" class="good-img"></image>
+            <view class="right-info flex-ds">
+              <view class="title omit-1">海外直采 泰国鲜虾大号</view>
+              <view class="tag omit-1">
+                <text>每天现杀</text>
+                <text>不隔离</text>
+                <text>生态散养</text>
+                <text>生态散养</text>
+                <text>生态散养</text>
+                <text>安全</text>
+                <text>生态散养</text>
+              </view>
+              <!-- <view class="sale-info flex">
+                <image src="/static/img/index/fire.png"></image>
+                <text>已售30021份/剩214份</text>
+              </view> -->
+              <!-- <view class="timer flex">
+                <view class="end-text">距结束</view>
+                <van-count-down use-slot time="{{ time }}" bind:change="onTimeChange">
+                  <view class="item-wrap flex">
+                    <text class="item">{{ timeData.hours }}</text>
+                    :
+                    <text class="item">{{ timeData.minutes }}</text>
+                    :
+                    <text class="item">{{ timeData.seconds }}</text>
+                  </view>
+                </van-count-down>
+              </view> -->
+              <view class="price-wrap flex">
+                <view class="price">
+                  <text>
+                    <text class="symbol">￥</text>
+                    <text class="price-num">18</text>
+                  </text>
+                  <!-- <text class="right">
+                    <text class="symbol">￥</text>
+                    <text class="price-num">18</text>
+                  </text> -->
+                </view>
+                <!-- <base-btn btn-name="立刻买"></base-btn> -->
+                <view class="number">x2</view>
+              </view>
+            </view>
+          </view>
+          <view class="other-user flex">
+            <view class="left flex">商品总价：</view>
+            <!-- <view class="img-list flex">
+              <view class="img-item flex">
+                <image src="https://dummyimage.com/36x36/000/fff"></image>
+                <view>李先生</view>
+              </view>
+              <view class="img-item flex">
+                <image src="https://dummyimage.com/36x36/222/fff"></image>
+                <view>李先生</view>
+              </view>
+              <view class="img-item flex">
+                <image src="https://dummyimage.com/36x36/777/fff"></image>
+                <view>李先生</view>
+              </view>
+            </view> -->
+            <view class="right-text">￥123</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 备注留言 -->
+    <view class="leave-msg frame flex">
+      <view class="msg-name">备注：</view>
+      <view>
+        <input value="{{ remarks }}" bind:input="handelRemarks" placeholder="请输入您的备注信息" />
+      </view>
+    </view>
+    <!-- 支付方式 -->
+    <view class="pay-wrap frame">
+      <van-radio-group value="{{radio}}" bind:change="onChange" data-name="radio">
+        <view class="pay-item flex" bind:tap="changePayWay" data-way="WX">
+          <view class="left flex">
+            <image mode="widthFix" src="/static/img/wx.png" />
+            <text class="color-wx">微信支付</text>
+          </view>
+          <van-radio name="WX" class="right" checked-color="#00D71B"></van-radio>
+        </view>
+      </van-radio-group>
+    </view>
+    <!-- 支付按钮 -->
+    <view class="btm-btn flex">
+      <view class="text">
+        <text>合计：</text>
+        <text class="red">￥100</text>
+      </view>
+      <base-btn btnName="支付订单"></base-btn>
+    </view>
+  </view>
+</view>

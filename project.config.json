@@ -28,7 +28,6 @@
       "disablePlugins": [],
       "outputPath": ""
     },
-    "enableEngineNative": false,
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
@@ -39,6 +38,7 @@
         "miniprogramNpmDistDir": "./"
       }
     ],
+    "enableEngineNative": false,
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
@@ -53,6 +53,14 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
     "plugin": {
       "list": []
     },
@@ -65,39 +73,30 @@
     "miniprogram": {
       "list": [
         {
-          "name": "分类",
-          "pathName": "pages/class/class",
+          "id": -1,
+          "name": "确认订单",
+          "pathName": "pages/confirmOrder/confirmOrder",
           "query": "",
           "scene": null
         },
         {
-          "name": "我的",
-          "pathName": "pages/personal/personal",
+          "id": -1,
+          "name": "确认订单",
+          "pathName": "pages/confirmOrder/confirmOrder",
           "query": "",
           "scene": null
         },
         {
-          "name": "订单",
-          "pathName": "pages/order/order",
+          "id": -1,
+          "name": "购物车",
+          "pathName": "pages/cart/cart",
           "query": "",
           "scene": null
         },
         {
-          "name": "秒杀",
-          "pathName": "pages/seckill/seckill",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "商品详情",
-          "pathName": "pages/goodDetail/goodDetail",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "测试",
-          "pathName": "pages/test/test",
-          "query": "",
+          "id": -1,
+          "name": "提现",
+          "pathName": "pages/withdraw/withdraw",
           "scene": null
         }
       ]

@@ -20,7 +20,7 @@
   </view>
   <view class="class-wrap">
     <view class="class-list">
-      <view wx:for="{{classList}}" wx:key="*this" class="class-item flex-dc">
+      <view bind:tap="openClass" wx:for="{{classList}}" wx:key="*this" data-index="{{index}}" class="class-item flex-dc">
         <image src="https://dummyimage.com/90x90/000/fff"></image>
         <text>生鲜</text>
       </view>
@@ -49,7 +49,7 @@
   </view>
   <view class="goods-wrap frame">
     <view class="goods-list">
-      <view wx:for="{{1}}" wx:key="*this" class="goods-item">
+      <view bind:tap="openDetail" wx:for="{{1}}" wx:key="*this" class="goods-item">
         <view class="item-content flex">
           <image src="https://dummyimage.com/281x231/000/fff" class="good-img"></image>
           <view class="right-info flex-ds">

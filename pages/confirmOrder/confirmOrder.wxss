@@ -1,0 +1,169 @@
+/* pages/confirmOrder/confirmOrder.wxss */
+.container {
+  background-color: #f5f5f5;
+}
+
+.container .confirm-order .address-wrap {
+  margin: 20rpx 30rpx;
+}
+
+.container .confirm-order .address-wrap .address {
+  background-color: #fff;
+  border-radius: 17rpx;
+  padding: 20rpx 15rpx;
+  justify-content: space-between;
+}
+
+.container .confirm-order .address-wrap .address .left image {
+  width: 40rpx;
+  height: 35rpx;
+  margin-right: 40rpx;
+}
+
+.container .confirm-order .goods-wrap .goods-list .goods-item {
+  margin-bottom: 20rpx;
+}
+
+.container .confirm-order .goods-wrap .goods-list .goods-item .item-content {
+  align-items: stretch;
+  margin-bottom: 20rpx;
+}
+
+.container .confirm-order .goods-wrap .goods-list .goods-item .item-content .good-img {
+  margin-right: 15rpx;
+  width: 281rpx;
+  height: 231rpx;
+  background-color: #ff5100;
+  border-radius: 18.12rpx;
+}
+
+.container .confirm-order .goods-wrap .goods-list .goods-item .item-content .right-info {
+  justify-content: space-between;
+}
+
+.container .confirm-order .goods-wrap .goods-list .goods-item .item-content .right-info .title {
+  font-size: 28rpx;
+}
+
+.container .confirm-order .goods-wrap .goods-list .goods-item .item-content .right-info .tag {
+  font-size: 24rpx;
+  margin-bottom: 25rpx;
+}
+
+.container .confirm-order .goods-wrap .goods-list .goods-item .item-content .right-info .tag text {
+  margin-right: 5rpx;
+  color: #666666;
+}
+
+.container .confirm-order .goods-wrap .goods-list .goods-item .item-content .right-info .sale-info {
+  margin-bottom: 15rpx;
+  background-color: #fee7e8;
+  border-radius: 15.5rpx;
+  padding: 5rpx 10rpx;
+  font-size: 20rpx;
+  color: #603b41;
+}
+
+.container .confirm-order .goods-wrap .goods-list .goods-item .item-content .right-info .sale-info image {
+  width: 17rpx;
+  height: 21rpx;
+  margin-right: 10rpx;
+}
+
+.container .confirm-order .goods-wrap .goods-list .goods-item .item-content .right-info .timer {
+  margin-bottom: 15rpx;
+}
+
+.container .confirm-order .goods-wrap .goods-list .goods-item .item-content .right-info .timer .end-text {
+  margin-right: 10rpx;
+}
+
+.container .confirm-order .goods-wrap .goods-list .goods-item .item-content .right-info .timer .item-wrap {
+  color: #fb1438;
+}
+
+.container .confirm-order .goods-wrap .goods-list .goods-item .item-content .right-info .timer .item-wrap .item {
+  display: inline-block;
+  width: 30rpx;
+  margin: 0rpx 5rpx;
+  color: #fb1438;
+  font-size: 20rpx;
+  text-align: center;
+  background-color: #fee7e8;
+  border-radius: 4rpx;
+}
+
+.container .confirm-order .goods-wrap .goods-list .goods-item .item-content .right-info .price-wrap {
+  margin-bottom: 15rpx;
+  width: 400rpx;
+  justify-content: space-between;
+}
+
+.container .confirm-order .goods-wrap .goods-list .goods-item .item-content .right-info .price-wrap .price {
+  font-size: 28rpx;
+  color: #fb1438;
+}
+
+.container .confirm-order .goods-wrap .goods-list .goods-item .item-content .right-info .price-wrap .price .right {
+  margin-left: 20rpx;
+  text-decoration: line-through;
+  color: #666666;
+}
+
+.container .confirm-order .goods-wrap .goods-list .goods-item .item-content .right-info .price-wrap .price .symbol {
+  font-size: 24rpx;
+}
+
+.container .confirm-order .goods-wrap .goods-list .goods-item .other-user {
+  justify-content: space-between;
+  font-size: 24rpx;
+  color: #111;
+}
+
+.container .confirm-order .goods-wrap .goods-list .goods-item .other-user .img-list {
+  margin-right: 15rpx;
+}
+
+.container .confirm-order .goods-wrap .goods-list .goods-item .other-user .img-list .img-item image {
+  display: block;
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  margin: 0 8rpx;
+}
+
+.container .confirm-order .leave-msg {
+  padding: 10rpx 0;
+}
+
+.container .confirm-order .pay-wrap {
+  background: white;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.06);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.06);
+  border-radius: 10px;
+}
+
+.container .confirm-order .pay-wrap .pay-item {
+  padding: 15rpx;
+  justify-content: space-between;
+}
+
+.container .confirm-order .pay-wrap .pay-item .left image {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 15rpx;
+}
+
+.container .confirm-order .btm-btn {
+  background-color: #fff;
+  padding: 30rpx;
+  justify-content: flex-end;
+  position: fixed;
+  bottom: 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.container .confirm-order .btm-btn .text {
+  margin-right: 20rpx;
+}

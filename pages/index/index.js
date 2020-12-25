@@ -4,7 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-    navOpacity:0,
+    navOpacity: 0,
     indicatorDots: false,
     autoplay: true,
     interval: 3000,
@@ -22,6 +22,19 @@ Page({
   bindViewTap: function () {
     wx.navigateTo({
       url: '../logs/logs'
+    })
+  },
+  // 打开相应分类
+  openClass(e) {
+    console.log(e)
+    wx.switchTab({
+      url: '/pages/class/class'
+    })
+  },
+  // 打开商品详情
+  openDetail(e) {
+    wx.navigateTo({
+      url: '/pages/goodDetail/goodDetail'
     })
   },
   onLoad: function () {

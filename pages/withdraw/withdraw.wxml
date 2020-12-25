@@ -1,0 +1,12 @@
+<view class="container">
+<base-header title="提现" showLeft></base-header>
+	<van-cell-group>
+		<van-field value="{{ balance }}" label="当前余额" readonly input-align="right" />
+		<van-field value="{{ withdrawMoney }}" label="提现金额" placeholder="请输入提现金额" type="number" input-align="right" />
+		<van-cell title="提现方式" is-link value="{{payWay}}" bindtap="openPayList" />
+	</van-cell-group>
+	<van-action-sheet show="{{ show }}" actions="{{ actions }}" bind:close="closePayList" bind:select="closePayList" title="选择提现方式" />
+	<view class="upbtn">
+		<van-button round size="large" type="info">提现</van-button>
+	</view>
+</view>

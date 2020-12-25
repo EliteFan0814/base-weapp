@@ -85,7 +85,7 @@
         </view>
         <view class="btn-wrap flex-cc">
           <base-btn btn-name="加入购物车" btn-style="btn-style style-left"></base-btn>
-          <base-btn btn-name="立即购买" btn-style="btn-style style-right"></base-btn>
+          <base-btn btn-name="立即购买" bind:handleTap="handleBuy" btn-style="btn-style style-right"></base-btn>
         </view>
       </view>
     </van-popup>

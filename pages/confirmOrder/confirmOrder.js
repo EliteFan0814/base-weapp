@@ -1,15 +1,12 @@
-// pages/goodDetail/goodDetail.js
+// pages/confirmOrder/confirmOrder.js
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    indicatorDots: true,
-    autoplay: true,
-    interval: 3000,
-    duration: 500,
-    swiperList: 5,
-    showDialog: false
+    latitude: undefined,
+    longitude: undefined,
+    radio:'WX'
   },
 
   /**
@@ -51,14 +48,28 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {},
-  handleClose() {
-    this.setData({
-      showDialog: !this.data.showDialog
-    })
-  },
-  handleBuy(){
-    wx.navigateTo({
-      url:'/pages/confirmOrder/confirmOrder'
+  openMap() {
+    wx.chooseLocation({
+      success: (res) => {
+        this.setData({
+          latitude: res.latitude,
+          longitude: res.longitude
+        })
+        // 根据定位信息获取附近提货点
+        // getPickupListByLocation(this.data.latitude, this.data.longitude)
+        //   .then((res) => {
+        //     this.setData({
+        //       pickupList: res.data.list
+        //     })
+        //   })
+        //   .catch((err) => {
+        //     if (err.code === 0) {
+        //       this.setData({
+        //         pickupList: []
+        //       })
+        //     }
+        //   })
+      }
     })
   }
 })
