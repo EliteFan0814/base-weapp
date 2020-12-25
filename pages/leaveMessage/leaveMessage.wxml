@@ -1,0 +1,15 @@
+<!-- pages/leaveMessage/leaveMessage.wxml -->
+<view class="container">
+  <base-header title="留言反馈" showLeft></base-header>
+  <view class="message-wrap">
+    <van-cell-group>
+      <van-field value="{{ username3 }}" label="称呼" placeholder="请输入联系人" input-align="right" />
+      <van-field value="{{ username3 }}" label="联系电话" placeholder="请输入联系电话" input-align="right" />
+      <van-field value="{{ message }}" label="意见建议" type="textarea"  placeholder="请输入意见建议"
+       show-word-limit maxlength="{{500}}" autosize="{{autosize}}" border="{{ false }}" />
+    </van-cell-group>
+  </view>
+  <view class="add-wrap flex-cc">
+    <text>发送反馈</text>
+  </view>
+</view>

@@ -1,0 +1,5 @@
+<!--pages/notice/notice.wxml-->
+<view class="container">
+  <base-header title="{{title}}"></base-header>
+  <view class="conent"></view>
+</view>

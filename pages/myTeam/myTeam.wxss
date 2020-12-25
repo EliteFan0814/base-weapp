@@ -1,0 +1,11 @@
+/* pages/myTeam/myTeam.wxss */
+.container .team-wrap .team-list .team-item {
+  margin-bottom: 20rpx;
+}
+
+.container .team-wrap .team-list .team-item .top image {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  margin-right: 15rpx;
+}

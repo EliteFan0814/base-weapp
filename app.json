@@ -8,7 +8,15 @@
     "pages/seckill/seckill",
     "pages/goodDetail/goodDetail",
     "pages/confirmOrder/confirmOrder",
-    "pages/withdraw/withdraw"
+    "pages/withdraw/withdraw",
+    "pages/withdrawRecord/withdrawRecord",
+    "pages/myTeam/myTeam",
+    "pages/check/check",
+    "pages/addressList/addressList",
+    "pages/addressEdit/addressEdit",
+    "pages/leaveMessage/leaveMessage",
+    "pages/noticeList/noticeList",
+    "pages/notice/notice"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -52,6 +60,7 @@
     "base-btn": "baseComponents/base-btn/base-btn",
     "base-no-list": "baseComponents/base-no-list/base-no-list",
     "base-search": "baseComponents/base-search/base-search",
+    "base-pre-img": "baseComponents/base-pre-img/base-pre-img",
     "van-count-down": "@vant/weapp/count-down/index",
     "van-tab": "@vant/weapp/tab/index",
     "van-tabs": "@vant/weapp/tabs/index",
@@ -60,6 +69,13 @@
     "van-popup": "@vant/weapp/popup/index",
     "van-stepper": "@vant/weapp/stepper/index",
     "van-radio": "@vant/weapp/radio",
-    "van-radio-group": "@vant/weapp/radio-group"
+    "van-radio-group": "@vant/weapp/radio-group",
+    "van-field": "@vant/weapp/field/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-collapse": "@vant/weapp/collapse/index",
+    "van-collapse-item": "@vant/weapp/collapse-item/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index"
   }
 }

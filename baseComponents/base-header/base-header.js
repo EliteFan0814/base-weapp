@@ -12,7 +12,7 @@ Component({
     },
     navOpacity: {
       type: Number,
-      value: 0
+      value: 1
     },
     showLeft: {
       type: Boolean,

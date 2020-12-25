@@ -1,0 +1,26 @@
+<!-- pages/noticeList/noticeList.wxml -->
+<view class="container">
+  <base-header title="平台公告" showLeft></base-header>
+  <view class="list-wrap frame">
+    <view class="list-item flex">
+      <view class="left flex">
+        <image src="https://dummyimage.com/180x90/000/fff"></image>
+        <view class="text">
+          <view class="name omit-1">这是一个公告这是一个公告</view>
+          <view class="time">2020-02-08</view>
+        </view>
+      </view>
+      <van-icon color="#999999" name="arrow" />
+    </view>
+    <view class="list-item flex">
+      <view class="left flex">
+        <image src="https://dummyimage.com/180x90/000/fff"></image>
+        <view class="text">
+          <view class="name omit-1">这是一个公告这是一个公告</view>
+          <view class="time">2020-02-08</view>
+        </view>
+      </view>
+      <van-icon color="#999999" name="arrow" />
+    </view>
+  </view>
+</view>

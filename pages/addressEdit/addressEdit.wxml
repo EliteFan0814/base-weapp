@@ -1,0 +1,15 @@
+<!-- pages/addressEdit/addressEdit.wxml -->
+<view class="container">
+  <base-header title="{{title}}" showLeft></base-header>
+  <view class="form-wrap">
+    <van-cell-group>
+      <van-field value="{{ username3 }}" label="联系人" placeholder="请输入联系人" input-align="right" />
+      <van-field value="{{ username3 }}" label="联系电话" placeholder="请输入联系电话" input-align="right" />
+      <van-field value="{{ username3 }}" label="收货地址" placeholder="请选择收货地址" input-align="right" />
+      <van-field value="{{ username3 }}" label="详细地址" placeholder="请输入详细地址" input-align="right" />
+    </van-cell-group>
+  </view>
+  <view class="add-wrap flex-cc">
+    <text>保存</text>
+  </view>
+</view>

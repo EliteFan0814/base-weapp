@@ -1,5 +1,6 @@
 <!-- pages/order/order.wxml -->
 <view class="container">
+  <base-header title="订单" showLeft></base-header>
   <van-tabs active="{{ active }}" sticky bind:change="onChange">
     <van-tab wx:for="{{tabList}}" wx:key="*this" title="{{item.title}}"></van-tab>
   </van-tabs>

@@ -1,7 +1,22 @@
-.upbtn{
-  width: 710rpx;
-  margin: 200rpx auto;
+.container .withdraw-wrap .balance-wrap {
+  font-size: 28rpx;
+  justify-content: space-between;
 }
-.upbtn button{
-  height: 80rpx;
+
+.container .withdraw-wrap .balance-wrap .left .red {
+  color: red;
+}
+
+.container .withdraw-wrap .withdraw-way {
+  font-size: 28rpx;
+  justify-content: space-between;
+}
+
+.container .withdraw-wrap .btn {
+  padding-top: 400rpx;
+}
+
+.container .withdraw-wrap .btn .btn-style {
+  font-size: 30rpx;
+  padding: 20rpx 40rpx;
 }

@@ -1,0 +1,17 @@
+/* pages/check/check.wxss */
+.container .check-wrap .card-form .card-wrap {
+  margin-bottom: 50rpx;
+}
+
+.container .check-wrap .card-form .card-wrap .card-item {
+  margin: 40rpx 0rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 26rpx;
+  color: #bbb;
+}
+
+.container .check-wrap .card-form .card-wrap .card-item .card-img {
+  width: 500rpx;
+}

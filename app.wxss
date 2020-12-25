@@ -45,8 +45,18 @@
 }
 /*多行省略*/
 .omit-2 {
+  width: 380rpx;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+}
+.red {
+  color: #fe2448;
+}
+.grey {
+  color: #a6a6a6;
+}
+.white{
+  color: #fff;
 }

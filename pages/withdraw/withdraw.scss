@@ -1,0 +1,24 @@
+.container {
+  .withdraw-wrap {
+    .balance-wrap{
+      font-size: 28rpx;
+      justify-content: space-between;
+      .left{
+        .red{
+          color: red;
+        }
+      }
+    }
+    .withdraw-way {
+      font-size: 28rpx;
+      justify-content: space-between;
+    }
+    .btn{
+      padding-top: 400rpx;
+      .btn-style{
+        font-size: 30rpx;
+        padding: 20rpx 40rpx;
+      }
+    }
+  }
+}

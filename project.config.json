@@ -4,9 +4,9 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": true,
-    "enhance": false,
+    "enhance": true,
     "postcss": true,
     "preloadBackgroundData": false,
     "minified": true,
@@ -28,6 +28,7 @@
       "disablePlugins": [],
       "outputPath": ""
     },
+    "enableEngineNative": false,
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
@@ -38,7 +39,6 @@
         "miniprogramNpmDistDir": "./"
       }
     ],
-    "enableEngineNative": false,
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
@@ -53,14 +53,6 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
-    "search": {
-      "current": -1,
-      "list": []
-    },
-    "conversation": {
-      "current": -1,
-      "list": []
-    },
     "plugin": {
       "list": []
     },
@@ -97,6 +89,60 @@
           "id": -1,
           "name": "提现",
           "pathName": "pages/withdraw/withdraw",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "提现记录",
+          "pathName": "pages/withdrawRecord/withdrawRecord",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "我的团队",
+          "pathName": "pages/myTeam/myTeam",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "成为团长",
+          "pathName": "pages/check/check",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "收货地址",
+          "pathName": "pages/addressList/addressList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "编辑地址",
+          "pathName": "pages/addressEdit/addressEdit",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "留言",
+          "pathName": "pages/leaveMessage/leaveMessage",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "平台公告",
+          "pathName": "pages/noticeList/noticeList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "订单",
+          "pathName": "pages/order/order",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "购物车",
+          "pathName": "pages/cart/cart",
           "scene": null
         }
       ]

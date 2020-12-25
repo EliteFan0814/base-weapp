@@ -1,0 +1,16 @@
+/* pages/noticeList/noticeList.wxss */
+.container .list-wrap .list-item {
+  justify-content: space-between;
+  margin-bottom: 15rpx;
+}
+
+.container .list-wrap .list-item .left image {
+  border-radius: 10rpx;
+  width: 180rpx;
+  height: 90rpx;
+  margin-right: 15rpx;
+}
+
+.container .list-wrap .list-item .left .text .name {
+  margin-bottom: 15rpx;
+}

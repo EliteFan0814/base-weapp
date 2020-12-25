@@ -1,0 +1,23 @@
+<!-- pages/withdrawRecord/withdrawRecord.wxml -->
+<view class="container">
+  <base-header title="提现记录" showLeft></base-header>
+  <view class="record-wrap">
+    <view class="record-list">
+      <van-collapse value="{{ activeName }}" accordion bind:change="handleChange">
+        <van-collapse-item title="支付宝提现" name="0">
+          <view slot="value">500</view>
+          <view class="record-wrap">
+            <view class="record-item">
+              <text>真实姓名：</text>
+              <text>周星星</text>
+            </view>
+            <view class="record-item">
+              <text>转账时间：</text>
+              <text>2020-15-15</text>
+            </view>
+          </view>
+        </van-collapse-item>
+      </van-collapse>
+    </view>
+  </view>
+</view>

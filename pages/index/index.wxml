@@ -12,39 +12,59 @@
       <block wx:for="{{swiperList}}" wx:key="*this">
         <swiper-item>
           <view class="swiper-item">
-            <image src="https://dummyimage.com/690x240/000/fff"></image>
+            <image src="{{item.hostPic}}"></image>
           </view>
         </swiper-item>
       </block>
     </swiper>
   </view>
   <view class="class-wrap">
-    <view class="class-list">
-      <view bind:tap="openClass" wx:for="{{classList}}" wx:key="*this" data-index="{{index}}" class="class-item flex-dc">
+    <swiper indicator-dots="{{true}}" autoplay="{{false}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{classList}}" wx:for-item="pageItem" wx:for-index="pageIndex" wx:key="*this">
+        <swiper-item>
+          <view class="class-list">
+            <view bind:tap="openClass" wx:for="{{pageItem}}" wx:key="*this" data-index="{{index}}" class="class-item flex-dc">
+              <image src="{{item.thumbHost}}"></image>
+              <text>{{item.name}}</text>
+            </view>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+    <!-- <view bind:tap="openClass" wx:for="{{classList}}" wx:key="*this" data-index="{{index}}" class="class-item flex-dc">
         <image src="https://dummyimage.com/90x90/000/fff"></image>
         <text>生鲜</text>
-      </view>
-    </view>
+      </view> -->
   </view>
   <!-- 限时秒杀 -->
   <view class="seckill-wrap">
     <view class="seckill flex">
-      <view class="left-icon flex-cc">
-        <image src="/static/img/index/seckill.png"></image>
-        <view>限时秒杀</view>
-      </view>
-      <view class="time-wrap">
-        <view class="time-list flex-cc">
-          <view class="time-item flex-dc">
-            <view>10:00</view>
-            <view class="time-btn active-btn">抢购中</view>
-          </view>
-          <view class="time-item flex-dc">
-            <view>10:00</view>
-            <view class="time-btn">即将开始</view>
+      <view class="flex">
+        <view class="left-icon flex-cc">
+          <image src="/static/img/index/seckill.png"></image>
+          <view>限时秒杀</view>
+        </view>
+        <view class="time-wrap">
+          <view class="time-list flex-cc">
+            <view class="time-item flex-dc">
+              <view class="time-text">10点场疯抢中</view>
+              <view class="timer flex">
+                <view class="timer-text ">距结束：</view>
+                <van-count-down use-slot time="{{ time }}" bind:change="onTimeChange">
+                  <view class="item-wrap flex">
+                    <text class="item">{{ timeData.hours }}</text>
+                    <text class="white">:</text>
+                    <text class="item">{{ timeData.minutes }}</text>
+                    <text class="white">:</text>
+                    <text class="item">{{ timeData.seconds }}</text>
+                  </view>
+                </van-count-down>
+              </view>
+            </view>
           </view>
         </view>
       </view>
+      <view class=" active-btn">全部秒杀></view>
     </view>
   </view>
   <view class="goods-wrap frame">
@@ -67,7 +87,7 @@
               <image src="/static/img/index/fire.png"></image>
               <text>已售30021份/剩214份</text>
             </view>
-            <view class="timer flex">
+            <!-- <view class="timer flex">
               <view class="end-text">距结束</view>
               <van-count-down use-slot time="{{ time }}" bind:change="onTimeChange">
                 <view class="item-wrap flex">
@@ -78,7 +98,7 @@
                   <text class="item">{{ timeData.seconds }}</text>
                 </view>
               </van-count-down>
-            </view>
+            </view> -->
             <view class="price-wrap flex">
               <view class="price">
                 <text>
@@ -142,7 +162,7 @@
                 <image src="/static/img/index/fire.png"></image>
                 <text>已售30021份/剩214份</text>
               </view>
-              <view class="timer flex">
+              <!-- <view class="timer flex">
                 <view class="end-text">距结束</view>
                 <van-count-down use-slot time="{{ time }}" bind:change="onTimeChange">
                   <view class="item-wrap flex">
@@ -153,7 +173,7 @@
                     <text class="item">{{ timeData.seconds }}</text>
                   </view>
                 </van-count-down>
-              </view>
+              </view> -->
               <view class="price-wrap flex">
                 <view class="price">
                   <text>

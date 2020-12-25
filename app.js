@@ -8,17 +8,18 @@ App({
 
     // 登录
     wx.login({
-      success: res => {
+      success: (res) => {
+        // console.log('res', res)
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
     })
     // 获取用户信息
     wx.getSetting({
-      success: res => {
+      success: (res) => {
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
-            success: res => {
+            success: (res) => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
 
@@ -29,12 +30,22 @@ App({
               }
             }
           })
+        } else {
         }
       }
     })
   },
   globalData: {
+    isLogin: wx.getStorageSync('token') ? true : false,
     userInfo: null,
     capsuleToTop: wx.getSystemInfoSync()['statusBarHeight'] + 6
+  },
+  // input双向绑定
+  setData(e, _this) {
+    const name = e.currentTarget.dataset.name
+    _this.setData({
+      // e.detail.value为小程序原生 input 返回值 e.detail 为 vant 返回值
+      [name]: typeof e.detail.value == 'undefined' ? e.detail : e.detail.value
+    })
   }
 })

@@ -1,0 +1,44 @@
+/* pages/addressList/addressList.wxss */
+.container {
+  background-color: #f5f5f5;
+}
+
+.container .address-list {
+  margin-top: 20rpx;
+}
+
+.container .address-list .address-item {
+  border-radius: 17rpx;
+  background-color: #fff;
+  padding: 20rpx;
+}
+
+.container .address-list .address-item .link {
+  justify-content: space-between;
+}
+
+.container .address-list .address-item .address {
+  margin: 20rpx 0;
+}
+
+.container .address-list .address-item .operation {
+  border-top: 1px solid #f5f5f5;
+  padding-top: 15rpx;
+  justify-content: space-between;
+}
+
+.container .address-list .address-item .operation .right .img {
+  width: 30rpx;
+  height: 30rpx;
+  margin-left: 30rpx;
+}
+
+.container .add-wrap {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 30rpx 0;
+  background-color: #07c160;
+  color: #fff;
+  font-size: 32rpx;
+}

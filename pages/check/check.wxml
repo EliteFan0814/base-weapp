@@ -1,0 +1,20 @@
+<!-- pages/check/check.wxml -->
+<view class="container">
+  <base-header title="成为团长" showLeft></base-header>
+  <view class="check-wrap">
+    <!-- 证件照上传 -->
+    <view class="card-form">
+      <view class="card-wrap">
+        <view wx:for="{{cardList}}" wx:key="index" class="card-item">
+          <view data-img-index="{{index}}" data-img-key="{{item.name}}" bind:tap="upImg">
+            <base-pre-img mode="widthFix" imgList="{{item.value}}" isPreview="{{item.isupdate}}" base-img-style="card-img"></base-pre-img>
+          </view>
+          <text class="card-name">{{item.text}}</text>
+        </view>
+      </view>
+      <view class="check-btn flex-cc">
+        <base-btn btn-name="提交申请" is-pushing="{{isRegisting}}" bind:handleTap="handRegist"></base-btn>
+      </view>
+    </view>
+  </view>
+</view>

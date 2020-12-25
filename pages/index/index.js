@@ -1,4 +1,4 @@
-//index.js
+import requestIndex from '../../api/index'
 //获取应用实例
 const app = getApp()
 
@@ -9,20 +9,15 @@ Page({
     autoplay: true,
     interval: 3000,
     duration: 500,
-    swiperList: 5,
-    classList: 10,
+    swiperList: [],
+    classList: [],
+    classPages: 0,
     time: 30 * 60 * 60 * 1000,
     timeData: {},
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     capsuleToTop: app.globalData.capsuleToTop
-  },
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
   },
   // 打开相应分类
   openClass(e) {
@@ -31,13 +26,65 @@ Page({
       url: '/pages/class/class'
     })
   },
+
+  onLoad: function () {
+    this.getCarousel()
+    this.getClassList()
+  },
+  onPageScroll: function (e) {
+    let a = e.scrollTop / 60
+    if (a >= 1) a = 1
+    this.setData({
+      navOpacity: a
+    })
+  },
+  //  方法
+  // 获取轮播图
+  getCarousel() {
+    requestIndex
+      .getCarouseList()
+      .then((res) => {
+        this.setData({
+          swiperList: res.value
+        })
+      })
+      .catch((err) => {})
+  },
+  //
+  getClassList() {
+    requestIndex.getClassList().then((res) => {
+      res.value = res.value.concat(res.value).concat(res.value).concat(res.value).concat(res.value).concat(res.value)
+      const filterArr = this.sliceArray(res.value, 10)
+      this.setData({
+        classList: filterArr,
+        classPages: filterArr.length
+      })
+      console.log(222, this.data.classList)
+    })
+  },
+  //分类分页处理
+  sliceArray(targetArray, number) {
+    const page = Math.ceil(targetArray.length / number)
+    const returnArr = []
+    for (let i = 0; i < page; i++) {
+      returnArr[i] = targetArray.slice(i * number, (i + 1) * number)
+    }
+    return returnArr
+  },
   // 打开商品详情
   openDetail(e) {
     wx.navigateTo({
       url: '/pages/goodDetail/goodDetail'
     })
   },
-  onLoad: function () {
+  onTimeChange(e) {
+    this.setData({
+      timeData: e.detail
+    })
+  },
+
+  // 静默获取用户的微信个人信息
+  getWxUserInfoSilent() {
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -65,24 +112,12 @@ Page({
       })
     }
   },
-  getUserInfo: function (e) {
-    console.log(e)
+  // 获取用户的微信个人信息
+  getWxUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
-    })
-  },
-  onTimeChange(e) {
-    this.setData({
-      timeData: e.detail
-    })
-  },
-  onPageScroll: function (e) {
-    let a = e.scrollTop / 60
-    if (a >= 1) a = 1
-    this.setData({
-      navOpacity: a
     })
   }
 })

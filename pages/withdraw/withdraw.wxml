@@ -1,12 +1,30 @@
 <view class="container">
-<base-header title="提现" showLeft></base-header>
-	<van-cell-group>
-		<van-field value="{{ balance }}" label="当前余额" readonly input-align="right" />
-		<van-field value="{{ withdrawMoney }}" label="提现金额" placeholder="请输入提现金额" type="number" input-align="right" />
-		<van-cell title="提现方式" is-link value="{{payWay}}" bindtap="openPayList" />
-	</van-cell-group>
-	<van-action-sheet show="{{ show }}" actions="{{ actions }}" bind:close="closePayList" bind:select="closePayList" title="选择提现方式" />
-	<view class="upbtn">
-		<van-button round size="large" type="info">提现</van-button>
-	</view>
+  <base-header title="提现" showLeft></base-header>
+  <view class="withdraw-wrap">
+    <view class="balance-wrap frame flex">
+      <view class="left flex-dc">
+        <text class="red">88.88</text>
+        <text>当前余额</text>
+      </view>
+      <view class="right">
+        <text>提现记录</text>
+      </view>
+    </view>
+    <view class="withdraw-way frame flex">
+      <text>提现方式</text>
+      <van-dropdown-menu active-color="#07c160">
+        <van-dropdown-item value="{{ way }}" options="{{ wayList }}" />
+      </van-dropdown-menu>
+    </view>
+    <van-cell-group>
+      <van-field value="{{ username3 }}" label="提现金额" clearable placeholder="请输入提现金额" input-align="right" />
+      <van-field value="{{ username3 }}" label="手续费" clearable placeholder="请输入手续费" input-align="right" />
+      <van-field value="{{ username3 }}" label="开户行" clearable placeholder="请输入开户行" input-align="right" />
+      <van-field value="{{ username3 }}" label="提现账号" clearable placeholder="请输入提现账号" input-align="right" />
+      <van-field value="{{ username3 }}" label="真实姓名" clearable placeholder="请输入真实姓名" input-align="right" />
+    </van-cell-group>
+    <view class="btn flex-cc">
+      <base-btn btnName="立即提现" btn-style="btn-style"></base-btn>
+    </view>
+  </view>
 </view>

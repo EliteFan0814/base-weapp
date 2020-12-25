@@ -1,0 +1,28 @@
+<!-- pages/myTeam/myTeam.wxml -->
+<view class="container">
+  <base-header title="我的团队" showLeft></base-header>
+  <view class="team-wrap frame">
+    <view class="team-list">
+      <view class="team-item">
+        <view class="top flex">
+          <image src="https://dummyimage.com/90x90/000/fff"></image>
+          <view class="info">
+            <view>成员名：吴孟达</view>
+            <view>直推人数：25</view>
+            <view>推荐时间：2020-12-14</view>
+          </view>
+        </view>
+      </view>
+      <view class="team-item">
+        <view class="top flex">
+          <image src="https://dummyimage.com/90x90/000/fff"></image>
+          <view class="info">
+            <view>成员名：吴孟达</view>
+            <view>直推人数：25</view>
+            <view>推荐时间：2020-12-14</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

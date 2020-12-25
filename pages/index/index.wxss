@@ -3,6 +3,29 @@
   position: relative;
 }
 
+.container .timer {
+  margin-top: 15rpx;
+}
+
+.container .timer .end-text {
+  margin-right: 10rpx;
+}
+
+.container .timer .item-wrap {
+  color: #07c160;
+}
+
+.container .timer .item-wrap .item {
+  display: inline-block;
+  width: 30rpx;
+  margin: 0rpx 5rpx;
+  color: #07c160;
+  font-size: 20rpx;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 4rpx;
+}
+
 .container .search-wrap {
   position: relative;
   z-index: 2;
@@ -40,17 +63,17 @@
 .container .class-wrap .class-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 
 .container .class-wrap .class-list .class-item {
   width: 20%;
   font-size: 24rpx;
+  margin-bottom: 15rpx;
 }
 
 .container .class-wrap .class-list .class-item image {
-  width: 90rpx;
-  height: 90rpx;
+  width: 80rpx;
+  height: 80rpx;
   border-radius: 18.12rpx;
 }
 
@@ -59,13 +82,14 @@
 }
 
 .container .seckill-wrap .seckill {
+  justify-content: space-between;
   padding: 16rpx 30rpx;
   background-color: #07c160;
   color: #fff;
 }
 
 .container .seckill-wrap .seckill .left-icon {
-  margin-right: 40rpx;
+  margin-right: 20rpx;
 }
 
 .container .seckill-wrap .seckill .left-icon image {
@@ -84,14 +108,15 @@
   margin: 0 10rpx;
 }
 
-.container .seckill-wrap .seckill .time-wrap .time-item .time-btn {
-  background-color: #07c160;
-  color: #fff;
-  padding: 4rpx 10rpx;
+.container .seckill-wrap .seckill .time-wrap .time-item .time-text {
+  font-size: 30rpx;
 }
 
-.container .seckill-wrap .seckill .time-wrap .time-item .active-btn {
-  border-radius: 16.5rpx;
+.container .seckill-wrap .seckill .active-btn {
+  font-size: 30rpx;
+  color: #fff;
+  padding: 6rpx 15rpx;
+  border-radius: 25.5rpx;
   background-color: #fff;
   color: #07c160;
 }
@@ -144,29 +169,6 @@
   width: 17rpx;
   height: 21rpx;
   margin-right: 10rpx;
-}
-
-.container .goods-wrap .goods-list .goods-item .item-content .right-info .timer {
-  margin-bottom: 15rpx;
-}
-
-.container .goods-wrap .goods-list .goods-item .item-content .right-info .timer .end-text {
-  margin-right: 10rpx;
-}
-
-.container .goods-wrap .goods-list .goods-item .item-content .right-info .timer .item-wrap {
-  color: #fb1438;
-}
-
-.container .goods-wrap .goods-list .goods-item .item-content .right-info .timer .item-wrap .item {
-  display: inline-block;
-  width: 30rpx;
-  margin: 0rpx 5rpx;
-  color: #fb1438;
-  font-size: 20rpx;
-  text-align: center;
-  background-color: #fee7e8;
-  border-radius: 4rpx;
 }
 
 .container .goods-wrap .goods-list .goods-item .item-content .right-info .price-wrap {
