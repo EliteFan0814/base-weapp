@@ -56,10 +56,6 @@
   height: 240rpx;
 }
 
-.container .class-wrap {
-  margin-bottom: 15px;
-}
-
 .container .class-wrap .class-list {
   display: flex;
   flex-wrap: wrap;
@@ -122,6 +118,8 @@
 }
 
 .container .goods-wrap .goods-list .goods-item {
+  border-bottom: 1px solid #f5f5f5;
+  padding-bottom: 15rpx;
   margin-bottom: 20rpx;
 }
 
@@ -217,6 +215,7 @@
 
 .container .rush-wrap {
   background-color: #07c160;
+  margin-bottom: 15rpx;
 }
 
 .container .rush-wrap .rush .nav-style {

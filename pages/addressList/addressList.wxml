@@ -2,24 +2,24 @@
 <view class="container">
   <base-header title="收货地址"></base-header>
   <view class="address-list frame">
-    <van-radio-group value="{{ radio }}" bind:change="onChange">
-      <view class="address-item">
+    <van-radio-group value="{{ defaultId }}" bind:change="changeDefault">
+      <view wx:for="{{addressList}}" wx:key="id" class="address-item">
         <view class="link flex">
-          <text>周星驰</text>
-          <text>15255555555</text>
+          <text>{{item.contact}}</text>
+          <text>{{item.mobile}}</text>
         </view>
-        <view class="address">北京市 西城区 东大街</view>
+        <view class="address">{{item.area}} {{item.address}}</view>
         <view class="operation flex">
-          <van-radio name="1">默认地址</van-radio>
+          <van-radio name="{{item.id}}">默认地址</van-radio>
           <view class="right">
-            <image src="/static/img/icon/edit.png" class="img"></image>
-            <image src="/static/img/icon/delete.png" class="img"></image>
+            <image catch:tap="changeAddress" data-type="edit" data-info="{{item}}" src="/static/img/icon/edit.png" class="img"></image>
+            <image catch:tap="deleteAddress" data-id="{{item.id}}" src="/static/img/icon/delete.png" class="img"></image>
           </view>
         </view>
       </view>
     </van-radio-group>
   </view>
-  <view class="add-wrap flex-cc">
+  <view catch:tap="changeAddress" data-type="add" class="add-wrap flex-cc">
     <text>添加收货地址</text>
   </view>
 </view>

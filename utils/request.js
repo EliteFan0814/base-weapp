@@ -1,5 +1,5 @@
 import userAuth from './userAuth' // 登录获取token
-import Fly from '../lib/wx'
+import Fly from '../lib/wxRequest'
 
 const fly = new Fly()
 const flyForToken = new Fly()
@@ -9,7 +9,7 @@ fly.config = {
     'content-type': 'application/json'
   },
   // baseURL: 'https://xiaochengxu.wgywkm.com',
-  baseURL: 'http://192.168.0.142/',
+  baseURL: 'http://192.168.0.128/',
   parseJson: true,
   timeout: 10000
 }
@@ -18,8 +18,8 @@ fly.config = {
 fly.interceptors.request.use(async (request) => {
   fly.lock()
   try {
-    // const token = await userAuth.setTokenSync() // 方式1 执行wx.login登录并获取token
-    const token = 3
+    const token = await userAuth.setTokenSync() // 方式1 执行wx.login登录并获取token
+    // const token = 3
     // const token = wx.getStorageSync('token') //  方式2 直接获取token
     if (token) {
       request.headers['Authorization'] = 'Bearer ' + token
@@ -35,18 +35,18 @@ fly.interceptors.request.use(async (request) => {
 fly.interceptors.response.use(
   (response) => {
     // 响应成功，但是数据异常
-    // if (response.data.code === 0) {
-    //   wx.showToast({
-    //     title: response.data.msg,
-    //     icon: 'none',
-    //     duration: 2000
-    //   })
-    //   return Promise.reject(response.data)
-    // }
+    if (response.data.errCode === -1) {
+      wx.showToast({
+        title: response.data.msg,
+        icon: 'none',
+        duration: 2000
+      })
+      return Promise.reject(response.data)
+    }
     // 响应成功，数据正常，但是有特别的 message 信息需要展示
-    // if (response.data.code === 1 && response.data.msg !== 'ok') {
+    // if (response.data.errCode === -1) {
     //   wx.showToast({
-    //     title: response.data.msg,
+    //     title: response.data.message,
     //     icon: 'success',
     //     duration: 1500
     //   })

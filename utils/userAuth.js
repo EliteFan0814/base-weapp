@@ -22,11 +22,11 @@ function getWxCode() {
 async function code2Token() {
   try {
     const code = await getWxCode()
-    const res = await flyForToken.post(authConfig.loginUrl, {
+    const res = await flyForToken.get(authConfig.loginUrl, {
       [authConfig.codeName]: code
     })
     const tokenRes = res.data
-    return tokenRes.data.token
+    return tokenRes.value.token
   } catch (err) {
     console.log('用code换取token出错', err)
   }

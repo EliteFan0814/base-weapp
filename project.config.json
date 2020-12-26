@@ -43,7 +43,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.1",
-  "appid": "wxc56e480d287c5585",
+  "appid": "wxb675ad12d3a78931",
   "projectname": "%E7%94%9F%E9%B2%9C%E9%85%8D%E9%80%81%E5%95%86%E5%9F%8E",
   "debugOptions": {
     "hidedInDevtools": []
@@ -143,6 +143,18 @@
         {
           "name": "购物车",
           "pathName": "pages/cart/cart",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "我的",
+          "pathName": "pages/personal/personal",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "确认订单",
+          "pathName": "pages/confirmOrder/confirmOrder",
           "scene": null
         }
       ]

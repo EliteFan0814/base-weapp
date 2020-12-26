@@ -1,16 +1,41 @@
-// pages/addressEdit/addressEdit.js
+import request from '../../api/address'
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    title: '新增收货地址'
+    title: '',
+    type: '',
+    info: {}
   },
-
+  openMap() {
+    wx.chooseLocation({
+      latitude,
+      longitude,
+      success: (res) => {
+        console.log('res', res)
+        this.setData({
+          latitude: res.latitude,
+          longitude: res.longitude
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {},
+  onLoad: function (o) {
+    if (o.info) {
+      console.log(o.info)
+      this.setData({
+        info: JSON.parse(o.info)
+      })
+    }
+    this.setData({
+      title: o.title,
+      type: o.type
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

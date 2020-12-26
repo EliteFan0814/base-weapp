@@ -1,5 +1,6 @@
 /* pages/personal/personal.wxss */
 .container {
+  position: relative;
   padding-bottom: 20rpx;
   background-color: #f5f5f5;
 }
@@ -31,12 +32,40 @@
   padding-left: 60rpx;
 }
 
-.container .personal-wrap .top-info .info-wrap .user .avatar {
-  width: 85rpx;
-  height: 85rpx;
+.container .personal-wrap .top-info .info-wrap .user .img-wrap {
+  position: relative;
+  width: 105rpx;
+  height: 105rpx;
   border-radius: 50%;
+  overflow: hidden;
   margin-right: 24rpx;
+}
+
+.container .personal-wrap .top-info .info-wrap .user .img-wrap .avatar {
+  width: 105rpx;
+  height: 105rpx;
+  border-radius: 50%;
+  display: block;
   background-color: #f6f6f6;
+}
+
+.container .personal-wrap .top-info .info-wrap .user .img-wrap .shadow {
+  position: absolute;
+  background-color: rgba(40, 69, 54, 0.46);
+  bottom: 0;
+}
+
+.container .personal-wrap .top-info .info-wrap .user .img-wrap .shadow .bind-phone-btn {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 105rpx;
+  height: 52.5rpx;
+  font-size: 20rpx;
+  padding: 0;
+  text-align: center;
+  background-color: transparent;
 }
 
 .container .personal-wrap .top-info .info-wrap .user .info {
@@ -50,6 +79,11 @@
   font-size: 24rpx;
   background-color: #f9963e;
   border-radius: 17.5rpx;
+}
+
+.container .personal-wrap .top-info .info-wrap .user .no-bind .bind-btn {
+  background-color: #fff;
+  color: #07c160;
 }
 
 .container .personal-wrap .top-info .info-wrap .balance {
@@ -158,4 +192,20 @@
   font-size: 26rpx;
   color: #000000;
   padding: 25rpx 0;
+}
+
+.container .personal-wrap .operate-list .operate-item .serve-btn {
+  margin: 0;
+  padding: 10rpx 0;
+  flex-grow: 1;
+  text-align: left;
+  border: none;
+  font-size: 26rpx;
+  color: #000000;
+  background-color: #fff;
+}
+
+.container .personal-wrap .operate-list .operate-item .serve-btn::after {
+  content: '';
+  border: none;
 }

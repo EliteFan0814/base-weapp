@@ -16,7 +16,7 @@ Component({
     },
     showLeft: {
       type: Boolean,
-      value: false
+      value: true
     }
   },
 

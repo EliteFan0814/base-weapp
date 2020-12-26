@@ -18,12 +18,13 @@
       </block>
     </swiper>
   </view>
+  <!-- 产品分类 -->
   <view class="class-wrap">
     <swiper indicator-dots="{{true}}" autoplay="{{false}}" interval="{{interval}}" duration="{{duration}}">
       <block wx:for="{{classList}}" wx:for-item="pageItem" wx:for-index="pageIndex" wx:key="*this">
         <swiper-item>
           <view class="class-list">
-            <view bind:tap="openClass" wx:for="{{pageItem}}" wx:key="*this" data-index="{{index}}" class="class-item flex-dc">
+            <view bind:tap="openClass" wx:for="{{pageItem}}" wx:key="id" data-pageIndex="{{pageIndex}}" data-index="{{index}}" class="class-item flex-dc">
               <image src="{{item.thumbHost}}"></image>
               <text>{{item.name}}</text>
             </view>
@@ -144,7 +145,7 @@
     </view>
     <view class="goods-wrap">
       <view class="goods-list">
-        <view wx:for="{{10}}" wx:key="*this" class="goods-item">
+        <view wx:for="{{1}}" wx:key="*this" class="goods-item">
           <view class="item-content flex">
             <image src="https://dummyimage.com/281x231/000/fff" class="good-img"></image>
             <view class="right-info flex-ds">
@@ -186,6 +187,70 @@
                   </text>
                 </view>
                 <base-btn btn-name="立刻买"></base-btn>
+              </view>
+            </view>
+          </view>
+          <view class="other-user flex">
+            <view class="img-list flex">
+              <view class="img-item flex">
+                <image src="https://dummyimage.com/36x36/000/fff"></image>
+                <view>李先生</view>
+              </view>
+              <view class="img-item flex">
+                <image src="https://dummyimage.com/36x36/222/fff"></image>
+                <view>李先生</view>
+              </view>
+              <view class="img-item flex">
+                <image src="https://dummyimage.com/36x36/777/fff"></image>
+                <view>李先生</view>
+              </view>
+            </view>
+            <view class="right-text">等36人刚刚购买了此商品</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 普通商品 -->
+  <view class="common-wrap frame">
+    <view class="goods-wrap">
+      <view class="goods-list">
+        <view wx:for="{{commonList}}" wx:key="id" class="goods-item">
+          <view class="item-content flex">
+            <image src="{{item.thumbHost}}" class="good-img"></image>
+            <view class="right-info flex-ds">
+              <view class="title omit-1">{{item.title}}</view>
+              <view class="tag omit-1">
+                <text>{{item.tags}}</text>
+              </view>
+              <view class="sale-info flex">
+                <image src="/static/img/index/fire.png"></image>
+                <text>已售{{item.salesCount}}份/剩{{item.lastCount}}份</text>
+              </view>
+              <!-- <view class="timer flex">
+                <view class="end-text">距结束</view>
+                <van-count-down use-slot time="{{ time }}" bind:change="onTimeChange">
+                  <view class="item-wrap flex">
+                    <text class="item">{{ timeData.hours }}</text>
+                    :
+                    <text class="item">{{ timeData.minutes }}</text>
+                    :
+                    <text class="item">{{ timeData.seconds }}</text>
+                  </view>
+                </van-count-down>
+              </view> -->
+              <view class="price-wrap flex">
+                <view class="price">
+                  <text>
+                    <text class="symbol">￥</text>
+                    <text class="price-num">{{item.specialPrice}}</text>
+                  </text>
+                  <text class="right">
+                    <text class="symbol">￥</text>
+                    <text class="price-num">{{item.sourcePrice}}</text>
+                  </text>
+                </view>
+                <base-btn catch:handleTap="buyGood" data-id="{{item.id}}" btn-name="立刻买"></base-btn>
               </view>
             </view>
           </view>

@@ -5,12 +5,14 @@
 
 .container .address-list {
   margin-top: 20rpx;
+  padding-bottom: 110rpx;
 }
 
 .container .address-list .address-item {
   border-radius: 17rpx;
   background-color: #fff;
   padding: 20rpx;
+  margin-bottom: 15rpx;
 }
 
 .container .address-list .address-item .link {

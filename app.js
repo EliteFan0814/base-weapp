@@ -47,5 +47,38 @@ App({
       // e.detail.value为小程序原生 input 返回值 e.detail 为 vant 返回值
       [name]: typeof e.detail.value == 'undefined' ? e.detail : e.detail.value
     })
+  },
+  // 获取tap点击后传入的数据
+  tapData(e) {
+    return e.currentTarget.dataset
+  },
+  //失败提示
+  toastFail(e) {
+    wx.showToast({
+      title: e,
+      icon: 'none'
+    })
+  },
+  //成功提示
+  toastSuccess(e) {
+    wx.showToast({
+      title: e
+    })
+  },
+  // 交互弹框
+  showModal(title, content) {
+    return new Promise((reslove, reject) => {
+      wx.showModal({
+        title,
+        content,
+        success(res) {
+          if (res.confirm) {
+            reslove(true)
+          } else if (res.cancel) {
+            reslove(false)
+          }
+        }
+      })
+    })
   }
 })

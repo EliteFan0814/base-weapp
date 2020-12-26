@@ -1,4 +1,4 @@
-import requestIndex from '../../api/index'
+import request from '../../api/index'
 //获取应用实例
 const app = getApp()
 
@@ -15,6 +15,13 @@ Page({
     time: 30 * 60 * 60 * 1000,
     timeData: {},
     userInfo: {},
+    todayProd: [],
+    tomorrowProd: [],
+    seckillProd: [],
+    commonList: [],
+    page: 1,
+    pageSize: 10,
+    totalPage: 0,
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     capsuleToTop: app.globalData.capsuleToTop
@@ -30,6 +37,7 @@ Page({
   onLoad: function () {
     this.getCarousel()
     this.getClassList()
+    this.getCommonList()
   },
   onPageScroll: function (e) {
     let a = e.scrollTop / 60
@@ -41,7 +49,7 @@ Page({
   //  方法
   // 获取轮播图
   getCarousel() {
-    requestIndex
+    request
       .getCarouseList()
       .then((res) => {
         this.setData({
@@ -50,10 +58,35 @@ Page({
       })
       .catch((err) => {})
   },
-  //
+  // 获取商品列表
+  getCommonList(type) {
+    request.getCommonList(this.data.page, 10).then((res) => {
+      this.data.totalPage = res.value.totalPage
+      let tempCommon = this.data.commonList
+      const resList = res.value.data
+      if (type === 'down') {
+        tempCommon.push(...resList)
+        this.setData({
+          commonList: tempCommon
+        })
+      } else {
+        this.setData({
+          commonList: resList
+        })
+      }
+    })
+  },
+  onReachBottom() {
+    if (this.data.page < this.data.totalPage) {
+      this.data.page += 1
+      this.getCommonList('down')
+    }
+  },
+  // 获取分类列表
   getClassList() {
-    requestIndex.getClassList().then((res) => {
+    request.getClassList().then((res) => {
       res.value = res.value.concat(res.value).concat(res.value).concat(res.value).concat(res.value).concat(res.value)
+      // res.value = res.value
       const filterArr = this.sliceArray(res.value, 10)
       this.setData({
         classList: filterArr,
@@ -61,6 +94,56 @@ Page({
       })
       console.log(222, this.data.classList)
     })
+  },
+  //
+  openClass(e) {
+    const data = app.tapData(e)
+    console.log(data)
+  },
+  // 获取期次列表
+  getPeriodList() {
+    request
+      .getPeriodList()
+      .then((res) => {})
+      .catch((err) => {})
+  },
+  // 获取 今日抢购
+  getProdList() {
+    request
+      .getProdList(0)
+      .then((res) => {
+        this.setData({
+          todayProd: res.value
+        })
+      })
+      .catch((err) => {})
+  },
+  // 获取  明日预告
+  getProdList() {
+    request
+      .getProdList(1)
+      .then((res) => {
+        this.setData({
+          tomorrowProd: res.value
+        })
+      })
+      .catch((err) => {})
+  },
+  // 获取   限时秒杀
+  getProdList() {
+    request
+      .getProdList(2)
+      .then((res) => {
+        this.setData({
+          seckillProd: res.value
+        })
+      })
+      .catch((err) => {})
+  },
+  //
+  buyGood(e) {
+    const { id } = app.tapData(e)
+    console.log(id)
   },
   //分类分页处理
   sliceArray(targetArray, number) {

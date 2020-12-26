@@ -1,22 +1,35 @@
 <!-- pages/personal/personal.wxml -->
 <view class="container">
+  <base-header title="个人中心" navOpacity="{{navOpacity}}" showLeft="{{false}}"></base-header>
   <view class="personal-wrap">
     <view class="top-info" style="height:{{142+capsuleToTop}}px;">
       <image src="/static/img/personal/bg.png" class="bg" style="height:{{142+capsuleToTop}}px;"></image>
       <view class="info-wrap" style="padding-top:{{capsuleToTop}}px;">
-        <view class="title">生鲜配送</view>
+        <!-- <view class="title">生鲜配送</view> -->
         <view class="user flex">
-          <image class="avatar"></image>
-          <view class="info">
-            <view class="name flex">
-              <view>周星星</view>
-              <view class="grade">团长</view>
+          <view class="img-wrap">
+            <image class="avatar" src="{{userInfo.wxHeader}}"></image>
+            <view wx:if="{{!userInfo.mobileAuth}}" class="shadow">
+              <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class="bind-phone-btn">
+                绑定手机
+              </button>
             </view>
-            <view class="phone">15000000000</view>
+          </view>
+          <view wx:if="{{userInfo.infoAuth}}" class="info">
+            <view class="name flex">
+              <view>{{userInfo.wxName}}</view>
+              <view class="grade">{{userInfo.userTypeStr}}</view>
+            </view>
+            <view class="phone">{{userInfo.mobileAuth?userInfo.mobile:'请绑定手机号'}}</view>
+          </view>
+          <view wx:else class="no-bind">
+            <button class="bind-btn" type="default" size="mini" open-type="getUserInfo" bindgetuserinfo="getWxUserInfo">
+              授权头像昵称
+            </button>
           </view>
         </view>
         <view class="balance flex">
-          <view>余额：364.5</view>
+          <view>余额：{{account.leaderAccount}}</view>
           <view class="flex">
             <image src="/static/img/personal/diamond.png"></image>
             <text class="text-info">团长信息</text>
@@ -26,7 +39,7 @@
       </view>
     </view>
     <view class="order-list frame flex">
-      <view wx:for="{{orderList}}" wx:key="*this" class="order-item flex-dc">
+      <view wx:for="{{orderList}}" wx:key="index" class="order-item flex-dc">
         <image src="{{item.img}}" class="order-icon"></image>
         <text>{{item.name}}</text>
       </view>
@@ -39,21 +52,27 @@
       <view class="title">我的团队</view>
       <view class="content flex">
         <view class="item flex-dc">
-          <view class="red">463.5</view>
+          <view class="red">{{account.spendMoney}}</view>
           <view>消费金额</view>
         </view>
         <view class="item  flex-dc">
-          <view class="gold">56.3</view>
+          <view class="gold">{{account.totalRebate}}</view>
           <view>佣金金额</view>
         </view>
-        <base-btn btn-name="查看团队" btn-style="btn-style"></base-btn>
+        <base-btn btn-name="查看团队" btn-style="btn-style" bind:handleTap="openTeam"></base-btn>
       </view>
     </view>
     <view class="operate-list frame">
-      <view wx:for="{{operateList}}" wx:key="*this" class="operate-item flex">
-        <text class="name">{{item.name}}</text>
-        <van-icon color="#999999" name="arrow" />
-      </view>
+      <block wx:for="{{operateList}}" wx:key="index">
+        <view bind:tap="openOperate" data-info="{{item}}" wx:if="{{!item.isServe}}" class="operate-item flex">
+          <text class="name">{{item.name}}</text>
+          <van-icon color="#999999" name="arrow" />
+        </view>
+        <view wx:else class="operate-item flex">
+          <button open-type='contact' class="serve-btn">{{item.name}}</button>
+          <van-icon color="#999999" name="arrow" />
+        </view>
+      </block>
     </view>
   </view>
 </view>

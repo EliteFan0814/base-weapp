@@ -48,7 +48,7 @@
     }
   }
   .class-wrap {
-    margin-bottom: 15px;
+    // margin-bottom: 15px;
     swiper {
       // height: 240rpx;
     }
@@ -110,6 +110,8 @@
   .goods-wrap {
     .goods-list {
       .goods-item {
+        border-bottom: 1px solid #f5f5f5;
+        padding-bottom: 15rpx;
         margin-bottom: 20rpx;
         .item-content {
           align-items: stretch;
@@ -193,6 +195,7 @@
   }
   .rush-wrap {
     background-color: #07c160;
+    margin-bottom: 15rpx;
     .rush {
       .nav-style {
         background-color: #07c160;
@@ -222,5 +225,8 @@
         }
       }
     }
+  }
+  .common-wrap {
+
   }
 }
