@@ -5,6 +5,7 @@ Page({
    */
   data: {
     classList: [],
+    activeId: undefined,
     classItemList: [],
     page: 1,
     pageSize: 10,
@@ -18,12 +19,15 @@ Page({
         return item
       })
       this.setData({
-        classList: temp
+        classList: temp,
+        activeId: temp[0].id
       })
+      this.getClassItemList()
     })
   },
-  getClassItemList() {
-    request.getClassItemList(this.data.page, 10).then((res) => {
+  //
+  getClassItemList(type) {
+    request.getClassItemList(this.data.page, 10, this.data.activeId).then((res) => {
       this.data.totalPage = res.value.totalPage
       let tempCommon = this.data.classItemList
       const resList = res.value.data
@@ -38,6 +42,19 @@ Page({
         })
       }
     })
+  },
+  // 处理点击分类
+  handleClickNav(e) {
+    const id = this.data.classList[e.detail.index].id
+    this.setData({
+      activeId: id
+    })
+    this.setData({
+      page: 1,
+      totalPage: 0,
+      classItemList: []
+    })
+    this.getClassItemList()
   },
   onReachBottom() {
     if (this.data.page < this.data.totalPage) {

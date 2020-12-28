@@ -140,10 +140,10 @@ Page({
       })
       .catch((err) => {})
   },
-  //
+  // 购买普通商品
   buyGood(e) {
     const { id } = app.tapData(e)
-    console.log(id)
+    wx.navigateTo({ url: '/pages/goodDetail/goodDetail?id=' + id })
   },
   //分类分页处理
   sliceArray(targetArray, number) {

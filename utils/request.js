@@ -8,10 +8,10 @@ fly.config = {
   headers: {
     'content-type': 'application/json'
   },
-  // baseURL: 'https://xiaochengxu.wgywkm.com',
-  baseURL: 'http://192.168.0.128/',
+  baseURL: 'http://xiaocaiwa.test.fxcloud.net',
+  // baseURL: 'http://192.168.0.128/',
   parseJson: true,
-  timeout: 10000
+  timeout: 100000
 }
 
 // 请求拦截

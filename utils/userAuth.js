@@ -22,6 +22,8 @@ function getWxCode() {
 async function code2Token() {
   try {
     const code = await getWxCode()
+    // console.log(code)
+    // return
     const res = await flyForToken.get(authConfig.loginUrl, {
       [authConfig.codeName]: code
     })

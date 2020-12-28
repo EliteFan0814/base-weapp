@@ -1,4 +1,5 @@
 import request from '../../api/address'
+const app = getApp()
 Page({
   /**
    * 页面的初始数据
@@ -6,29 +7,93 @@ Page({
   data: {
     title: '',
     type: '',
-    info: {}
+    info: {
+      mobile: '',
+      address: '',
+      area: '',
+      contact: '',
+      longitude: '',
+      latitude: '',
+      addressLatlog: ''
+    },
+    rules: [
+      { name: 'contact', message: '请输入联系人！' },
+      { name: 'mobile', message: '请输入联系电话！' },
+      { name: 'area', message: '请选择地区！' },
+      { name: 'address', message: '请输入详细地址！' }
+    ]
   },
-  openMap() {
+  //
+  inputChange(e) {
+    app.setData(e, this)
+  },
+  // 打开地图选址
+  openMap(e) {
+    const { longitude, latitude } = app.tapData(e)
     wx.chooseLocation({
       latitude,
       longitude,
       success: (res) => {
         console.log('res', res)
+        const locationSrc = '' + res.longitude + ',' + res.latitude
         this.setData({
-          latitude: res.latitude,
-          longitude: res.longitude
+          ['info.addressLatlog']: locationSrc,
+          ['info.area']: res.address
         })
       }
     })
+  },
+  //
+  confirm() {
+    const res = this.validate(this.data.rules)
+    if (res) {
+      if (this.data.type === 'edit') {
+        request
+          .edit(this.data.info)
+          .then((res) => {
+            app.toastSuccess('修改成功！')
+            this.changeParentData()
+          })
+          .catch((err) => {})
+      } else {
+        request
+          .add(this.data.info)
+          .then((res) => {
+            app.toastSuccess('添加成功！')
+            this.changeParentData()
+          })
+          .catch((err) => {})
+      }
+    }
+  },
+  changeParentData() {
+    const pages = getCurrentPages()
+    if (pages.length > 1) {
+      const beforePage = pages[pages.length - 2]
+      beforePage.changeData()
+    }
+  },
+  // 验证
+  validate(rules) {
+    for (let i = 0; i < rules.length; i++) {
+      if (!this.data.info[rules[i].name]) {
+        app.toastFail(rules[i].message)
+        return false
+      }
+    }
+    return true
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (o) {
-    if (o.info) {
-      console.log(o.info)
+    if (o.type === 'edit') {
+      const tempInfo = JSON.parse(o.info)
+      const location = tempInfo.addressLatlog.split()
+      tempInfo.longitude = location[0] // 经度
+      tempInfo.latitude = location[1] // 纬度
       this.setData({
-        info: JSON.parse(o.info)
+        info: tempInfo
       })
     }
     this.setData({

@@ -1,41 +1,23 @@
 <!-- pages/class/class.wxml -->
 <view class="container">
-  <base-header navOpacity="{{1}}" title="生鲜分类"></base-header>
+  <base-header navOpacity="{{1}}" title="生鲜分类" showLeft="{{false}}"></base-header>
   <view class="class-wrap">
     <base-search navOpacity="{{1}}"></base-search>
     <view class="content-wrap">
-      <van-tree-select items="{{ classList }}" main-active-class="active-class" height="55vw" main-active-index="{{ mainActiveIndex }}" bind:click-nav="onClickNav" bind:click-item="onClickItem">
+      <van-tree-select items="{{ classList }}" active-id="{{ activeId }}" main-active-class="active-class" height="55vw" main-active-index="{{ mainActiveIndex }}" bind:click-nav="handleClickNav">
         <view slot="content">
           <view class="goods-list">
-            <view class="goods-item flex">
-              <image src="https://dummyimage.com/223x183/000/fff" class="good-img"></image>
+            <view wx:for="{{classItemList}}" wx:key="id" class="goods-item flex">
+              <image src="{{item.thumbHost}}" class="good-img"></image>
               <view class="goods-info flex-ds">
                 <view class="top-wrap">
-                  <view class="title omit-1">海外直采 泰国鲜虾大号泰国鲜虾大号</view>
-                  <view class="sale">已售30021份/剩214份</view>
+                  <view class="title omit-1">{{item.title}}</view>
+                  <view class="sale">已售{{item.salseTotal}}份/剩{{item.inventoryCount}}份</view>
                 </view>
                 <view class="price flex">
                   <view class="left-price">
                     <text class="symbol">￥</text>
-                    14.0
-                  </view>
-                  <view class="btn">
-                    <image src="/static/img/class/shop-cart.png"></image>
-                  </view>
-                </view>
-              </view>
-            </view>
-            <view class="goods-item flex">
-              <image src="https://dummyimage.com/223x183/000/fff" class="good-img"></image>
-              <view class="goods-info flex-ds">
-                <view class="top-wrap">
-                  <view class="title omit-1">海外直采 泰国鲜虾大号泰国鲜虾大号</view>
-                  <view class="sale">已售30021份/剩214份</view>
-                </view>
-                <view class="price flex">
-                  <view class="left-price">
-                    <text class="symbol">￥</text>
-                    14.0
+                    {{item.specialPrice}}
                   </view>
                   <view class="btn">
                     <image src="/static/img/class/shop-cart.png"></image>

@@ -3,7 +3,7 @@
   <base-header title="收货地址"></base-header>
   <view class="address-list frame">
     <van-radio-group value="{{ defaultId }}" bind:change="changeDefault">
-      <view wx:for="{{addressList}}" wx:key="id" class="address-item">
+      <view bind:tap="selectAddress" data-info="{{item}}" wx:for="{{addressList}}" wx:key="id" class="address-item">
         <view class="link flex">
           <text>{{item.contact}}</text>
           <text>{{item.mobile}}</text>

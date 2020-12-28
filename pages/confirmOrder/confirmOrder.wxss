@@ -14,9 +14,34 @@
   justify-content: space-between;
 }
 
+.container .confirm-order .address-wrap .address .left .text {
+  align-items: flex-start;
+}
+
 .container .confirm-order .address-wrap .address .left image {
-  width: 40rpx;
-  height: 35rpx;
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 40rpx;
+}
+
+.container .confirm-order .time-wrap {
+  margin: 20rpx 30rpx;
+}
+
+.container .confirm-order .time-wrap .time {
+  background-color: #fff;
+  border-radius: 17rpx;
+  padding: 20rpx 15rpx;
+  justify-content: space-between;
+}
+
+.container .confirm-order .time-wrap .time .left .text {
+  align-items: flex-start;
+}
+
+.container .confirm-order .time-wrap .time .left image {
+  width: 30rpx;
+  height: 30rpx;
   margin-right: 40rpx;
 }
 

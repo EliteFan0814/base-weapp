@@ -6,7 +6,8 @@ Page({
    */
   data: {
     addressList: [],
-    defaultId: undefined
+    defaultId: undefined,
+    type: undefined
   },
   getAddressList() {
     request.getAddressList().then((res) => {
@@ -68,11 +69,35 @@ Page({
         })
     }
   },
+  changeData() {
+    this.getAddressList()
+  },
+  // 选择地址
+  selectAddress(e) {
+    const { info } = app.tapData(e)
+    if (this.data.type === 'select') {
+      const pages = getCurrentPages()
+      const beforePage = pages[pages.length - 2]
+      beforePage.setData({
+        address: info,
+        addressId: info.id
+      })
+      wx.navigateBack({
+        delta: 1
+      })
+    } else {
+      return false
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     // this.getDefault()
+    this.setData({
+      type: options.type
+    })
+    // console.log('this.data.type', this.data.type)
     this.getAddressList()
   },
 

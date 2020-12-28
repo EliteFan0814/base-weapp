@@ -29,7 +29,7 @@
 
 .container .style-right {
   border-radius: 0rpx 31rpx 31rpx 0rpx;
-  background-color: #fe2448;
+  background-color: #07c160;
 }
 
 .container .swiper-wrap {
@@ -103,12 +103,19 @@
 
 .container .operation-wrap .operate-item {
   font-size: 22rpx;
+  line-height: 32rpx;
 }
 
 .container .operation-wrap .operate-item image {
   width: 27rpx;
   height: 29rpx;
   margin-bottom: 5rpx;
+}
+
+.container .operation-wrap .operate-item .serve-btn {
+  color: #333333;
+  font-size: 22rpx;
+  line-height: 32rpx;
 }
 
 .container .detail-wrap {
@@ -133,24 +140,30 @@
 
 .container .detail-wrap .spec-wrap .item-wrap .spec-name {
   font-size: 30rpx;
-  margin-bottom: 10rpx;
+  margin: 20rpx 0;
 }
 
 .container .detail-wrap .spec-wrap .item-wrap .spec-list {
   flex-wrap: wrap;
+  padding-top: 20rpx;
 }
 
 .container .detail-wrap .spec-wrap .item-wrap .spec-list .spec-item {
+  color: #fff;
   padding: 5rpx 15rpx;
   background-color: #b8b8b8;
   border-radius: 20rpx;
   margin: 0 10rpx 20rpx;
 }
 
+.container .detail-wrap .spec-wrap .item-wrap .spec-list .active-item {
+  background-color: #07c160;
+}
+
 .container .detail-wrap .buy-num {
   justify-content: space-between;
   font-size: 30rpx;
-  margin-bottom: 20rpx;
+  margin: 20rpx 0 30rpx;
 }
 
 .container .detail-wrap .btn-wrap .btn-style {

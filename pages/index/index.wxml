@@ -1,6 +1,6 @@
 <!-- index.wxml -->
 <view class="container">
-  <base-header navOpacity="{{navOpacity}}" title="生鲜配送"></base-header>
+  <base-header navOpacity="{{navOpacity}}" title="生鲜配送" showLeft="{{false}}"></base-header>
   <view class="search-wrap">
     <base-search navOpacity="{{navOpacity}}"></base-search>
   </view>

@@ -23,7 +23,7 @@
   }
   .style-right {
     border-radius: 0rpx 31rpx 31rpx 0rpx;
-    background-color: #fe2448;
+    background-color: #07c160;
   }
   .swiper-wrap {
     margin-bottom: 10px;
@@ -85,10 +85,17 @@
     padding: 10rpx 30rpx;
     .operate-item {
       font-size: 22rpx;
+      line-height: 32rpx;
+
       image {
         width: 27rpx;
         height: 29rpx;
         margin-bottom: 5rpx;
+      }
+      .serve-btn {
+        color: #333333;
+        font-size: 22rpx;
+        line-height: 32rpx;
       }
     }
   }
@@ -113,15 +120,20 @@
       .item-wrap {
         .spec-name {
           font-size: 30rpx;
-          margin-bottom: 10rpx;
+          margin: 20rpx 0;
         }
         .spec-list {
           flex-wrap: wrap;
+          padding-top: 20rpx;
           .spec-item {
+            color: #fff;
             padding: 5rpx 15rpx;
             background-color: #b8b8b8;
             border-radius: 20rpx;
             margin: 0 10rpx 20rpx;
+          }
+          .active-item {
+            background-color: #07c160;
           }
         }
       }
@@ -129,10 +141,10 @@
     .buy-num {
       justify-content: space-between;
       font-size: 30rpx;
-      margin-bottom: 20rpx;
+      margin: 20rpx 0 30rpx;
     }
-    .btn-wrap{
-      .btn-style{
+    .btn-wrap {
+      .btn-style {
         width: 200rpx;
       }
     }

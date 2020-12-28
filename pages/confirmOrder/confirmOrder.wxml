@@ -2,7 +2,7 @@
 <view class="container">
   <base-header showLeft navOpacity="{{1}}" title="确认订单"></base-header>
   <view class="confirm-order">
-    <view class="address-wrap frame">
+    <!-- <view class="address-wrap frame">
       <view bind:tap="openMap" class="address flex">
         <view class="left flex">
           <image></image>
@@ -10,22 +10,43 @@
         </view>
         <van-icon color="#999999" name="arrow" />
       </view>
+    </view> -->
+    <view class="address-wrap frame">
+      <view bind:tap="openAddress" class="address flex">
+        <view class="left flex">
+          <image src="/static/img/order/address.png"></image>
+          <!-- <view class="text">选择收货选址</view> -->
+          <view class="text flex-dc">
+            <view class="address-text">{{address.area}} {{address.address}}</view>
+            <view class="link">{{address.contact}} {{address.mobile}}</view>
+          </view>
+        </view>
+        <van-icon color="#999999" name="arrow" />
+      </view>
     </view>
+    <view bind:tap="openSelectTime" class="time-wrap frame">
+      <view class="time flex">
+        <view class="left flex">
+          <image src="/static/img/order/time.png"></image>
+          <!-- <view class="text">选择收货选址</view> -->
+          <view class="text">{{selectDate?'配送时间：'+selectDate:'选择配送时间'}}</view>
+        </view>
+        <van-icon color="#999999" name="arrow" />
+      </view>
+    </view>
+    <!-- 配送时间弹框 -->
+    <van-popup show="{{ showTimeDialog }}" position="bottom" custom-style="border-radius:30rpx 30rpx 0 0;" bind:close="onClose">
+      <van-datetime-picker type="date" title="选择配送时间" value="{{ currentDate }}" bind:confirm="confirmSelectTime" bind:cancel="cancelDelectTime" min-date="{{ minDate }}" formatter="{{ formatter }}" />
+    </van-popup>
     <view class="goods-wrap frame">
       <view class="goods-list">
-        <view bind:tap="openDetail" wx:for="{{2}}" wx:key="*this" class="goods-item">
+        <view bind:tap="openDetail" wx:for="{{cartInfoList}}" wx:key="id" class="goods-item">
           <view class="item-content flex">
-            <image src="https://dummyimage.com/281x231/000/fff" class="good-img"></image>
+            <image src="{{item.thumbHost}}" class="good-img"></image>
             <view class="right-info flex-ds">
-              <view class="title omit-1">海外直采 泰国鲜虾大号</view>
+              <view class="title omit-1">{{item.title}}</view>
               <view class="tag omit-1">
-                <text>每天现杀</text>
-                <text>不隔离</text>
-                <text>生态散养</text>
-                <text>生态散养</text>
-                <text>生态散养</text>
-                <text>安全</text>
-                <text>生态散养</text>
+                <text>{{item.tags}}</text>
               </view>
               <!-- <view class="sale-info flex">
                 <image src="/static/img/index/fire.png"></image>
@@ -47,7 +68,7 @@
                 <view class="price">
                   <text>
                     <text class="symbol">￥</text>
-                    <text class="price-num">18</text>
+                    <text class="price-num">{{item.specialPrice}}</text>
                   </text>
                   <!-- <text class="right">
                     <text class="symbol">￥</text>
@@ -55,7 +76,7 @@
                   </text> -->
                 </view>
                 <!-- <base-btn btn-name="立刻买"></base-btn> -->
-                <view class="number">x2</view>
+                <view class="number">x{{item.count}}</view>
               </view>
             </view>
           </view>
@@ -75,7 +96,7 @@
                 <view>李先生</view>
               </view>
             </view> -->
-            <view class="right-text">￥123</view>
+            <view class="right-text red">￥{{item.totalPrice}}</view>
           </view>
         </view>
       </view>
@@ -103,9 +124,9 @@
     <view class="btm-btn flex">
       <view class="text">
         <text>合计：</text>
-        <text class="red">￥100</text>
+        <text class="red">￥{{total}}</text>
       </view>
-      <base-btn btnName="支付订单"></base-btn>
+      <base-btn btnName="支付订单" isPushing="{{isPushing}}" bind:handleTap="payOrder"></base-btn>
     </view>
   </view>
 </view>

@@ -155,6 +155,25 @@
         {
           "name": "确认订单",
           "pathName": "pages/confirmOrder/confirmOrder",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "商品详情",
+          "pathName": "pages/goodDetail/goodDetail",
+          "query": "id=7",
+          "scene": null
+        },
+        {
+          "name": "分类",
+          "pathName": "pages/class/class",
+          "query": "id=7",
+          "scene": null
+        },
+        {
+          "name": "结算购物车",
+          "pathName": "pages/confirmOrder/confirmOrder",
+          "query": "type=cart&cartIdList=[5,4]",
           "scene": null
         }
       ]

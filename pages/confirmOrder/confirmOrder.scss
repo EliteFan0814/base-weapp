@@ -11,9 +11,31 @@
         padding: 20rpx 15rpx;
         justify-content: space-between;
         .left {
+          .text {
+            align-items: flex-start;
+          }
           image {
-            width: 40rpx;
-            height: 35rpx;
+            width: 30rpx;
+            height: 30rpx;
+            margin-right: 40rpx;
+          }
+        }
+      }
+    }
+    .time-wrap {
+      margin: 20rpx 30rpx;
+      .time {
+        background-color: #fff;
+        border-radius: 17rpx;
+        padding: 20rpx 15rpx;
+        justify-content: space-between;
+        .left {
+          .text {
+            align-items: flex-start;
+          }
+          image {
+            width: 30rpx;
+            height: 30rpx;
             margin-right: 40rpx;
           }
         }
@@ -124,25 +146,24 @@
     .leave-msg {
       padding: 10rpx 0;
     }
-    .pay-wrap{
+    .pay-wrap {
       background: white;
       -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.06);
       box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.06);
       border-radius: 10px;
-      .pay-item{
+      .pay-item {
         padding: 15rpx;
         justify-content: space-between;
-        .left{
-          image{
+        .left {
+          image {
             width: 30rpx;
             height: 30rpx;
             margin-right: 15rpx;
           }
-
         }
       }
     }
-    .btm-btn{
+    .btm-btn {
       background-color: #fff;
       padding: 30rpx;
       justify-content: flex-end;
@@ -150,7 +171,7 @@
       bottom: 0;
       box-sizing: border-box;
       width: 100%;
-      .text{
+      .text {
         margin-right: 20rpx;
       }
     }

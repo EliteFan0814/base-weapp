@@ -1,22 +1,23 @@
 <!-- pages/cart/cart.wxml -->
 <view class="container">
-  <base-header title="购物车"></base-header>
+  <base-header title="购物车" showLeft="{{false}}"></base-header>
   <view class="cart-wrap frame">
     <view class="cart-list">
-      <van-checkbox-group value="{{ result }}" bind:change="onChange">
-        <view wx:for="{{10}}" wx:key="*this" class="check-item flex">
-          <van-checkbox name="a"></van-checkbox>
+      <van-checkbox-group value="{{ selected }}" bind:change="handleSelect">
+        <view wx:for="{{cartList}}" wx:key="id" class="check-item flex">
+          <!-- <van-checkbox name="{{item.id}}"></van-checkbox> -->
+          <van-checkbox name="{{index}}"></van-checkbox>
           <view class="cart-item flex">
-            <image src="https://dummyimage.com/200x200/000/fff" class="good-img"></image>
+            <image src="{{item.thumbHost}}" class="good-img"></image>
             <view class="right flex-dc">
               <view class="name-wrap flex">
-                <view class="name omit-2">超市里的大海鲜超市里的大海鲜超市里的大海鲜超市里的大海鲜</view>
-                <image src="/static/img/icon/delete.png" class="delete"></image>
+                <view class="name omit-2">{{item.title}}</view>
+                <image bind:tap="cartDeleteByOne" data-id="{{item.id}}" src="/static/img/icon/delete.png" class="delete"></image>
               </view>
-              <view class="spec omit-2">大海鲜5斤</view>
+              <view class="spec omit-2">{{item.tags}}</view>
               <view class="price flex">
-                <text class="red">￥500</text>
-                <van-stepper value="{{ 1 }}" bind:change="onChange" input-width="25px" button-size="20px" />
+                <text class="red">￥{{item.specialPrice}}</text>
+                <van-stepper value="{{ item.count }}" bind:change="handleCartNum" data-info="{{item}}" data-index="{{index}}" async-change input-width="25px" button-size="20px" />
               </view>
             </view>
           </view>
@@ -26,14 +27,14 @@
   </view>
   <view class="operation flex">
     <view class="left">
-      <van-checkbox value="{{ checked }}" bind:change="onChange">全选</van-checkbox>
+      <van-checkbox value="{{ selAll }}" bind:change="handleSelAll">全选</van-checkbox>
     </view>
     <view class="right flex">
       <view class="all flex">
         <text class="grey">合计：</text>
-        <text class="red">￥500</text>
+        <text class="red">￥{{total}}</text>
       </view>
-      <base-btn btnName="结算"></base-btn>
+      <base-btn btnName="结算" bind:handleTap="confirmCartOrder" disabled="{{!selected.length}}"></base-btn>
     </view>
   </view>
 </view>

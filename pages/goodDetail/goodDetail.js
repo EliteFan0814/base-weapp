@@ -1,4 +1,5 @@
-// pages/goodDetail/goodDetail.js
+import request from '../../api/good'
+const app = getApp()
 Page({
   /**
    * 页面的初始数据
@@ -9,14 +10,80 @@ Page({
     interval: 3000,
     duration: 500,
     swiperList: 5,
-    showDialog: false
+    showDialog: false,
+    id: undefined,
+    swiperList: [],
+    goodInfo: {},
+    goodSpec: [],
+    selectedId: undefined,
+    selectedNumber: 1,
+    selectedSpec: {}
   },
-
+  getGoodInfo() {
+    request.getGoodInfo(this.data.id).then((res) => {
+      this.setData({
+        goodInfo: res.value,
+        swiperList: res.value.picsArray
+      })
+    })
+  },
+  getGoodSpec() {
+    request.getGoodSpec(this.data.id).then((res) => {
+      this.setData({
+        goodSpec: res.value,
+        selectedSpec: res.value[0],
+        selectedId: res.value[0].id
+      })
+    })
+  },
+  // 购物数量
+  handleBuyNum(e) {
+    this.setData({
+      selectedNumber: e.detail
+    })
+  },
+  // 加入购物车
+  handleCart(e) {
+    const { info, num } = app.tapData(e)
+    request
+      .addToCart(info.productId, num, info.id)
+      .then((res) => {
+        app.toastSuccess('加入购物车成功！')
+      })
+      .catch((err) => {})
+  },
+  //
+  handleSelect(e) {
+    const { info } = app.tapData(e)
+    this.setData({
+      selectedId: info.id,
+      selectedSpec: info
+    })
+  },
+  //
+  openCart() {
+    wx.switchTab({
+      url: '/pages/cart/cart'
+    })
+  },
+  openIndex() {
+    wx.switchTab({
+      url: '/pages/index/index'
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {},
-
+  onLoad: function (options) {
+    this.setData({ id: options.id })
+    this.getGoodInfo()
+    this.getGoodSpec()
+  },
+  handleBuy() {
+    wx.navigateTo({
+      url: '/pages/confirmOrder/confirmOrder'
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -54,11 +121,6 @@ Page({
   handleClose() {
     this.setData({
       showDialog: !this.data.showDialog
-    })
-  },
-  handleBuy(){
-    wx.navigateTo({
-      url:'/pages/confirmOrder/confirmOrder'
     })
   }
 })
