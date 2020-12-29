@@ -52,6 +52,16 @@ Page({
       })
       .catch((err) => {})
   },
+  // 立即购买
+  handleBuy(e) {
+    const { prod, spec, num } = app.tapData(e)
+    const prodInfo = JSON.stringify(prod)
+    const specInfo = JSON.stringify(spec)
+    wx.navigateTo({
+      // url: `/pages/confirmOrder/confirmOrder?type=buyNow&prodId=${info.productId}&specId=${info.id}&num=${num}`
+      url: `/pages/confirmOrder/confirmOrder?type=buyNow&prodInfo=${prodInfo}&specInfo=${specInfo}&num=${num}`
+    })
+  },
   //
   handleSelect(e) {
     const { info } = app.tapData(e)
@@ -71,6 +81,12 @@ Page({
       url: '/pages/index/index'
     })
   },
+
+  handleClose() {
+    this.setData({
+      showDialog: !this.data.showDialog
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -79,11 +95,7 @@ Page({
     this.getGoodInfo()
     this.getGoodSpec()
   },
-  handleBuy() {
-    wx.navigateTo({
-      url: '/pages/confirmOrder/confirmOrder'
-    })
-  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -117,10 +129,5 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {},
-  handleClose() {
-    this.setData({
-      showDialog: !this.data.showDialog
-    })
-  }
+  onShareAppMessage: function () {}
 })

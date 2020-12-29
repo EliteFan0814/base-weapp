@@ -8,8 +8,8 @@ fly.config = {
   headers: {
     'content-type': 'application/json'
   },
-  baseURL: 'http://xiaocaiwa.test.fxcloud.net',
-  // baseURL: 'http://192.168.0.128/',
+  // baseURL: 'http://xiaocaiwa.test.fxcloud.net',
+  baseURL: 'http://192.168.0.129/',
   parseJson: true,
   timeout: 100000
 }
@@ -19,7 +19,6 @@ fly.interceptors.request.use(async (request) => {
   fly.lock()
   try {
     const token = await userAuth.setTokenSync() // 方式1 执行wx.login登录并获取token
-    // const token = 3
     // const token = wx.getStorageSync('token') //  方式2 直接获取token
     if (token) {
       request.headers['Authorization'] = 'Bearer ' + token

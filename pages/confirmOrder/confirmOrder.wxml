@@ -38,9 +38,10 @@
     <van-popup show="{{ showTimeDialog }}" position="bottom" custom-style="border-radius:30rpx 30rpx 0 0;" bind:close="onClose">
       <van-datetime-picker type="date" title="选择配送时间" value="{{ currentDate }}" bind:confirm="confirmSelectTime" bind:cancel="cancelDelectTime" min-date="{{ minDate }}" formatter="{{ formatter }}" />
     </van-popup>
-    <view class="goods-wrap frame">
+    <!-- 购物车产品信息 -->
+    <view wx:if="{{type === 'cart'}}" class="goods-wrap frame">
       <view class="goods-list">
-        <view bind:tap="openDetail" wx:for="{{cartInfoList}}" wx:key="id" class="goods-item">
+        <view wx:for="{{cartInfoList}}" wx:key="id" class="goods-item">
           <view class="item-content flex">
             <image src="{{item.thumbHost}}" class="good-img"></image>
             <view class="right-info flex-ds">
@@ -48,22 +49,6 @@
               <view class="tag omit-1">
                 <text>{{item.tags}}</text>
               </view>
-              <!-- <view class="sale-info flex">
-                <image src="/static/img/index/fire.png"></image>
-                <text>已售30021份/剩214份</text>
-              </view> -->
-              <!-- <view class="timer flex">
-                <view class="end-text">距结束</view>
-                <van-count-down use-slot time="{{ time }}" bind:change="onTimeChange">
-                  <view class="item-wrap flex">
-                    <text class="item">{{ timeData.hours }}</text>
-                    :
-                    <text class="item">{{ timeData.minutes }}</text>
-                    :
-                    <text class="item">{{ timeData.seconds }}</text>
-                  </view>
-                </van-count-down>
-              </view> -->
               <view class="price-wrap flex">
                 <view class="price">
                   <text>
@@ -101,13 +86,56 @@
         </view>
       </view>
     </view>
+    <!-- 立即购买产品信息 -->
+    <view wx:if="{{type === 'buyNow'}}" class="goods-wrap frame">
+      <view class="goods-list">
+        <view class="goods-item">
+          <view class="item-content flex">
+            <image src="{{buyNowProd.thumbHost}}" class="good-img"></image>
+            <view class="right-info flex-ds">
+              <view class="title omit-1">{{buyNowProd.title}}</view>
+              <view class="tag omit-1">
+                <text>{{buyNowSpec.name}}</text>
+              </view>
+              <view class="price-wrap flex">
+                <view class="price">
+                  <text>
+                    <text class="symbol">￥</text>
+                    <text class="price-num">{{buyNowSpec.specialPrice}}</text>
+                  </text>
+                </view>
+                <view class="number">x{{buyNowNum}}</view>
+              </view>
+            </view>
+          </view>
+          <view class="other-user flex">
+            <view class="left flex">商品总价：</view>
+            <!-- <view class="img-list flex">
+              <view class="img-item flex">
+                <image src="https://dummyimage.com/36x36/000/fff"></image>
+                <view>李先生</view>
+              </view>
+              <view class="img-item flex">
+                <image src="https://dummyimage.com/36x36/222/fff"></image>
+                <view>李先生</view>
+              </view>
+              <view class="img-item flex">
+                <image src="https://dummyimage.com/36x36/777/fff"></image>
+                <view>李先生</view>
+              </view>
+            </view> -->
+            <view class="right-text red">￥{{total}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
     <!-- 备注留言 -->
-    <view class="leave-msg frame flex">
+    <!-- <view class="leave-msg frame flex">
       <view class="msg-name">备注：</view>
       <view>
         <input value="{{ remarks }}" bind:input="handelRemarks" placeholder="请输入您的备注信息" />
       </view>
-    </view>
+    </view> -->
     <!-- 支付方式 -->
     <view class="pay-wrap frame">
       <van-radio-group value="{{radio}}" bind:change="onChange" data-name="radio">

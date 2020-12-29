@@ -11,6 +11,13 @@ Page({
   },
   getAddressList() {
     request.getAddressList().then((res) => {
+      res.value.map((item) => {
+        if (item.isDefault) {
+          this.setData({
+            defaultId: item.id
+          })
+        }
+      })
       this.setData({
         addressList: res.value
       })

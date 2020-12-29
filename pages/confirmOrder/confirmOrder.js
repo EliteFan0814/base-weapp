@@ -28,7 +28,10 @@ Page({
       return value
     },
     selectDate: undefined,
-    isPushing: false
+    isPushing: false,
+    buyNowProd: {},
+    buyNowSpec: {},
+    buyNowNum: 0
   },
   //
   confirmSelectTime(e) {
@@ -56,43 +59,79 @@ Page({
   },
   // 确认订单
   payOrder() {
+    if (!this.data.addressId) return app.toastFail('请选择收货地址！')
+    if (!this.data.selectDate) return app.toastFail('请选择配送时间！')
     this.setData({
       isPushing: true
     })
-    request
-      .buyCart(this.data.cartIdList, this.data.addressId, this.data.selectDate)
-      .then((res) => {
-        const payInfo = res.value.prepayObj
-        pay
-          .wxPay(payInfo)
-          .then((res) => {
-            app.toastSuccess('支付成功！')
-            console.log(res)
-            this.setData({
-              isPushing: false
-            })
-            setTimeout(() => {
-              wx.navigateTo({
-                url: '/pages/order/order'
+    if (this.data.type === 'cart') {
+      request
+        .buyCart(this.data.cartIdList, this.data.addressId, this.data.selectDate)
+        .then((res) => {
+          const payInfo = res.value.prepayObj
+          pay
+            .wxPay(payInfo)
+            .then((res) => {
+              app.toastSuccess('支付成功！')
+              console.log(res)
+              this.setData({
+                isPushing: false
               })
-            }, 300)
-          })
-          .catch((err) => {
-            app.toastFail('支付失败！')
-            this.setData({
-              isPushing: false
+              setTimeout(() => {
+                wx.navigateTo({
+                  url: '/pages/order/order'
+                })
+              }, 300)
             })
-          })
-      })
-      .catch((err) => {
-        app.toastFail('支付失败！')
-        this.setData({
-          isPushing: false
+            .catch((err) => {
+              app.toastFail('支付失败！')
+              this.setData({
+                isPushing: false
+              })
+            })
         })
-      })
+        .catch((err) => {
+          app.toastFail('支付失败！')
+          this.setData({
+            isPushing: false
+          })
+        })
+    } else if (this.data.type === 'buyNow') {
+      request
+        .buyNow(this.data.buyNowSpec.id, this.data.buyNowNum, this.data.addressId, this.data.selectDate)
+        .then((res) => {
+          const payInfo = res.value.prepayObj
+          pay
+            .wxPay(payInfo)
+            .then((res) => {
+              app.toastSuccess('支付成功！')
+              console.log(res)
+              this.setData({
+                isPushing: false
+              })
+              setTimeout(() => {
+                wx.navigateTo({
+                  url: '/pages/order/order'
+                })
+              }, 300)
+            })
+            .catch((err) => {
+              app.toastFail('支付失败！')
+              this.setData({
+                isPushing: false
+              })
+            })
+        })
+        .catch((err) => {
+          app.toastFail('支付失败！')
+          this.setData({
+            isPushing: false
+          })
+        })
+    }
   },
+  // 获取购物车信息
   getCartInfo() {
-    console.log(this.data.cartIdList)
     request.getCartInfo(this.data.cartIdList).then((res) => {
       this.setData({
         cartInfoList: res.value
@@ -104,9 +143,14 @@ Page({
   // 计算总金额
   computeTotal() {
     let total = 0
-    this.data.cartInfoList.map((item) => {
-      total = total + item.totalPrice
-    })
+    if (this.data.type === 'cart') {
+      this.data.cartInfoList.map((item) => {
+        total = total + item.totalPrice
+      })
+    } else if (this.data.type === 'buyNow') {
+      console.log('计算总金额')
+      total = this.data.buyNowSpec.specialPrice * this.data.buyNowNum
+    }
     this.setData({
       total: total.toFixed(2)
     })
@@ -120,6 +164,7 @@ Page({
       })
     })
   },
+  // 打开选择地址
   openAddress() {
     wx.navigateTo({
       url: '/pages/addressList/addressList?type=select'
@@ -154,9 +199,26 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      cartIdList: JSON.parse(options.cartIdList)
+      type: options.type
     })
-    this.getCartInfo()
+    // 立即购买
+    if (options.type === 'buyNow') {
+      const { prodInfo, specInfo, num } = options
+      const buyNowProd = JSON.parse(prodInfo)
+      const buyNowSpec = JSON.parse(specInfo)
+      this.setData({
+        buyNowProd: buyNowProd,
+        buyNowSpec: buyNowSpec,
+        buyNowNum: num
+      })
+      this.computeTotal()
+    } else if (options.type === 'cart') {
+      // 购物车购买
+      this.setData({
+        cartIdList: JSON.parse(options.cartIdList)
+      })
+      this.getCartInfo()
+    }
     this.getDefaultAddress()
   },
 

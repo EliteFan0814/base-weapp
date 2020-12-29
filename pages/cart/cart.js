@@ -103,7 +103,7 @@ Page({
     })
     const cartIdList = JSON.stringify(idList)
     wx.navigateTo({
-      url: `/pages/confirmOrder/confirmOrder?type=${'cart'}&cartIdList=${cartIdList}`
+      url: `/pages/confirmOrder/confirmOrder?type=cart&cartIdList=${cartIdList}`
     })
   },
   /**

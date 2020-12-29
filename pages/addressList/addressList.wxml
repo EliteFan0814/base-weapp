@@ -9,7 +9,7 @@
           <text>{{item.mobile}}</text>
         </view>
         <view class="address">{{item.area}} {{item.address}}</view>
-        <view class="operation flex">
+        <view wx:if="{{type !== 'select'}}" class="operation flex">
           <van-radio name="{{item.id}}">默认地址</van-radio>
           <view class="right">
             <image catch:tap="changeAddress" data-type="edit" data-info="{{item}}" src="/static/img/icon/edit.png" class="img"></image>
