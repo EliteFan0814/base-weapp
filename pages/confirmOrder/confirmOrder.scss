@@ -2,6 +2,22 @@
 .container {
   background-color: #f5f5f5;
   .confirm-order {
+    padding-bottom: 130rpx;
+    .icon-img {
+      flex-shrink: 0;
+    }
+    .sendway-wrap {
+      margin: 20rpx 30rpx;
+      padding: 20rpx 15rpx;
+      background-color: #fff;
+      border-radius: 17rpx;
+      van-radio-group {
+        display: flex;
+        van-radio {
+          margin: 0 20rpx;
+        }
+      }
+    }
     .address-wrap {
       margin: 20rpx 30rpx;
       .address {
@@ -41,6 +57,23 @@
         }
       }
     }
+    .select-wrap {
+      padding: 10rpx;
+      .title-wrap {
+        text-align: center;
+        padding: 20rpx 0;
+        font-size: 30rpx;
+        line-height: 40rpx;
+        justify-content: space-between;
+        .close {
+          justify-content: flex-end;
+          padding-right: 15rpx;
+        }
+        > view {
+          width: 33.33%;
+        }
+      }
+    }
     .goods-wrap {
       .goods-list {
         .goods-item {
@@ -53,19 +86,21 @@
             margin-bottom: 20rpx;
             .good-img {
               margin-right: 15rpx;
-              width: 281rpx;
-              height: 231rpx;
-              background-color: #ff5100;
+              width: 100rpx;
+              height: 100rpx;
               border-radius: 18.12rpx;
             }
             .right-info {
+              flex-grow: 1;
               justify-content: space-between;
+              align-items: stretch;
               .title {
                 font-size: 28rpx;
+                font-weight: bolder;
               }
               .tag {
                 font-size: 24rpx;
-                margin-bottom: 25rpx;
+                // margin-bottom: 25rpx;
                 text {
                   margin-right: 5rpx;
                   color: #666666;
@@ -104,9 +139,12 @@
                 }
               }
               .price-wrap {
+                // border: 1px solid red;
                 margin-bottom: 15rpx;
-                width: 400rpx;
+
+                // width: 400rpx;
                 justify-content: space-between;
+                align-items: center;
                 .price {
                   font-size: 28rpx;
                   color: #fb1438;

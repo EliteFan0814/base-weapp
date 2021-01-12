@@ -28,8 +28,7 @@
 .container .personal-wrap .top-info .info-wrap .user {
   position: relative;
   margin-bottom: 20rpx;
-  padding-top: 30rpx;
-  padding-left: 60rpx;
+  padding: 30rpx 60rpx 0;
 }
 
 .container .personal-wrap .top-info .info-wrap .user .img-wrap {
@@ -84,6 +83,18 @@
 .container .personal-wrap .top-info .info-wrap .user .no-bind .bind-btn {
   background-color: #fff;
   color: #07c160;
+}
+
+.container .personal-wrap .top-info .info-wrap .user .sign {
+  justify-content: flex-end;
+  flex-grow: 1;
+  color: #fff;
+}
+
+.container .personal-wrap .top-info .info-wrap .user .sign image {
+  width: 35rpx;
+  height: 35rpx;
+  margin-bottom: 8rpx;
 }
 
 .container .personal-wrap .top-info .info-wrap .balance {
@@ -178,9 +189,6 @@
   padding: 20rpx;
   background-color: #fff;
   border-radius: 10rpx;
-  height: 450rpx;
-  overflow: hidden;
-  overflow-y: scroll;
 }
 
 .container .personal-wrap .operate-list .operate-item {
@@ -192,6 +200,11 @@
   font-size: 26rpx;
   color: #000000;
   padding: 25rpx 0;
+}
+
+.container .personal-wrap .operate-list .operate-item .item-right {
+  font-size: 25rpx;
+  line-height: 1;
 }
 
 .container .personal-wrap .operate-list .operate-item .serve-btn {

@@ -48,21 +48,21 @@ Page({
     }
     wx.navigateTo({ url })
   },
+  // 修改默认地址
   changeDefault(e) {
     request
       .setDefault(e.detail)
       .then((res) => {
         this.setData({ defaultId: e.detail })
-        app.toastSuccess('修改成功！')
+        app.toastSuccess('设置成功！')
       })
       .catch((err) => {
         app.toastFail('设置默认地址失败！')
       })
-    console.log(e)
   },
+  // 删除地址
   async deleteAddress(e) {
     const res = await app.showModal('删除', '确认删除该地址？')
-    console.log(res)
     const { id } = app.tapData(e)
     if (res) {
       request
@@ -82,7 +82,11 @@ Page({
   // 选择地址
   selectAddress(e) {
     const { info } = app.tapData(e)
-    if (this.data.type === 'select') {
+    if (['select', 'exchangeSelect'].includes(this.data.type)) {
+      // 如果是 普通选择且当前地址不支持配送 则直接弹出错误信息
+      if (this.data.type === 'select' && !info.status) {
+        return app.toastFail('所选地址暂不支持配货，请更换配送地址！')
+      }
       const pages = getCurrentPages()
       const beforePage = pages[pages.length - 2]
       beforePage.setData({
@@ -100,11 +104,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.getDefault()
     this.setData({
       type: options.type
     })
-    // console.log('this.data.type', this.data.type)
     this.getAddressList()
   },
 

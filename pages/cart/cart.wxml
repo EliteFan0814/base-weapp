@@ -2,32 +2,54 @@
 <view class="container">
   <base-header title="购物车" showLeft="{{false}}"></base-header>
   <view class="cart-wrap frame">
-    <view class="cart-list">
+    <view wx:if="{{cartList.length}}" class="cart-list">
       <van-checkbox-group value="{{ selected }}" bind:change="handleSelect">
-        <view wx:for="{{cartList}}" wx:key="id" class="check-item flex">
-          <!-- <van-checkbox name="{{item.id}}"></van-checkbox> -->
-          <van-checkbox name="{{index}}"></van-checkbox>
-          <view class="cart-item flex">
-            <image src="{{item.thumbHost}}" class="good-img"></image>
-            <view class="right flex-dc">
-              <view class="name-wrap flex">
-                <view class="name omit-2">{{item.title}}</view>
-                <image bind:tap="cartDeleteByOne" data-id="{{item.id}}" src="/static/img/icon/delete.png" class="delete"></image>
-              </view>
-              <view class="spec omit-2">{{item.tags}}</view>
-              <view class="price flex">
-                <text class="red">￥{{item.specialPrice}}</text>
-                <van-stepper value="{{ item.count }}" bind:change="handleCartNum" data-info="{{item}}" data-index="{{index}}" async-change input-width="25px" button-size="20px" />
+        <view wx:for="{{cartList}}" wx:key="id" class="check-item">
+          <view wx:if="{{item.seckillSkuId}}" class="more-info flex">
+            <view class="red">秒杀商品</view>
+            <view wx:if="{{item.endReduce}}" class="timer flex">
+              <view class="timer-text ">结束倒计时：</view>
+              <van-count-down use-slot time="{{ item.endReduce }}" bind:change="onTimeChange" bind:finish="onTimeFinished" data-index="{{index}}">
+                <view class="item-wrap flex">
+                  <text class="item">{{ item.timeData.hours }}</text>
+                  <text>:</text>
+                  <text class="item">{{ item.timeData.minutes }}</text>
+                  <text>:</text>
+                  <text class="item">{{ item.timeData.seconds }}</text>
+                </view>
+              </van-count-down>
+            </view>
+            <view wx:else class="is-end red">秒杀已结束</view>
+          </view>
+          <view wx:else class="more-info flex">
+            <view>普通商品</view>
+            <view></view>
+          </view>
+          <view class="flex">
+            <van-checkbox name="{{index}}" disabled="{{item.seckillSkuId&&(!item.endReduce)}}" checked-color="#07c160"></van-checkbox>
+            <view class="cart-item flex">
+              <image src="{{item.thumbHost}}" class="good-img"></image>
+              <view class="right flex-dc">
+                <view class="name-wrap flex">
+                  <view class="name omit-2">{{item.title}}</view>
+                  <image bind:tap="cartDeleteByOne" data-id="{{item.id}}" src="/static/img/icon/delete.png" class="delete"></image>
+                </view>
+                <view class="spec omit-2">{{item.skuName}}</view>
+                <view class="price flex">
+                  <text class="red">￥{{item.specialPrice}}</text>
+                  <van-stepper value="{{ item.count }}" bind:change="handleCartNum" data-info="{{item}}" data-index="{{index}}" disable-input async-change input-width="25px" button-size="20px" />
+                </view>
               </view>
             </view>
           </view>
         </view>
       </van-checkbox-group>
     </view>
+    <base-no-list wx:else title="暂无商品，去看看吧"></base-no-list>
   </view>
-  <view class="operation flex">
+  <view wx:if="{{cartList.length}}" class="operation flex">
     <view class="left">
-      <van-checkbox value="{{ selAll }}" bind:change="handleSelAll">全选</van-checkbox>
+      <van-checkbox value="{{ selAll }}" bind:change="handleSelAll" checked-color="#07c160">全选</van-checkbox>
     </view>
     <view class="right flex">
       <view class="all flex">

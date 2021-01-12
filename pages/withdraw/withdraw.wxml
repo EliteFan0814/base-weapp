@@ -1,30 +1,40 @@
 <view class="container">
-  <base-header title="提现" showLeft></base-header>
+  <base-header title="提现" showLeft></base-header> 
   <view class="withdraw-wrap">
     <view class="balance-wrap frame flex">
       <view class="left flex-dc">
-        <text class="red">88.88</text>
-        <text>当前余额</text>
+        <view>当前余额：<text class="red">{{amount.leaderAccount}}</text></view>
       </view>
-      <view class="right">
+      <!--><view class="right">
         <text>提现记录</text>
-      </view>
+      </view><-->
     </view>
     <view class="withdraw-way frame flex">
       <text>提现方式</text>
-      <van-dropdown-menu active-color="#07c160">
-        <van-dropdown-item value="{{ way }}" options="{{ wayList }}" />
+      <van-dropdown-menu active-color="#07c160" class="dropdown" >
+        <van-dropdown-item value="{{ way }}" options="{{ wayList }}"bind:change="onChange" />
       </van-dropdown-menu>
     </view>
     <van-cell-group>
-      <van-field value="{{ username3 }}" label="提现金额" clearable placeholder="请输入提现金额" input-align="right" />
-      <van-field value="{{ username3 }}" label="手续费" clearable placeholder="请输入手续费" input-align="right" />
-      <van-field value="{{ username3 }}" label="开户行" clearable placeholder="请输入开户行" input-align="right" />
-      <van-field value="{{ username3 }}" label="提现账号" clearable placeholder="请输入提现账号" input-align="right" />
-      <van-field value="{{ username3 }}" label="真实姓名" clearable placeholder="请输入真实姓名" input-align="right" />
+      <van-field value="{{ money }}" label="提现金额" clearable placeholder="请输入提现金额" input-align="right" bind:change="setInputVal" data-name="money"/>
+      <view class="remark flex">提现手续费：<text class="money">{{shouxu}}</text></view>
+      <van-field value="{{ trueName }}" label="真实姓名" clearable placeholder="请输入真实姓名" input-align="right" bind:change="setInputVal" data-name="trueName"/>
+      <van-field value="{{ cardId }}" label="提现账号" clearable placeholder="请输入提现账号" input-align="right" bind:change="setInputVal" data-name="cardId"/>
+      <van-field value="{{ bankAccount }}" wx:if="{{way == 'BANK'}}" label="开户行" clearable placeholder="请输入开户行" input-align="right" bind:change="setInputVal" data-name="bankAccount"/>
+
+      <view class="field flex" wx:if="{{way == 'ALI' || way == 'WX'}}">
+        <view class="label">收款码</view>
+        <view class="upload" wx:if="{{!outQrCode}}" bindtap="upImg">
+          <van-icon name="plus" size="30rpx" color="#666"/>
+        </view>
+
+        <image src="{{outQrCode}}" wx:else class="qrcode" bindtap="upImg"/>
+      </view>
     </van-cell-group>
     <view class="btn flex-cc">
-      <base-btn btnName="立即提现" btn-style="btn-style"></base-btn>
+      <view class="base-btn" bind:tap="submit">
+        提交申请
+        </view>
     </view>
   </view>
 </view>

@@ -2,10 +2,11 @@
 <view class="container">
   <base-header title="{{title}}" showLeft></base-header>
   <view class="form-wrap">
-    <van-cell-group>
+    <van-cell-group> 
       <van-field bind:change="inputChange" data-name="info.contact" value="{{ info.contact }}" clearable label="联系人：" placeholder="请输入联系人" input-align="right" />
       <van-field bind:change="inputChange" data-name="info.mobile" value="{{ info.mobile }}" type="number" label="联系电话：" placeholder="请输入联系电话" clearable input-align="right" />
-      <van-field bind:tap="openMap" data-lon="{{info.longitude}}" data-lat="{{info.latitude}}" clearable value="{{ info.area }}" readonly label="地图选址：" placeholder="请在地图选址" input-align="right" />
+      <van-field wx:if="{{isGetPositionAuth}}" bind:tap="openMap" data-lon="{{info.longitude}}" data-lat="{{info.latitude}}" type="textarea" autosize="{{autosize}}" clearable value="{{ info.area }}" readonly label="地图选址：" placeholder="请在地图选址" input-align="right" />
+      <van-field wx:else bind:tap="showAuthPosition" clearable value="{{ info.area }}" readonly label="地图选址：" placeholder="请点击授权定位" input-align="right" />
       <van-field bind:change="inputChange" data-name="info.address" value="{{ info.address }}" label="详细地址：" placeholder="请输入详细地址" clearable input-align="right" />
     </van-cell-group>
   </view>

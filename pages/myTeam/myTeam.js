@@ -1,66 +1,65 @@
 // pages/myTeam/myTeam.js
+import request from '../../api/personal'
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    page: 1,
+    totalPage: 1,
+    list: [],
+    account: {},
+    capsuleToTop: app.globalData.capsuleToTop,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getData()
+    this.getInfo()
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onShow(){
+    // this.getInfo()
+  },
+  getInfo() {   //获取个人信息
+    request.getUserInfo().then((res) => {
+      if (res.success) {
+        this.setData({
+          account: res.value.account,
+        })
+      }
+    })
+  },
+  getData(type){
+    const {page, list} = this.data;
+    request.teamList(
+      page,
+      10,
+    ).then(res=>{
+      const {data, totalPage} = res.value;
+      if(type == 'down'){
+        list.push(...data);
+        this.setData({
+          list,
+          totalPage
+        })
+      }else{
+        this.setData({
+          list: data, 
+          totalPage
+        })
+      }
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  onReachBottom() {
+    if (this.data.page < this.data.totalPage) {
+      this.data.page += 1
+      this.getData('down')
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

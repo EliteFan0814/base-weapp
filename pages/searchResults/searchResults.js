@@ -1,10 +1,8 @@
-import {
-  classSecondList
-} from '../../api/class'
+import request from '../../api/index'
+const app = getApp()
 Page({
   data: {
     page: 1,
-    rows: 5,
     totalPage: 0,
     sort: 'def_desc',
     keywords: '',
@@ -29,7 +27,9 @@ Page({
       },
     ],
     selectIndex: 0,
-    showNoList: false
+    showNoList: false,
+    commonList: [],
+
   },
   // load初始化
   onLoad(options) {
@@ -39,12 +39,41 @@ Page({
     this.setData({
       keywords: options.value
     })
-    this.getSecondClassList(false)
+    this.getCommonList()
   },
   togoodsdetail(e) {
     wx.navigateTo({
       url: `/pages/goodsDetails/goodsDetails?goodsId=${e.currentTarget.dataset.id}`,
     })
+  },
+  // 获取商品列表
+  getCommonList(type) {
+    request.getCommonList(this.data.page, 10, this.data.keywords).then((res) => {
+      this.data.totalPage = res.value.totalPage
+      let tempCommon = this.data.commonList
+      const resList = res.value.data
+      if (type === 'down') {
+        tempCommon.push(...resList)
+        this.setData({
+          commonList: tempCommon
+        })
+      } else {
+        this.setData({
+          commonList: resList
+        })
+      }
+    })
+  },
+  onReachBottom() {
+    if (this.data.page < this.data.totalPage) {
+      this.data.page += 1
+      this.getCommonList('down')
+    }
+  },
+   // 购买普通商品
+   buyGood(e) {
+    const { id } = app.tapData(e)
+    wx.navigateTo({ url: '/pages/goodDetail/goodDetail?type=normal&id=' + id })
   },
   // 更改查询关键字
   changeKeywords(e) {
@@ -54,8 +83,8 @@ Page({
   },
   // 点击搜索
   searchNewGood() {
-    this.clearKeywords
-    this.getSecondClassList(false)
+    // this.clearKeywords()
+    this.getCommonList()
   },
   // 清除查询关键字,清除所有数据
   clearKeywords() {
@@ -138,14 +167,7 @@ Page({
         sort: this.data.sortList[this.data.selectIndex].downValue
       })
     }
-    this.getSecondClassList(false)
+    this.getCommonList()
   },
 
-  // 触底触发无限加载
-  onReachBottom() {
-    if (this.data.page < this.data.totalPage) {
-      this.data.page += 1
-      this.getSecondClassList(true)
-    }
-  },
 })

@@ -1,0 +1,242 @@
+/* pages/goodDetail/goodDetail.wxss */
+.container {
+  background-color: #f5f5f5;
+}
+
+.container .rich-img {
+  width: 100%;
+}
+
+.container .red {
+  font-size: 34.72rpx;
+  color: #fe2448;
+}
+
+.container .grey {
+  margin-left: 10rpx;
+  font-size: 26rpx;
+  color: #a6a6a6;
+  text-decoration: line-through;
+}
+
+.container .btn-style {
+  font-size: 24rpx;
+  width: 160rpx;
+  padding: 15rpx 20rpx;
+  box-shadow: none;
+}
+
+.container .style-left {
+  border-radius: 31rpx 0rpx 0rpx 31rpx;
+  background-color: #666666;
+}
+
+.container .style-right {
+  border-radius: 0rpx 31rpx 31rpx 0rpx;
+  background-color: #07c160;
+}
+
+.container .buy-num {
+  background-color: #fff;
+  justify-content: space-between;
+  font-size: 30rpx;
+  padding: 20rpx 30rpx;
+  margin-bottom: 10rpx;
+}
+
+.container .swiper-wrap swiper {
+  height: 690rpx;
+}
+
+.container .swiper-wrap .swiper-item image {
+  overflow: hidden;
+  width: 750rpx;
+  height: 690rpx;
+}
+
+.container .seckill-wrap .seckill {
+  justify-content: space-between;
+  padding: 16rpx 30rpx;
+  background-color: #07c160;
+  color: #fff;
+}
+
+.container .seckill-wrap .seckill .left-icon {
+  margin-right: 20rpx;
+}
+
+.container .seckill-wrap .seckill .left-icon image {
+  width: 47rpx;
+  height: 44rpx;
+  margin-right: 10rpx;
+}
+
+.container .seckill-wrap .seckill .left-icon view {
+  width: 60rpx;
+  font-size: 30rpx;
+  line-height: 36rpx;
+}
+
+.container .seckill-wrap .seckill .time-wrap .time-item {
+  margin: 0 10rpx;
+}
+
+.container .seckill-wrap .seckill .time-wrap .time-item .time-text {
+  font-size: 30rpx;
+  line-height: 30rpx;
+}
+
+.container .seckill-wrap .seckill .time-wrap .time-item .item-wrap {
+  font-size: 30rpx;
+  line-height: 30rpx;
+  color: #fff;
+}
+
+.container .seckill-wrap .seckill .active-btn {
+  font-size: 30rpx;
+  color: #fff;
+  padding: 6rpx 15rpx;
+  border-radius: 25.5rpx;
+  background-color: #fff;
+  color: #07c160;
+}
+
+.container .sale-wrap {
+  background-color: #fff;
+  margin-bottom: 10rpx;
+  padding: 10rpx 30rpx 20rpx;
+}
+
+.container .sale-wrap .slogan {
+  margin-bottom: 20rpx;
+}
+
+.container .sale-wrap .slogan .name {
+  font-size: 30rpx;
+  margin-bottom: 15rpx;
+}
+
+.container .sale-wrap .slogan .tag {
+  font-size: 24rpx;
+  color: #666666;
+}
+
+.container .sale-wrap .price-wrap {
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+
+.container .sale-wrap .price-wrap .price {
+  align-items: flex-end;
+}
+
+.container .sale-wrap .promise {
+  border-top: 1px solid #f2f2f2;
+  padding: 35rpx 0rpx 20rpx;
+  justify-content: space-between;
+}
+
+.container .sale-wrap .promise .left {
+  font-size: 28rpx;
+  color: #999999;
+}
+
+.container .sale-wrap .promise .left .fold {
+  margin-right: 20rpx;
+  color: #4d4d4d;
+}
+
+.container .tab-wrap {
+  padding-bottom: 100rpx;
+}
+
+.container .tab-wrap .good-detail {
+  background: #fff;
+  padding: 10rpx;
+}
+
+.container .tab-wrap .buy-record {
+  padding-bottom: 15rpx;
+}
+
+.container .tab-wrap .buy-record .record-item {
+  background-color: #fff;
+  margin: 10rpx 0;
+  border-radius: 15rpx;
+  padding: 10rpx;
+}
+
+.container .tab-wrap .buy-record .record-item .user-img {
+  width: 100rpx;
+  height: 100rpx;
+  display: block;
+  border-radius: 50%;
+  margin-right: 15rpx;
+}
+
+.container .tab-wrap .buy-record .record-item .right-info > view {
+  padding: 5rpx 0;
+}
+
+.container .operation-wrap {
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 30rpx 0;
+  background-color: #07c160;
+  color: #fff;
+  font-size: 32rpx;
+}
+
+.container .detail-wrap {
+  padding: 20rpx 30rpx;
+  position: relative;
+}
+
+.container .detail-wrap .good-wrap {
+  margin-bottom: 20rpx;
+}
+
+.container .detail-wrap .good-wrap .spec-img {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 10rpx;
+  margin-right: 10rpx;
+}
+
+.container .detail-wrap .good-wrap .right-text .name {
+  margin-bottom: 20rpx;
+}
+
+.container .detail-wrap .spec-wrap .item-wrap .spec-name {
+  font-size: 30rpx;
+  margin: 20rpx 0;
+}
+
+.container .detail-wrap .spec-wrap .item-wrap .spec-list {
+  flex-wrap: wrap;
+  padding-top: 20rpx;
+}
+
+.container .detail-wrap .spec-wrap .item-wrap .spec-list .spec-item {
+  color: #fff;
+  padding: 5rpx 15rpx;
+  background-color: #b8b8b8;
+  border-radius: 20rpx;
+  margin: 0 10rpx 20rpx;
+}
+
+.container .detail-wrap .spec-wrap .item-wrap .spec-list .active-item {
+  background-color: #07c160;
+}
+
+.container .detail-wrap .buy-num {
+  justify-content: space-between;
+  font-size: 30rpx;
+  margin: 20rpx 0 30rpx;
+}
+
+.container .detail-wrap .btn-wrap .btn-style {
+  width: 200rpx;
+}

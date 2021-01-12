@@ -11,7 +11,7 @@ Component({
     title: {
       type: String,
       value: '暂无任何订单'
-    },
+    }, 
     widthSize: {
       type: Number,
       value: 278
@@ -19,7 +19,11 @@ Component({
     heightSize: {
       type: Number,
       value: 255
-    }
+    },
+    widthWrap: {
+      type: String,
+      value: '100%'
+    },
   },
 
   /**

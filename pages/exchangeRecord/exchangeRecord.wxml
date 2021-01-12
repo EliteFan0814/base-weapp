@@ -1,0 +1,26 @@
+<view class="container">
+  <base-header title="积分流水"></base-header>
+  <view class="record-wrap">
+    <view class="tab-wrap">
+      <van-tabs active="{{active}}" bind:change="handleChangeTab">
+        <van-tab wx:for="{{tabList}}" wx:key="value" title="{{item.name}}" name="{{item.value}}"></van-tab>
+      </van-tabs>
+    </view>
+    <view wx:if="{{list.length}}" class="list-wrap frame">
+      <view wx:for="{{list}}" wx:key="id" class="list-item">
+        <view class="title flex">
+          <view class="flex-ds">
+            <text class="remark">{{item.remark}}</text>
+            <text class="time">{{item.createDate}}</text>
+          </view>
+          <text class="{{item.isIncome?'blue':'red'}}">{{item.isIncome?'+':'-'}}{{item.integral}}</text>
+        </view>
+        <!-- <view class="">兑换人：{{item.memberName}}</view>
+        <view class="">联系电话：{{item.memberMobile}}</view>
+        <view class="remark">备注：{{item.remark}}</view>
+        <view class="time">{{item.createDate}}</view> -->
+      </view>
+    </view>
+    <base-no-list wx:else title="暂无流水信息"></base-no-list>
+  </view>
+</view>

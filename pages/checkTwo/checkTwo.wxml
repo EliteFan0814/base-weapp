@@ -1,0 +1,15 @@
+<!-- pages/leaveMessage/leaveMessage.wxml -->
+<view class="container">
+  <base-header title="成为团长" showLeft></base-header>
+  <view class="message-wrap">
+    <van-cell-group>
+      <van-field value="{{ trueName }}" label="姓名" placeholder="请输入联系人" input-align="right" bind:blur="change" data-name="trueName"/>
+      <van-field value="{{ mobile }}" label="联系电话" placeholder="请输入联系电话" input-align="right" bind:blur="change" data-name="mobile"/>
+      <van-field value="{{ cardId }}" label="身份证号" placeholder="请输入身份证号" input-align="right" bind:blur="change" data-name="cardId"/>
+      
+    </van-cell-group>
+  </view>
+  <view class="add-wrap flex-cc" bindtap="submit">
+    <text>提交申请</text>
+  </view>
+</view>

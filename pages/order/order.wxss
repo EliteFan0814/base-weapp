@@ -3,9 +3,25 @@
   background-color: #f5f5f5;
 }
 
+.container .van-tabs__line {
+  background: #67C23A;
+}
+
+.container .van-tab--active {
+  color: #67C23A;
+}
+
+.container .scroll {
+  height: calc(100vh - 246rpx);
+}
+
 .container .order-list .order-item {
   background-color: #fff;
   padding: 30rpx;
+}
+
+.container .order-list .order-item:nth-child(n+2) {
+  margin-top: 15rpx;
 }
 
 .container .order-list .order-item .title {
@@ -19,6 +35,10 @@
   font-size: 28rpx;
   color: #fe2448;
   opacity: 0.97;
+}
+
+.container .order-list .order-item .title .success {
+  color: #67C23A;
 }
 
 .container .order-list .order-item .info {
@@ -68,7 +88,6 @@
 
 .container .order-list .order-item .info .more-btn image {
   width: 14rpx;
-  height: 14rpx;
   padding: 0 10rpx;
 }
 
@@ -92,12 +111,15 @@
   color: #666;
 }
 
-.container .order-list .order-item .operation {
-  justify-content: space-between;
+.container .order-list .order-item .info .refund {
+  font-size: 22rpx;
+  color: #f88094;
+  text-align: right;
+  margin-top: 3rpx;
 }
 
-.container .order-list .order-item .operation .left-info {
-  color: #999999;
+.container .order-list .order-item .operation {
+  justify-content: flex-end;
 }
 
 .container .order-list .order-item .operation .btn-wrap .base-style {
@@ -109,9 +131,47 @@
   color: #999999;
   padding: 10rpx 20rpx;
   border-radius: 26.99rpx;
+  box-shadow: none;
 }
 
 .container .order-list .order-item .operation .btn-wrap .red {
   border: solid 1rpx #fe2448;
   color: #fe2448;
+}
+
+.container .order-list .order-item .operation .btn-wrap .success {
+  border: solid 1rpx #67C23A;
+  color: #67C23A;
+}
+
+.container .order-list .order-item .operation .btn-wrap .primary {
+  border: solid 1rpx #409EFF;
+  color: #409EFF;
+}
+
+.container .refundDialog {
+  width: 70vw;
+  padding: 50rpx;
+  font-size: 26rpx;
+}
+
+.container .refundDialog .van-cell {
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.container .refundDialog .van-field__page {
+  margin-top: 10rpx;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.container .refundDialog .btn {
+  width: 156rpx;
+  height: 55rpx;
+  border-radius: 26.99rpx;
+  text-align: center;
+  line-height: 55rpx;
+  border: solid 1rpx #3d5afe;
+  color: #3d5afe;
+  font-size: 24rpx;
+  margin: 30rpx auto 0;
 }

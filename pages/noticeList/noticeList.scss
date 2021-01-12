@@ -8,12 +8,14 @@
         image {
           border-radius: 10rpx;
           width: 180rpx;
-          height: 90rpx;
+          height: 180rpx;
           margin-right: 15rpx;
+          object-fit: cover;
         }
         .text {
           .name {
             margin-bottom: 15rpx;
+            font-weight: bold;
           }
         }
       }

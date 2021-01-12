@@ -1,0 +1,81 @@
+<!--pages/teamAccount/teamAccount.wxml-->
+<view class="container">
+  <base-header title="团队账户" navOpacity="{{0}}" titleColor="#fff" iconColor="#fff"></base-header>
+  
+  <view class="top" >
+    <image src="/static/img/personal/bg2.png" class="bg" style="height:{{230+capsuleToTop}}px;"/>
+    <view class="info" style="padding-top:{{71+capsuleToTop}}px;">
+      <view class="all"> 
+        <view class="text">总收益</view>
+        <view class="num">{{account.totalRebate}}</view>
+      </view>
+      <view class="flex">
+        <view>
+          <view class="text">余额</view>
+          <view class="num">{{account.leaderAccount}}</view>
+        </view>
+        <view>
+          <view class="text">待入账</view>
+          <view class="num">{{account.waitBonus}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="with"  bindtap="open">
+      <image src="/static/img/personal/account.png" mode="widthFix" class="icon"/>
+      <view class="text">提现</view>
+    </view>
+  </view> 
+
+  <view class="content">
+    <view class="tab flex">
+      <view class="tab-item {{index==active?'active':''}}" wx:for="{{tabList}}"
+        wx:key="index" bindtap="tabClick" data-index="{{index}}"  data-value="{{item.value}}">{{item.name}}</view>
+    </view>
+
+    <scroll-view scroll-y scroll-top="{{scrollTop}}" class="scroll" bindscrolltolower="loadMore">
+      <view class="list" wx:if="{{status == 2 && list.length != 0}}">
+        <view class="list-item flex" wx:for="{{list}}" wx:key="index">
+          <view>
+            <view class="label">{{item.remark}}</view>
+            <view class="time">{{item.createDate}}</view>
+          </view>
+          <view class="price"><text class="{{item.isIncome?'success':'danger'}}">{{item.isIncome?'+':'-'}}</text>{{item.money}}元</view>
+        </view>
+      </view>
+
+      <base-no-list wx:if="{{status == 2 && list.length == 0}}" title="暂无佣金记录"></base-no-list>
+
+
+      <view class="list" wx:if="{{status == 3 && list.length != 0}}">
+        <view class="block " wx:for="{{list}}" wx:key="index">
+          <van-collapse value="{{ activeNames }}" bind:change="onChange" border="{{false}}">
+            <van-collapse-item name="{{index}}">
+              <view slot="title" class="flex">
+                <view class="left">
+                  <view>{{item.wayStr}}</view>
+                  <view class="money">￥{{item.money}}</view>
+                </view>
+                <view class="right">
+                  <view>{{item.statusStr}}</view>
+                  <view class="time">{{item.createDate}}</view>
+                </view>
+              </view>
+              <view class="content">
+                <view>姓名：{{item.trueName}}</view>
+                <view>账号：{{item.cardId}}</view>
+                <view>手续费：{{item.fee}}</view>
+                <view wx:if="{{item.bankAccount}}">开户行：{{item.bankAccount}}</view>
+                <view wx:if="{{item.status==-10}}">拒绝理由：{{item.remark}}</view>
+              </view>
+            </van-collapse-item>
+          </van-collapse>
+        </view>
+      </view>
+
+      <base-no-list wx:if="{{status == 3 && list.length == 0}}" title="暂无提现记录"></base-no-list>
+
+    </scroll-view>
+
+  </view>
+</view>

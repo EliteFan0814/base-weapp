@@ -2,41 +2,65 @@
 <view class="container">
   <base-header showLeft navOpacity="{{1}}" title="确认订单"></base-header>
   <view class="confirm-order">
-    <!-- <view class="address-wrap frame">
-      <view bind:tap="openMap" class="address flex">
+    <view wx:if="{{type !== 'exchange'}}" class="sendway-wrap flex">
+      <view class="left">配送方式：</view>
+      <van-radio-group value="{{ getWay }}" bind:change="handleGetWay">
+        <van-radio name="autoGet" checked-color="#07c160">配送</van-radio>
+        <van-radio name="selfGet" checked-color="#07c160">自提</van-radio>
+      </van-radio-group>
+    </view>
+    <!-- 展示配送方式的地址选择 -->
+    <view wx:if="{{getWay === 'autoGet'}}" class="address-wrap frame">
+      <view bind:tap="openAddress" class="address flex">
         <view class="left flex">
-          <image></image>
-          <view class="text">打开地图选址</view>
+          <image src="/static/img/order/address.png" class="icon-img"></image>
+          <view wx:if="{{addressId}}" class="text flex-dc">
+            <view class="address-text">{{address.area}} {{address.address}}</view>
+            <view class="link">{{address.contact}} {{address.mobile}}</view>
+          </view>
+          <view wx:else class="text">选择收货选址</view>
         </view>
         <van-icon color="#999999" name="arrow" />
       </view>
-    </view> -->
-    <view class="address-wrap frame">
-      <view bind:tap="openAddress" class="address flex">
+    </view>
+    <!-- 展示自提方式的地址选择 -->
+    <view wx:if="{{getWay === 'selfGet'}}" class="address-wrap frame">
+      <view bind:tap="showAddress" data-info="{{selfGetInfo}}" class="address flex">
         <view class="left flex">
-          <image src="/static/img/order/address.png"></image>
-          <!-- <view class="text">选择收货选址</view> -->
+          <image src="/static/img/order/address.png" class="icon-img"></image>
           <view class="text flex-dc">
-            <view class="address-text">{{address.area}} {{address.address}}</view>
-            <view class="link">{{address.contact}} {{address.mobile}}</view>
+            <view class="address-text">{{selfGetInfo.pickUpAddress}}</view>
+            <view class="link">联系电话：{{selfGetInfo.pickUpPhone}}</view>
           </view>
         </view>
         <van-icon color="#999999" name="arrow" />
       </view>
     </view>
-    <view bind:tap="openSelectTime" class="time-wrap frame">
+    <!-- 配送时间 -->
+    <view wx:if="{{getWay === 'autoGet'&&type !== 'exchange'}}" bind:tap="openSelectTime" class="time-wrap frame">
       <view class="time flex">
         <view class="left flex">
-          <image src="/static/img/order/time.png"></image>
+          <image src="/static/img/order/time.png" class="icon-img"></image>
           <!-- <view class="text">选择收货选址</view> -->
-          <view class="text">{{selectDate?'配送时间：'+selectDate:'选择配送时间'}}</view>
+          <view class="text">{{isSelectedTime?'配送时间：'+selectDate:'选择配送时间'}}</view>
         </view>
         <van-icon color="#999999" name="arrow" />
       </view>
     </view>
     <!-- 配送时间弹框 -->
-    <van-popup show="{{ showTimeDialog }}" position="bottom" custom-style="border-radius:30rpx 30rpx 0 0;" bind:close="onClose">
-      <van-datetime-picker type="date" title="选择配送时间" value="{{ currentDate }}" bind:confirm="confirmSelectTime" bind:cancel="cancelDelectTime" min-date="{{ minDate }}" formatter="{{ formatter }}" />
+    <van-popup show="{{ showTimeDialog }}" position="bottom" custom-style="border-radius:30rpx 30rpx 0 0;" bind:close="handleCloseDialog">
+      <!-- <van-datetime-picker type="date" title="选择配送时间" value="{{ currentDate }}" 
+      bind:confirm="confirmSelectTime" bind:cancel="cancelDelectTime" min-date="{{ minDate }}" formatter="{{ formatter }}" /> -->
+      <view class="select-wrap">
+        <view class="title-wrap flex-cc">
+          <view></view>
+          <view>选择配送时间</view>
+          <view bind:tap="handleCloseDialog" class="close flex">
+            <van-icon name="cross" size="40rpx" />
+          </view>
+        </view>
+        <van-tree-select items="{{ timeSelectList }}" main-active-index="{{ mainActiveIndex }}" active-id="{{ activeId }}" bind:click-nav="handleClickNav" bind:click-item="handleClickItem" />
+      </view>
     </van-popup>
     <!-- 购物车产品信息 -->
     <view wx:if="{{type === 'cart'}}" class="goods-wrap frame">
@@ -46,42 +70,19 @@
             <image src="{{item.thumbHost}}" class="good-img"></image>
             <view class="right-info flex-ds">
               <view class="title omit-1">{{item.title}}</view>
-              <view class="tag omit-1">
-                <text>{{item.tags}}</text>
-              </view>
               <view class="price-wrap flex">
+                <view style="width:40%" class="tag">
+                  <text>{{item.skuName}}</text>
+                </view>
                 <view class="price">
                   <text>
                     <text class="symbol">￥</text>
                     <text class="price-num">{{item.specialPrice}}</text>
                   </text>
-                  <!-- <text class="right">
-                    <text class="symbol">￥</text>
-                    <text class="price-num">18</text>
-                  </text> -->
                 </view>
-                <!-- <base-btn btn-name="立刻买"></base-btn> -->
                 <view class="number">x{{item.count}}</view>
               </view>
             </view>
-          </view>
-          <view class="other-user flex">
-            <view class="left flex">商品总价：</view>
-            <!-- <view class="img-list flex">
-              <view class="img-item flex">
-                <image src="https://dummyimage.com/36x36/000/fff"></image>
-                <view>李先生</view>
-              </view>
-              <view class="img-item flex">
-                <image src="https://dummyimage.com/36x36/222/fff"></image>
-                <view>李先生</view>
-              </view>
-              <view class="img-item flex">
-                <image src="https://dummyimage.com/36x36/777/fff"></image>
-                <view>李先生</view>
-              </view>
-            </view> -->
-            <view class="right-text red">￥{{item.totalPrice}}</view>
           </view>
         </view>
       </view>
@@ -110,21 +111,36 @@
           </view>
           <view class="other-user flex">
             <view class="left flex">商品总价：</view>
-            <!-- <view class="img-list flex">
-              <view class="img-item flex">
-                <image src="https://dummyimage.com/36x36/000/fff"></image>
-                <view>李先生</view>
-              </view>
-              <view class="img-item flex">
-                <image src="https://dummyimage.com/36x36/222/fff"></image>
-                <view>李先生</view>
-              </view>
-              <view class="img-item flex">
-                <image src="https://dummyimage.com/36x36/777/fff"></image>
-                <view>李先生</view>
-              </view>
-            </view> -->
             <view class="right-text red">￥{{total}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 积分兑换产品信息 -->
+    <view wx:if="{{type === 'exchange'}}" class="goods-wrap frame">
+      <view class="goods-list">
+        <view class="goods-item">
+          <view class="item-content flex">
+            <image src="{{buyNowProd.thumbHost}}" class="good-img"></image>
+            <view class="right-info flex-ds">
+              <view class="title omit-1">{{buyNowProd.name}}</view>
+              <!-- <view class="tag omit-1">
+                <text>{{buyNowProd.skuName}}</text>
+              </view> -->
+              <view class="price-wrap flex">
+                <view class="price">
+                  <text>
+                    <text class="symbol">所需积分：</text>
+                    <text class="price-num">{{buyNowProd.integral}}</text>
+                  </text>
+                </view>
+                <view class="number">x{{buyNowNum}}</view>
+              </view>
+            </view>
+          </view>
+          <view class="other-user flex">
+            <view class="left flex">合计积分：</view>
+            <view class="right-text red">{{total}}</view>
           </view>
         </view>
       </view>
@@ -137,7 +153,7 @@
       </view>
     </view> -->
     <!-- 支付方式 -->
-    <view class="pay-wrap frame">
+    <view wx:if="{{type !== 'exchange'}}" class="pay-wrap frame">
       <van-radio-group value="{{radio}}" bind:change="onChange" data-name="radio">
         <view class="pay-item flex" bind:tap="changePayWay" data-way="WX">
           <view class="left flex">
@@ -148,13 +164,24 @@
         </view>
       </van-radio-group>
     </view>
+    <view wx:else class="pay-wrap frame">
+      <view class="pay-item flex">
+        <view>剩余积分：</view>
+        <view>{{integral}}</view>
+      </view>
+    </view>
     <!-- 支付按钮 -->
     <view class="btm-btn flex">
-      <view class="text">
+      <view wx:if="{{type === 'exchange'}}" class="text">
+        <text>所需总积分：</text>
+        <text class="red">{{total}}</text>
+      </view>
+      <view wx:else class="text">
         <text>合计：</text>
         <text class="red">￥{{total}}</text>
       </view>
-      <base-btn btnName="支付订单" isPushing="{{isPushing}}" bind:handleTap="payOrder"></base-btn>
+      <base-btn wx:if="{{type === 'exchange'}}" btnName="立即兑换" isPushing="{{isPushing}}" bind:handleTap="payOrder"></base-btn>
+      <base-btn wx:else btnName="支付订单" isPushing="{{isPushing}}" bind:handleTap="payOrder"></base-btn>
     </view>
   </view>
 </view>

@@ -13,7 +13,7 @@
         justify-content: space-between;
       }
       .address {
-        margin: 20rpx 0;
+        padding: 20rpx 0;
       }
       .operation {
         border-top: 1px solid #f5f5f5;
@@ -27,9 +27,12 @@
           }
         }
       }
+      .warn-info {
+        padding: 15rpx 0 0;
+      }
     }
   }
-  .add-wrap{
+  .add-wrap {
     position: fixed;
     bottom: 0;
     width: 100%;

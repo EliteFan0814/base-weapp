@@ -1,5 +1,7 @@
-<!--pages/notice/notice.wxml-->
+<!-- pages/notice/notice.wxml -->
 <view class="container">
-  <base-header title="{{title}}"></base-header>
-  <view class="conent"></view>
+  <base-header title="{{info.title}}"></base-header>
+  <view class="content-wrap">
+    <rich-text class="content" nodes="{{info.content}}"></rich-text>
+  </view>
 </view>

@@ -20,7 +20,7 @@
 }
 
 .container .address-list .address-item .address {
-  margin: 20rpx 0;
+  padding: 20rpx 0;
 }
 
 .container .address-list .address-item .operation {
@@ -33,6 +33,10 @@
   width: 30rpx;
   height: 30rpx;
   margin-left: 30rpx;
+}
+
+.container .address-list .address-item .warn-info {
+  padding: 15rpx 0 0;
 }
 
 .container .add-wrap {

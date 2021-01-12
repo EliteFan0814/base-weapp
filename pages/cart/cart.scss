@@ -1,8 +1,34 @@
 .container {
   background-color: #f5f5f5;
+  .timer {
+    .end-text {
+      margin-right: 10rpx;
+    }
+    .item-wrap {
+      color: #999999;
+      .item {
+        display: inline-block;
+        width: 30rpx;
+        margin: 0rpx 5rpx;
+        color: #fff;
+        font-size: 20rpx;
+        text-align: center;
+        background-color: #999999;
+        border-radius: 4rpx;
+      }
+    }
+  }
   .cart-wrap {
     padding-bottom: 115rpx;
     .cart-list {
+      .more-info {
+        color: #999999;
+        justify-content: space-between;
+        padding: 10rpx 0;
+        // border: 1px solid green;
+        margin-bottom: 10rpx;
+        border-bottom: 1px solid #ddd;
+      }
       .check-item {
         background-color: #fff;
         padding: 20rpx 15rpx;
@@ -13,17 +39,18 @@
           align-items: stretch;
           flex-grow: 1;
           .good-img {
-            width: 200rpx;
-            height: 200rpx;
+            width: 120rpx;
+            height: 120rpx;
           }
           .right {
             flex-grow: 1;
             justify-content: space-between;
             align-items: stretch;
-            padding: 15rpx;
+            padding-left: 15rpx;
             .name-wrap {
               justify-content: space-between;
               .name {
+                font-weight: bolder;
                 width: 300rpx;
               }
               .delete {
@@ -34,6 +61,7 @@
               }
             }
             .spec {
+              color: #999999;
               width: 300rpx;
             }
             .price {
@@ -53,10 +81,10 @@
     width: 100%;
     padding: 30rpx;
     background-color: #fff;
-    .right{
-      .all{
+    .right {
+      .all {
         margin-right: 20rpx;
-        .grey{
+        .grey {
           margin-right: 10rpx;
         }
       }

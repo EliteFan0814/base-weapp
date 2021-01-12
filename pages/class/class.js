@@ -1,4 +1,6 @@
 import request from '../../api/class'
+import good from '../../api/good'
+const app = getApp()
 Page({
   /**
    * 页面的初始数据
@@ -9,7 +11,92 @@ Page({
     classItemList: [],
     page: 1,
     pageSize: 10,
-    totalPage: 0
+    totalPage: 0,
+    selectedClassIndex: 0,
+    showDialog: false,
+    selectedNumber: 1,
+    goodInfo: {},
+    goodSpec: {},
+    selectedSpec: {},
+    selectedId: undefined
+  },
+  openSearch() {
+    wx.navigateTo({
+      url: '/pages/search/search'
+    })
+  },
+  // 倒计时
+  onTimeChange(e) {
+    const { index } = app.tapData(e)
+    const tempKey = `classItemList[${index}].timeData`
+    this.setData({
+      [tempKey]: e.detail
+    })
+  },
+  // 倒计时结束
+  onTimeFinished(e) {
+    const { index } = app.tapData(e)
+    const tempKey = `classItemList[${index}].seckillInfo.seckillEndReduce`
+    this.setData({
+      [tempKey]: 0
+    })
+  },
+  //
+  handleClose(e) {
+    const { info } = app.tapData(e)
+    this.setData({
+      showDialog: !this.data.showDialog
+    })
+    if (this.data.showDialog) {
+      good
+        .getGoodSpec(info.id)
+        .then((res) => {
+          this.setData({
+            goodInfo: info,
+            goodSpec: res.value,
+            selectedSpec: res.value[0],
+            selectedId: res.value[0].id
+          })
+        })
+        .catch((err) => {})
+    }
+  },
+  // 处理选择规格
+  handleSelect(e) {
+    const { info } = app.tapData(e)
+    this.setData({
+      selectedId: info.id,
+      selectedSpec: info
+    })
+  },
+  // 购物数量
+  handleBuyNum(e) {
+    this.setData({
+      selectedNumber: e.detail
+    })
+  },
+  // 加入购物车
+  handleCart(e) {
+    const { info, num } = app.tapData(e)
+    good
+      .addToCart(info.productId, num, info.id, info.seckillSkuId || '')
+      .then((res) => {
+        app.toastSuccess('添加成功！')
+        this.setData({
+          showDialog: false
+        })
+      })
+      .catch((err) => {})
+  },
+  // 立即购买
+  handleBuy(e) {
+    const { prod, spec, num } = app.tapData(e)
+    const prodInfo = encodeURIComponent(JSON.stringify(prod))
+    const specInfo = encodeURIComponent(JSON.stringify(spec))
+    wx.navigateTo({
+      // url: `/pages/confirmOrder/confirmOrder?type=buyNow&prodId=${info.productId}&specId=${info.id}&num=${num}`
+      url: `/pages/confirmOrder/confirmOrder?type=buyNow&prodInfo=${prodInfo}&specInfo=${specInfo}&num=${num}`
+    })
   },
   // 获取分类
   getClassList() {
@@ -20,16 +107,26 @@ Page({
       })
       this.setData({
         classList: temp,
-        activeId: temp[0].id
+        activeId: temp[this.data.selectedClassIndex].id
       })
       this.getClassItemList()
     })
+  },
+  buyGoods(e) {
+    const { id } = app.tapData(e)
+    wx.navigateTo({ url: '/pages/goodDetail/goodDetail?type=normal&id=' + id })
   },
   //
   getClassItemList(type) {
     request.getClassItemList(this.data.page, 10, this.data.activeId).then((res) => {
       this.data.totalPage = res.value.totalPage
       let tempCommon = this.data.classItemList
+      res.value.data = res.value.data.map((item, index) => {
+        if (item.isSeckill) {
+          item.timeData = 0
+        }
+        return item
+      })
       const resList = res.value.data
       if (type === 'down') {
         tempCommon.push(...resList)
@@ -66,6 +163,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      selectedClassIndex: app.globalData.selectedClassIndex || 0
+    })
     this.getClassList()
   },
 
@@ -77,7 +177,9 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {},
+  onShow: function () {
+    this.setData({ selectedNumber: 1 })
+  },
 
   /**
    * 生命周期函数--监听页面隐藏

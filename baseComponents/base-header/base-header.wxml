@@ -4,12 +4,12 @@
     <view class="route-wrap">
       <view bind:tap="handleBack" class="item left">
         <block wx:if="{{showLeft}}">
-          <van-icon wx:if="{{canBack}}" name="arrow-left" size="36rpx" />
-          <van-icon wx:else name="wap-home-o" size="36rpx" />
+          <van-icon wx:if="{{canBack}}" name="arrow-left" size="36rpx" color="{{titleColor}}" />
+          <van-icon wx:else name="wap-home-o" size="36rpx" color="{{titleColor}}"/>
           <!-- <text >返回首页</text> -->
         </block>
       </view>
-      <view class="item title">{{title}}</view>
+      <view class="item title" style="color:{{titleColor}};">{{title}}</view>
       <view class="item right"></view>
     </view>
   </view>

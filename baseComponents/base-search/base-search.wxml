@@ -1,4 +1,4 @@
-  <view class="search-wrap search-style">
+  <view bind:tap="handleTap" class="search-wrap search-style">
     <view class="top-search" style="background-color:rgba(255,255,255,{{navOpacity}})">
       <view class="search flex-cc">
         <image src="/static/img/index/search.png"></image>

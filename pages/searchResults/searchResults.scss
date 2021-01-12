@@ -1,0 +1,210 @@
+.container {
+  // position: relative;
+  .tablist {
+    position: fixed;
+    width: 100%;
+    .tab {
+      background: white;
+    }
+  }
+  .tab {
+    box-sizing: border-box;
+    padding: 10rpx 40rpx;
+    display: flex;
+    align-items: center;
+    font-size: 30rpx;
+    width: 100%;
+  }
+  .tab_item {
+    margin-right: 30rpx;
+    display: flex;
+    align-items: center;
+    text {
+      margin-right: 15rpx;
+      color: #999999;
+      &.tab-active {
+        color: #00d71b;
+      }
+    }
+    .tab-img {
+      width: 16rpx;
+      height: 11rpx;
+    }
+  }
+  .array-wrap {
+    display: flex;
+    align-items: center;
+  }
+  .tab_item-right {
+    margin-left: auto;
+    margin-right: 0;
+  }
+  .block {
+    margin-top: 160rpx;
+    display: flex;
+    padding: 30rpx 20rpx;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .block_item {
+    display: flex;
+    flex-direction: column;
+    width: 345rpx;
+    margin: 5rpx 0;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.06);
+    border-radius: 15rpx;
+    height: 460rpx;
+    &:last-child {
+      border: 0;
+    }
+    image {
+      width: 100%;
+      height: 280rpx;
+      border-radius: 8rpx 8rpx 0rpx 0rpx;
+    }
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20rpx;
+    }
+    .content_title {
+      font-size: 28rpx;
+      overflow: hidden;
+      display: -webkit-box;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      letter-spacing: 1rpx;
+    }
+    .content_money {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 30rpx;
+      text {
+        font-size: 24rpx;
+        color: #999;
+      }
+    }
+    .content_money-red {
+      color: #ff3f3f;
+      &::first-letter {
+        font-size: 24rpx;
+      }
+    }
+  }
+  .screen {
+    display: flex;
+    margin: 30rpx;
+    flex-wrap: wrap;
+    .title {
+      font-size: 30rpx;
+      width: 100%;
+      padding-bottom: 15rpx;
+    }
+  }
+  .screen_item {
+    margin: 15rpx;
+    background: #eee;
+    font-size: 26rpx;
+    padding: 5rpx 20rpx;
+    color: #666;
+    border-radius: 30rpx;
+  }
+  .screen_item-sel {
+    background: #0ccd79;
+    color: white;
+  }
+  .tab-class {
+    color: #0ccd79 !important;
+  }
+
+  .goods-list {
+    margin-top: 110rpx;
+    padding: 0 30rpx;
+    .goods-item {
+      border-bottom: 1px solid #f5f5f5;
+      padding-bottom: 15rpx;
+      margin-bottom: 20rpx;
+      .item-content {
+        align-items: stretch;
+        margin-bottom: 20rpx;
+        .good-img {
+          margin-right: 15rpx;
+          width: 281rpx;
+          height: 231rpx;
+          border-radius: 18.12rpx;
+        }
+        .right-info {
+          justify-content: space-between;
+          .title {
+            font-weight: bolder;
+            font-size: 28rpx;
+          }
+          .tag {
+            font-size: 24rpx;
+            margin-bottom: 25rpx;
+            text {
+              margin-right: 5rpx;
+              color: #666666;
+            }
+          }
+          .sale-info {
+            margin-bottom: 15rpx;
+            background-color: #fee7e8;
+            border-radius: 15.5rpx;
+            padding: 5rpx 10rpx;
+            font-size: 20rpx;
+            color: #603b41;
+            image {
+              width: 17rpx;
+              height: 21rpx;
+              margin-right: 10rpx;
+            }
+          }
+
+          .price-wrap {
+            margin-bottom: 15rpx;
+            width: 400rpx;
+            justify-content: space-between;
+            .price {
+              font-size: 28rpx;
+              color: #fb1438;
+              .right {
+                margin-left: 20rpx;
+                text-decoration: line-through;
+                color: #666666;
+              }
+              .symbol {
+                font-size: 24rpx;
+              }
+            }
+          }
+        }
+      }
+      .other-user {
+        justify-content: space-between;
+        font-size: 24rpx;
+        color: #999999;
+        .img-list {
+          margin-right: 15rpx;
+          .img-item {
+            image {
+              display: block;
+              width: 36rpx;
+              height: 36rpx;
+              border-radius: 50%;
+              margin: 0 8rpx;
+            }
+          }
+        }
+        .right-text {
+          border-left: 1px solid #999999;
+          padding-left: 15rpx;
+        }
+      }
+    }
+  }
+}

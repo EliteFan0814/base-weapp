@@ -1,0 +1,10 @@
+<!-- pages/spread/spread.wxml -->
+<view class="container">
+  <image mode="widthFix" src="/static/img/spread.jpg" class="bg-img"></image>
+  <view class="qr-wrap flex-dc">
+    <image src="{{img}}" class="qr" mode="widthFix" />
+    <text class="title">扫码加入团队</text>
+  </view>
+  <!-- <image src="../../static/icon/user/poster-bg.png" class="bg"/>
+  <view class="tips">分享成为团长</view> -->
+</view>

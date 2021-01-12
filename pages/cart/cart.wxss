@@ -2,8 +2,35 @@
   background-color: #f5f5f5;
 }
 
+.container .timer .end-text {
+  margin-right: 10rpx;
+}
+
+.container .timer .item-wrap {
+  color: #999999;
+}
+
+.container .timer .item-wrap .item {
+  display: inline-block;
+  width: 30rpx;
+  margin: 0rpx 5rpx;
+  color: #fff;
+  font-size: 20rpx;
+  text-align: center;
+  background-color: #999999;
+  border-radius: 4rpx;
+}
+
 .container .cart-wrap {
   padding-bottom: 115rpx;
+}
+
+.container .cart-wrap .cart-list .more-info {
+  color: #999999;
+  justify-content: space-between;
+  padding: 10rpx 0;
+  margin-bottom: 10rpx;
+  border-bottom: 1px solid #ddd;
 }
 
 .container .cart-wrap .cart-list .check-item {
@@ -20,15 +47,15 @@
 }
 
 .container .cart-wrap .cart-list .check-item .cart-item .good-img {
-  width: 200rpx;
-  height: 200rpx;
+  width: 120rpx;
+  height: 120rpx;
 }
 
 .container .cart-wrap .cart-list .check-item .cart-item .right {
   flex-grow: 1;
   justify-content: space-between;
   align-items: stretch;
-  padding: 15rpx;
+  padding-left: 15rpx;
 }
 
 .container .cart-wrap .cart-list .check-item .cart-item .right .name-wrap {
@@ -36,6 +63,7 @@
 }
 
 .container .cart-wrap .cart-list .check-item .cart-item .right .name-wrap .name {
+  font-weight: bolder;
   width: 300rpx;
 }
 
@@ -47,6 +75,7 @@
 }
 
 .container .cart-wrap .cart-list .check-item .cart-item .right .spec {
+  color: #999999;
   width: 300rpx;
 }
 

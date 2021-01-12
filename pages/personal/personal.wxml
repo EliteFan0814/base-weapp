@@ -1,11 +1,10 @@
 <!-- pages/personal/personal.wxml -->
 <view class="container">
-  <base-header title="个人中心" navOpacity="{{navOpacity}}" showLeft="{{false}}"></base-header>
+  <base-header title="个人中心" navOpacity="{{1}}" showLeft="{{false}}"></base-header>
   <view class="personal-wrap">
     <view class="top-info" style="height:{{142+capsuleToTop}}px;">
       <image src="/static/img/personal/bg.png" class="bg" style="height:{{142+capsuleToTop}}px;"></image>
       <view class="info-wrap" style="padding-top:{{capsuleToTop}}px;">
-        <!-- <view class="title">生鲜配送</view> -->
         <view class="user flex">
           <view class="img-wrap">
             <image class="avatar" src="{{userInfo.wxHeader}}"></image>
@@ -18,7 +17,7 @@
           <view wx:if="{{userInfo.infoAuth}}" class="info">
             <view class="name flex">
               <view>{{userInfo.wxName}}</view>
-              <view class="grade">{{userInfo.userTypeStr}}</view>
+              <view class="grade">{{userInfo.isLeaderStr}}</view>
             </view>
             <view class="phone">{{userInfo.mobileAuth?userInfo.mobile:'请绑定手机号'}}</view>
           </view>
@@ -27,52 +26,79 @@
               授权头像昵称
             </button>
           </view>
+          <view wx:if="{{userInfo.infoAuth&&userInfo.mobileAuth}}" bind:tap="handleSign" class="sign flex">
+            <view wx:if="{{!isSign}}" class=" flex-dc">
+              <image src="/static/img/personal/sign.png"></image>
+              <text>今日未签到</text>
+            </view>
+            <view wx:else class=" flex-dc">
+              <image src="/static/img/personal/signin.png"></image>
+              <text>已签到{{signDays}}天</text>
+            </view>
+          </view>
         </view>
         <view class="balance flex">
           <view>余额：{{account.leaderAccount}}</view>
-          <view class="flex">
+          <view class="flex" bindtap="openAccount">
             <image src="/static/img/personal/diamond.png"></image>
-            <text class="text-info">团长信息</text>
+            <text class="text-info">{{userInfo.isLeader ? '团长账户' : '申请成为团长'}}</text>
             <van-icon name="arrow" />
           </view>
         </view>
       </view>
     </view>
     <view class="order-list frame flex">
-      <view wx:for="{{orderList}}" wx:key="index" class="order-item flex-dc">
+      <view wx:for="{{orderList}}" wx:key="index" class="order-item flex-dc" bindtap="openOrder" data-status="{{item.value}}">
         <image src="{{item.img}}" class="order-icon"></image>
         <text>{{item.name}}</text>
       </view>
-      <view class="flex">
+      <view class="flex" bindtap="openOrder" data-status="all">
         <view class="slide"></view>
         <view class="all">全部订单</view>
       </view>
     </view>
     <view class="my-team frame">
-      <view class="title">我的团队</view>
+      <view class="title">{{userInfo.isLeader ? '我的团队' : '申请成为团长'}}</view>
       <view class="content flex">
         <view class="item flex-dc">
-          <view class="red">{{account.spendMoney}}</view>
+          <view class="red">{{account.spendMoneyGroup}}</view>
           <view>消费金额</view>
         </view>
         <view class="item  flex-dc">
           <view class="gold">{{account.totalRebate}}</view>
           <view>佣金金额</view>
         </view>
-        <base-btn btn-name="查看团队" btn-style="btn-style" bind:handleTap="openTeam"></base-btn>
+        <base-btn btn-name="{{userInfo.isLeader ? '查看团队' : '申请团长'}}" btn-style="btn-style" bind:handleTap="openTeam"></base-btn>
       </view>
     </view>
     <view class="operate-list frame">
       <block wx:for="{{operateList}}" wx:key="index">
         <view bind:tap="openOperate" data-info="{{item}}" wx:if="{{!item.isServe}}" class="operate-item flex">
           <text class="name">{{item.name}}</text>
-          <van-icon color="#999999" name="arrow" />
+          <view class="item-right flex">
+            <text wx:if="{{item.haveValue}}">{{integral}}</text>
+            <van-icon color="#999999" name="arrow" />
+          </view>
         </view>
         <view wx:else class="operate-item flex">
           <button open-type='contact' class="serve-btn">{{item.name}}</button>
           <van-icon color="#999999" name="arrow" />
         </view>
       </block>
+      <view wx:if="{{!isLeader}}" bind:tap="openApply" class="operate-item flex">
+        <text class="name">成为团长</text>
+        <view class="item-right flex">
+          <!-- <text wx:if="{{spread.haveValue}}">{{integral}}</text> -->
+          <van-icon color="#999999" name="arrow" />
+        </view>
+      </view>
+      <view wx:if="{{isLeader}}" bind:tap="openOperate" data-info="{{spread}}" class="operate-item flex">
+        <text class="name">{{spread.name}}</text>
+        <view class="item-right flex">
+          <text wx:if="{{spread.haveValue}}">{{integral}}</text>
+          <van-icon color="#999999" name="arrow" />
+        </view>
+      </view>
     </view>
   </view>
 </view>

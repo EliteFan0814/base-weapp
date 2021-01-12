@@ -1,5 +1,7 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText":"生鲜商城",
-  "navigationStyle":"custom"
+  "navigationBarTitleText": "生鲜商城",
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
 }

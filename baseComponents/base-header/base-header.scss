@@ -26,6 +26,14 @@
         padding-left: 15px;
         justify-content: flex-start;
       }
+      .title {
+        width: 400rpx;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      
     }
   }
 }

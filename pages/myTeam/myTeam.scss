@@ -1,6 +1,34 @@
 /* pages/myTeam/myTeam.wxss */
 .container {
+  >.top{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    .bg{
+      position: absolute;
+      width: 100%;
+    }
+    .flex{
+      position: relative;
+      text-align: center;
+      top: 220rpx;
+      .text{
+        font-size: 30rpx;
+        color: #1d6d3b;
+      }
+      .num{
+        color: #ffffff;
+        font-size: 40rpx;
+        margin-bottom: 20rpx;
+      }
+      > view{
+        flex: 1
+      }
+    }
+  }
   .team-wrap {
+    position: relative;
+    top: 340rpx;
     .team-list {
       .team-item {
         margin-bottom: 20rpx;
@@ -9,7 +37,18 @@
             width: 100rpx;
             height: 100rpx;
             border-radius: 50%;
-            margin-right: 15rpx;
+            margin-right: 25rpx;
+          }
+          .info{
+            flex:1;
+            .name{
+              font-weight: bold;
+            }
+          }
+          .flex{
+            margin-top: 20rpx;
+            justify-content: space-between;
+            color: #999;
           }
         }
       }

@@ -1,56 +1,171 @@
+.container ::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.container .grey {
+  margin-left: 10rpx;
+  font-size: 26rpx;
+  color: #a6a6a6;
+  text-decoration: line-through;
+}
+
+.container .content-wrap .van-tree-select {
+  height: calc(100vh - 115px) !important;
+}
+
 .container .content-wrap .active-class {
   border-left-color: transparent;
 }
 
-.container .content-wrap .goods-list .goods-item {
+.container .content-wrap .goods-list {
+  margin: 10rpx;
+  width: 540rpx;
+}
+
+.container .content-wrap .goods-list .goods-item .more-info {
+  justify-content: space-between;
+  font-size: 24rpx;
+  padding: 0 5rpx;
+  margin-bottom: 15rpx;
+}
+
+.container .content-wrap .goods-list .goods-item .more-info .more-right .more-item-wrap {
+  color: #999999;
+}
+
+.container .content-wrap .goods-list .goods-item .more-info .more-right .more-item-wrap .item {
+  display: inline-block;
+  width: 30rpx;
+  margin: 0rpx 5rpx;
+  color: #fff;
+  font-size: 20rpx;
+  text-align: center;
+  background-color: #999999;
+  border-radius: 4rpx;
+}
+
+.container .content-wrap .goods-list .goods-item .item-wrap {
   align-items: stretch;
   margin-bottom: 30rpx;
 }
 
-.container .content-wrap .goods-list .goods-item .good-img {
+.container .content-wrap .goods-list .goods-item .item-wrap .good-img {
   width: 223rpx;
   height: 183rpx;
   border-radius: 18.12rpx;
 }
 
-.container .content-wrap .goods-list .goods-item .goods-info {
+.container .content-wrap .goods-list .goods-item .item-wrap .goods-info {
   justify-content: space-between;
   align-items: stretch;
   width: 290rpx;
   padding: 0 15rpx;
 }
 
-.container .content-wrap .goods-list .goods-item .goods-info .top-wrap .title {
+.container .content-wrap .goods-list .goods-item .item-wrap .goods-info .top-wrap .title {
+  font-weight: bolder;
   font-size: 24rpx;
   width: 300rpx;
   margin-bottom: 20rpx;
 }
 
-.container .content-wrap .goods-list .goods-item .goods-info .top-wrap .sale {
+.container .content-wrap .goods-list .goods-item .item-wrap .goods-info .top-wrap .sale {
   font-size: 20rpx;
   color: #603b41;
 }
 
-.container .content-wrap .goods-list .goods-item .goods-info .price {
+.container .content-wrap .goods-list .goods-item .item-wrap .goods-info .price {
   justify-content: space-between;
 }
 
-.container .content-wrap .goods-list .goods-item .goods-info .price .left-price {
+.container .content-wrap .goods-list .goods-item .item-wrap .goods-info .price .left-price {
   color: #fb1438;
   font-size: 26.17rpx;
 }
 
-.container .content-wrap .goods-list .goods-item .goods-info .price .left-price .symbol {
+.container .content-wrap .goods-list .goods-item .item-wrap .goods-info .price .left-price .symbol {
   font-size: 23.17rpx;
 }
 
-.container .content-wrap .goods-list .goods-item .goods-info .price .btn {
-  padding: 3rpx 40rpx;
+.container .content-wrap .goods-list .goods-item .item-wrap .goods-info .price .btn {
+  padding: 10rpx 40rpx;
   background-color: #07c160;
-  border-radius: 20.42rpx;
+  border-radius: 25.42rpx;
 }
 
-.container .content-wrap .goods-list .goods-item .goods-info .price .btn image {
-  width: 28rpx;
-  height: 28rpx;
+.container .content-wrap .goods-list .goods-item .item-wrap .goods-info .price .btn image {
+  width: 30rpx;
+  height: 30rpx;
+  display: block;
+}
+
+.container .content-wrap .detail-wrap {
+  padding: 20rpx 30rpx;
+  position: relative;
+}
+
+.container .content-wrap .detail-wrap .good-wrap {
+  margin-bottom: 20rpx;
+}
+
+.container .content-wrap .detail-wrap .good-wrap .spec-img {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 10rpx;
+  margin-right: 10rpx;
+}
+
+.container .content-wrap .detail-wrap .good-wrap .right-text .name {
+  margin-bottom: 20rpx;
+}
+
+.container .content-wrap .detail-wrap .spec-wrap .item-wrap .spec-name {
+  font-size: 30rpx;
+  margin: 20rpx 0;
+}
+
+.container .content-wrap .detail-wrap .spec-wrap .item-wrap .spec-list {
+  flex-wrap: wrap;
+  padding-top: 20rpx;
+}
+
+.container .content-wrap .detail-wrap .spec-wrap .item-wrap .spec-list .spec-item {
+  color: #fff;
+  padding: 5rpx 15rpx;
+  background-color: #b8b8b8;
+  border-radius: 20rpx;
+  margin: 0 10rpx 20rpx;
+}
+
+.container .content-wrap .detail-wrap .spec-wrap .item-wrap .spec-list .active-item {
+  background-color: #07c160;
+}
+
+.container .content-wrap .detail-wrap .buy-num {
+  justify-content: space-between;
+  font-size: 30rpx;
+  margin: 20rpx 0 30rpx;
+}
+
+.container .content-wrap .detail-wrap .btn-style {
+  font-size: 30rpx;
+  width: 160rpx;
+  padding: 15rpx 20rpx;
+  box-shadow: none;
+}
+
+.container .content-wrap .detail-wrap .style-left {
+  border-radius: 31rpx 0rpx 0rpx 31rpx;
+  background-color: #666666;
+}
+
+.container .content-wrap .detail-wrap .style-right {
+  border-radius: 0rpx 31rpx 31rpx 0rpx;
+  background-color: #07c160;
+}
+
+.container .content-wrap .detail-wrap .btn-wrap .btn-style {
+  width: 200rpx;
 }

@@ -1,33 +1,90 @@
 <!-- pages/class/class.wxml -->
 <view class="container">
-  <base-header navOpacity="{{1}}" title="生鲜分类" showLeft="{{false}}"></base-header>
+  <base-header navOpacity="{{1}}" title="分类" showLeft="{{false}}"></base-header>
   <view class="class-wrap">
-    <base-search navOpacity="{{1}}"></base-search>
+    <base-search navOpacity="{{1}}" bind:handleTap="openSearch"></base-search>
     <view class="content-wrap">
-      <van-tree-select items="{{ classList }}" active-id="{{ activeId }}" main-active-class="active-class" height="55vw" main-active-index="{{ mainActiveIndex }}" bind:click-nav="handleClickNav">
+      <van-tree-select items="{{ classList }}" main-active-class="active-class" height="55vw" main-active-index="{{ selectedClassIndex }}" bind:click-nav="handleClickNav">
         <view slot="content">
-          <view class="goods-list">
-            <view wx:for="{{classItemList}}" wx:key="id" class="goods-item flex">
-              <image src="{{item.thumbHost}}" class="good-img"></image>
-              <view class="goods-info flex-ds">
-                <view class="top-wrap">
-                  <view class="title omit-1">{{item.title}}</view>
-                  <view class="sale">已售{{item.salseTotal}}份/剩{{item.inventoryCount}}份</view>
-                </view>
-                <view class="price flex">
-                  <view class="left-price">
-                    <text class="symbol">￥</text>
-                    {{item.specialPrice}}
+          <view wx:if="{{classItemList.length}}" class="goods-list">
+            <view bind:tap="buyGoods" data-id="{{item.id}}" wx:for="{{classItemList}}" wx:key="id" class="goods-item">
+              <view wx:if="{{item.isSeckill}}">
+                <view wx:if="{{item.seckillInfo.seckillEndReduce}}" class=" more-info flex">
+                  <view class="more-left red">以下商品正在参与秒杀：</view>
+                  <view class="more-right">
+                    <van-count-down use-slot time="{{ item.seckillInfo.seckillEndReduce }}" bind:change="onTimeChange" bind:finish="onTimeFinished" data-index="{{index}}">
+                      <view class="more-item-wrap flex">
+                        <text class="item">{{ item.timeData.hours }}</text>
+                        <text>:</text>
+                        <text class="item">{{ item.timeData.minutes }}</text>
+                        <text>:</text>
+                        <text class="item">{{ item.timeData.seconds }}</text>
+                      </view>
+                    </van-count-down>
                   </view>
-                  <view class="btn">
-                    <image src="/static/img/class/shop-cart.png"></image>
+                </view>
+                <view wx:else class="more-info flex">
+                  <view></view>
+                  <view class="red">秒杀已结束</view>
+                </view>
+              </view>
+              <view class="item-wrap flex">
+                <image mode="aspectFill" src="{{item.thumbHost}}" class="good-img"></image>
+                <view class="goods-info flex-ds">
+                  <view class="top-wrap">
+                    <view class="title omit-1">{{item.title}}</view>
+                    <view class="sale">已售{{item.salseTotal}}份/剩{{item.lastCount}}份</view>
+                  </view>
+                  <view class="price flex">
+                    <view class="left-price">
+                      <text class="symbol">￥</text>
+                      {{item.specialPrice}}
+                    </view>
+                    <view catch:tap="handleClose" data-info="{{item}}" class="btn">
+                      <image src="/static/img/class/shop-cart.png"></image>
+                    </view>
                   </view>
                 </view>
               </view>
             </view>
           </view>
+          <base-no-list wx:else title="暂无商品" topDistance="{{50}}"></base-no-list>
         </view>
       </van-tree-select>
+      <!-- 弹框购买 -->
+      <van-popup bind:close="handleClose" show="{{ showDialog }}"  closeable position="bottom" custom-style="border-radius:30rpx 30rpx 0 0;">
+        <view class="detail-wrap">
+          <view class="good-wrap flex">
+            <image class="spec-img" src="{{goodInfo.thumbHost}}"></image>
+            <view class="right-text">
+              <view class="name">{{goodInfo.title}}</view>
+              <view class="price">
+                <text class="red">￥{{selectedSpec.specialPrice}}</text>
+                <text class="grey">原价：{{selectedSpec.sourcePrice}}</text>
+              </view>
+            </view>
+          </view>
+          <view class="spec-wrap">
+            <view class="item-wrap">
+              <view class="spec-name">商品规格：</view>
+              <view class="spec-list flex">
+                <view bind:tap="handleSelect" data-info="{{item}}" wx:for="{{goodSpec}}" wx:key="id" class="spec-item {{item.id === selectedId?'active-item':''}}">
+                  {{item.name}}
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="buy-num flex">
+            <text>购买数量：</text>
+            <van-stepper wx:if="{{selectedSpec.buyLimit}}" bind:change="handleBuyNum" value="{{ selectedNumber }}" max="{{selectedSpec.buyLimit}}" input-width="40px" button-size="32px" />
+            <van-stepper wx:else bind:change="handleBuyNum" value="{{ selectedNumber }}" input-width="40px" button-size="32px" />
+          </view>
+          <view class="btn-wrap flex-cc">
+            <base-btn btn-name="加入购物车" bind:handleTap="handleCart" data-num="{{selectedNumber}}" data-info="{{selectedSpec}}" btn-style="btn-style style-left"></base-btn>
+            <base-btn btn-name="立即购买" bind:handleTap="handleBuy" data-num="{{selectedNumber}}" data-prod="{{goodInfo}}" data-spec="{{selectedSpec}}" btn-style="btn-style style-right"></base-btn>
+          </view>
+        </view>
+      </van-popup>
     </view>
   </view>
 </view>

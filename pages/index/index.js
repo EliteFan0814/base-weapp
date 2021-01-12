@@ -12,7 +12,16 @@ Page({
     swiperList: [],
     classList: [],
     classPages: 0,
-    time: 30 * 60 * 60 * 1000,
+    // periodDate: undefined,
+    // periodText: '',
+    periodInfo: {
+      period: '',
+      reduce: 0,
+      text: '',
+      timeSpan: ''
+    },
+    // time: 0,
+    // timeSpan: '',
     timeData: {},
     userInfo: {},
     todayProd: [],
@@ -22,15 +31,40 @@ Page({
     page: 1,
     pageSize: 10,
     totalPage: 0,
+    activeTab: 'today',
+    tabGoodsList: [],
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     capsuleToTop: app.globalData.capsuleToTop
   },
+  //
+  openSearch() {
+    wx.navigateTo({
+      url: '/pages/search/search'
+    })
+  },
+  // 切换tab
+  handleChangeTab(e) {
+    this.setData({
+      activeTab: e.detail.name
+    })
+    this.get2Day()
+  },
   // 打开相应分类
   openClass(e) {
-    console.log(e)
+    console.log(1)
+    const { index, pageindex } = app.tapData(e)
+    console.log(2)
+    app.globalData.selectedClassIndex = index + pageindex * 10
+    console.log(3)
     wx.switchTab({
-      url: '/pages/class/class'
+      url: '/pages/class/class',
+      success: function (e) {
+        var page = getCurrentPages().pop()
+
+        if (page == undefined || page == null) return
+        page.onLoad()
+      }
     })
   },
 
@@ -64,19 +98,58 @@ Page({
       }
     })
   },
-  // 限时秒杀
-  getSeckillList() {
-    request.getSeckillList().then((res) => {
+  // 获取秒杀期次
+  getPeriodDate() {
+    request.getPeriodDate().then((res) => {
+      // const tempPeriod = res.value.period
       this.setData({
-        seckillProd: res.value
-      }).catch((err) => {})
+        periodInfo: res.value
+        // time: res.value.reduce,
+        // periodDate: res.value.period,
+        // periodText: res.value.text,
+        // timeSpan: res.value.timeSpan
+      })
+      this.getSeckillList()
     })
   },
+  // 限时秒杀
+  getSeckillList() {
+    request
+      .getSeckillList(this.data.periodInfo.timeSpan)
+      .then((res) => {
+        this.setData({
+          seckillProd: res.value
+        })
+      })
+      .catch((err) => {})
+  },
   // 全部秒杀
-  openAllSecKill() {
+  openAllSecKill(e) {
+    const { period } = app.tapData(e)
     wx.navigateTo({
-      url: '/pages/seckill/seckill'
+      url: `/pages/seckill/seckill?period=${period}`
     })
+  },
+  // 购买秒杀商品
+  openSecKill(e) {
+    const { id } = app.tapData(e)
+    wx.navigateTo({
+      url: `/pages/goodDetail/goodDetail?type=seckill&id=${id}`
+    })
+  },
+  // 购买今日抢购商品
+  buyTodayGood(e) {
+    if (this.data.activeTab === 'today') {
+      const { id } = app.tapData(e)
+      wx.navigateTo({ url: '/pages/goodDetail/goodDetail?type=normal&id=' + id })
+    } else {
+      app.toastFail('耐心等待，明日再来！')
+    }
+  },
+  // 购买普通商品
+  buyGood(e) {
+    const { id } = app.tapData(e)
+    wx.navigateTo({ url: '/pages/goodDetail/goodDetail?type=normal&id=' + id })
   },
   onReachBottom() {
     if (this.data.page < this.data.totalPage) {
@@ -96,56 +169,31 @@ Page({
       })
     })
   },
-  //
-  openClass(e) {
-    const data = app.tapData(e)
-    console.log(data)
-  },
   // 获取期次列表
-  getPeriodList() {
+  // getPeriodList() {
+  //   request
+  //     .getPeriodList()
+  //     .then((res) => {})
+  //     .catch((err) => {})
+  // },
+  // 今日抢购 明日预告
+  get2Day() {
+    let temp = undefined
+    if (this.data.activeTab === 'today') {
+      temp = true
+    } else {
+      temp = false
+    }
     request
-      .getPeriodList()
-      .then((res) => {})
-      .catch((err) => {})
-  },
-  // 获取 今日抢购
-  getProdList() {
-    request
-      .getProdList(0)
+      .get2Day(temp)
       .then((res) => {
         this.setData({
-          todayProd: res.value
+          tabGoodsList: res.value
         })
       })
       .catch((err) => {})
   },
-  // 获取  明日预告
-  getProdList() {
-    request
-      .getProdList(1)
-      .then((res) => {
-        this.setData({
-          tomorrowProd: res.value
-        })
-      })
-      .catch((err) => {})
-  },
-  // 获取   限时秒杀
-  getProdList() {
-    request
-      .getProdList(2)
-      .then((res) => {
-        this.setData({
-          seckillProd: res.value
-        })
-      })
-      .catch((err) => {})
-  },
-  // 购买普通商品
-  buyGood(e) {
-    const { id } = app.tapData(e)
-    wx.navigateTo({ url: '/pages/goodDetail/goodDetail?id=' + id })
-  },
+
   //分类分页处理
   sliceArray(targetArray, number) {
     const page = Math.ceil(targetArray.length / number)
@@ -161,12 +209,33 @@ Page({
       url: '/pages/goodDetail/goodDetail'
     })
   },
+  // 倒计时处理
   onTimeChange(e) {
     this.setData({
       timeData: e.detail
     })
   },
-
+  // 倒计时结束
+  onTimeFinished(e) {
+    //如果已经开始秒杀，则秒杀结束
+    if (this.data.isSeckillBegin) {
+      this.setData({
+        ['seckillInfo.seckillBeginReduce']: 0,
+        ['seckillInfo.seckillEndReduce']: 0,
+        isSeckillBegin: false
+      })
+    } else {
+      // 如果还没开始，则设置开始秒杀
+      this.setData({
+        isSeckillBegin: true
+      })
+    }
+    // const { index } = app.tapData(e)
+    // const tempKey = `cartList[${index}].endReduce`
+    // this.setData({
+    //   [tempKey]: 0
+    // })
+  },
   // 静默获取用户的微信个人信息
   getWxUserInfoSilent() {
     if (app.globalData.userInfo) {
@@ -208,8 +277,9 @@ Page({
   onLoad: function () {
     this.getCarousel()
     this.getClassList()
-    this.getSeckillList()
+    this.get2Day()
     this.getCommonList()
+    this.getPeriodDate()
   },
   onPageScroll: function (e) {
     let a = e.scrollTop / 60
@@ -217,5 +287,28 @@ Page({
     this.setData({
       navOpacity: a
     })
+  },
+  onPullDownRefresh: function () {
+    this.setData({
+      page: 1,
+      totalPage: 0,
+      commonList: []
+    })
+    this.getCarousel()
+    this.getClassList()
+    this.get2Day()
+    this.getCommonList()
+    this.getPeriodDate()
+    setTimeout(() => {
+      wx.stopPullDownRefresh() //停止下拉刷新
+    }, 400)
+  },
+  onShareAppMessage: function (res) {
+    request.getIntegral()
+    const inviteCode = app.globalData.userInfo ? app.globalData.userInfo.inviteCode : ''
+    return {
+      title: '小菜娃',
+      path: `/pages/index/index?inviteCode=${inviteCode}`
+    }
   }
 })

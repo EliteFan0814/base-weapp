@@ -1,10 +1,16 @@
 import request from '../../api/address'
+import wxPosition from '../../utils/authPosition'
+
 const app = getApp()
 Page({
   /**
    * 页面的初始数据
    */
   data: {
+    autosize: {
+      maxHeight: 100,
+    },
+    isGetPositionAuth: false,
     title: '',
     type: '',
     info: {
@@ -29,17 +35,24 @@ Page({
   },
   // 打开地图选址
   openMap(e) {
-    const { longitude, latitude } = app.tapData(e)
+    const { lon, lat } = app.tapData(e)
     wx.chooseLocation({
-      latitude,
-      longitude,
+      latitude: lat,
+      longitude: lon,
       success: (res) => {
-        console.log('res', res)
         const locationSrc = '' + res.longitude + ',' + res.latitude
         this.setData({
           ['info.addressLatlog']: locationSrc,
-          ['info.area']: res.address
+          ['info.area']: res.address + res.name
         })
+      }
+    })
+  },
+  // 未授权定位则打开授权设置页面
+  showAuthPosition() {
+    wxPosition.isAuthPosition().then((res) => {
+      if (res) {
+        this.setData({ isGetPositionAuth: true })
       }
     })
   },
@@ -66,11 +79,17 @@ Page({
       }
     }
   },
+  // 修改上一页面数据 返回上一页
   changeParentData() {
     const pages = getCurrentPages()
     if (pages.length > 1) {
       const beforePage = pages[pages.length - 2]
       beforePage.changeData()
+      setTimeout(() => {
+        wx.navigateBack({
+          delta: 1
+        })
+      }, 300)
     }
   },
   // 验证
@@ -86,14 +105,21 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (o) {
+  onLoad: async function (o) {
+    const res = await wxPosition.asyncGetPosition()
+    if (res) {
+      this.setData({
+        isGetPositionAuth: true
+      })
+    }
     if (o.type === 'edit') {
       const tempInfo = JSON.parse(o.info)
-      const location = tempInfo.addressLatlog.split()
+      const location = tempInfo.addressLatlog.split(',')
       tempInfo.longitude = location[0] // 经度
       tempInfo.latitude = location[1] // 纬度
       this.setData({
-        info: tempInfo
+        info: tempInfo,
+        type: o.type
       })
     }
     this.setData({

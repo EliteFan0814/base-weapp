@@ -21,17 +21,20 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
-    "useMultiFrameRuntime": false,
+    "useMultiFrameRuntime": true,
     "useApiHook": true,
+    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
     "enableEngineNative": false,
+    "bundle": false,
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": false,
     "packNpmManually": true,
     "packNpmRelationList": [
       {
@@ -43,7 +46,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.1",
-  "projectname": "%E7%94%9F%E9%B2%9C%E9%85%8D%E9%80%81%E5%95%86%E5%9F%8E",
+  "projectname": "shengxian_member",
   "debugOptions": {
     "hidedInDevtools": []
   },
@@ -51,7 +54,7 @@
   "isGameTourist": false,
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
-  "appid": "wxb675ad12d3a78931",
+  "appid": "wx2251abc496a39bac",
   "condition": {
     "plugin": {
       "list": []
@@ -65,72 +68,26 @@
     "miniprogram": {
       "list": [
         {
-          "id": -1,
-          "name": "确认订单",
+          "name": "确认订单(普通商品)",
           "pathName": "pages/confirmOrder/confirmOrder",
-          "query": "",
+          "query": "type=buyNow&prodInfo=%7B%22id%22%3A13%2C%22title%22%3A%22%E4%BD%93%E8%B4%A8%E8%83%BD%E9%87%8F%22%2C%22tags%22%3A%22%E7%89%9B%E7%A3%BA%E9%85%B8%20%E5%BF%AB%E9%80%9F%E6%81%A2%E5%A4%8D%E4%BD%93%E5%8A%9B%22%2C%22thumb%22%3A%22%2Fpublic%2Feb342f94-9ae6-46a4-af79-f1a9c2893f17e32ad172-25d3-4589-9574-6c12716b26e91.jpg%22%2C%22content%22%3A%22%3Cp%3E1213123%3C%2Fp%3E%22%2C%22pics%22%3A%22%2Fpublic%2F57614fd5-6b59-4466-8b09-45b902bd74cde32ad172-25d3-4589-9574-6c12716b26e91.jpg%22%2C%22sort%22%3A0%2C%22productTypeId%22%3A6%2C%22salesCount%22%3A11111%2C%22trueSalesCount%22%3A1%2C%22rebateRate%22%3A0.05%2C%22createUser%22%3A%221235456464646545sdsd%22%2C%22createDate%22%3A%222020%2F12%2F29%2014%3A07%3A43%22%2C%22isDelete%22%3Afalse%2C%22isSeckill%22%3Afalse%2C%22sourcePrice%22%3A5%2C%22specialPrice%22%3A1%2C%22buyLimit%22%3A0%2C%22onShelf%22%3Atrue%2C%22todayBuy%22%3Atrue%2C%22tomrrowNotice%22%3Afalse%2C%22inventoryCount%22%3A0%2C%22isSeckillStr%22%3A%22%E6%9C%AA%E5%BC%80%E5%90%AF%22%2C%22seckillInfo%22%3Anull%2C%22onShelfStr%22%3A%22%E5%B7%B2%E4%B8%8A%E6%9E%B6%22%2C%22skus%22%3A%5B%7B%22id%22%3A12%2C%22productId%22%3A13%2C%22title%22%3Anull%2C%22thumb%22%3A%22%2Fpublic%2Feb342f94-9ae6-46a4-af79-f1a9c2893f17e32ad172-25d3-4589-9574-6c12716b26e91.jpg%22%2C%22thumbHost%22%3A%22%2Fpublic%2Feb342f94-9ae6-46a4-af79-f1a9c2893f17e32ad172-25d3-4589-9574-6c12716b26e91.jpg%22%2C%22name%22%3A%22500ml*1%E7%93%B6%22%2C%22lastCount%22%3A198%2C%22salseCount%22%3A0%2C%22isDelete%22%3Afalse%2C%22sourcePrice%22%3A5%2C%22seckillSkuId%22%3Anull%2C%22specialPrice%22%3A1%2C%22buyLimit%22%3A0%2C%22isVerification%22%3Afalse%7D%2C%7B%22id%22%3A13%2C%22productId%22%3A13%2C%22title%22%3Anull%2C%22thumb%22%3A%22%2Fpublic%2Feb342f94-9ae6-46a4-af79-f1a9c2893f17e32ad172-25d3-4589-9574-6c12716b26e91.jpg%22%2C%22thumbHost%22%3A%22%2Fpublic%2Feb342f94-9ae6-46a4-af79-f1a9c2893f17e32ad172-25d3-4589-9574-6c12716b26e91.jpg%22%2C%22name%22%3A%22500ml*12%E7%93%B6%22%2C%22lastCount%22%3A999%2C%22salseCount%22%3A0%2C%22isDelete%22%3Afalse%2C%22sourcePrice%22%3A60%2C%22seckillSkuId%22%3Anull%2C%22specialPrice%22%3A48%2C%22buyLimit%22%3A0%2C%22isVerification%22%3Afalse%7D%5D%2C%22isVerification%22%3Afalse%2C%22salseTotal%22%3A11112%2C%22buyInfo%22%3A%7B%22records%22%3A%5B%5D%2C%22count%22%3A0%7D%2C%22thumbHost%22%3A%22http%3A%2F%2Fxiaocaiwa.test.fxcloud.net%2Fpublic%2Feb342f94-9ae6-46a4-af79-f1a9c2893f17e32ad172-25d3-4589-9574-6c12716b26e91.jpg%22%2C%22lastCount%22%3A1197%2C%22picsArray%22%3A%5B%22http%3A%2F%2Fxiaocaiwa.test.fxcloud.net%2Fpublic%2F57614fd5-6b59-4466-8b09-45b902bd74cde32ad172-25d3-4589-9574-6c12716b26e91.jpg%22%5D%2C%22productTypeName%22%3A%22%E9%A5%AE%E6%96%99%22%7D&specInfo=%7B%22id%22%3A12%2C%22productId%22%3A13%2C%22title%22%3Anull%2C%22thumb%22%3A%22%2Fpublic%2Feb342f94-9ae6-46a4-af79-f1a9c2893f17e32ad172-25d3-4589-9574-6c12716b26e91.jpg%22%2C%22thumbHost%22%3A%22%2Fpublic%2Feb342f94-9ae6-46a4-af79-f1a9c2893f17e32ad172-25d3-4589-9574-6c12716b26e91.jpg%22%2C%22name%22%3A%22500ml*1%E7%93%B6%22%2C%22lastCount%22%3A198%2C%22salseCount%22%3A0%2C%22isDelete%22%3Afalse%2C%22sourcePrice%22%3A5%2C%22seckillSkuId%22%3Anull%2C%22specialPrice%22%3A1%2C%22buyLimit%22%3A0%2C%22isVerification%22%3Afalse%7D&num=1",
           "scene": null
         },
         {
-          "id": -1,
-          "name": "确认订单",
-          "pathName": "pages/confirmOrder/confirmOrder",
-          "query": "",
+          "name": "商品详情",
+          "pathName": "pages/goodDetail/goodDetail",
+          "query": "id=12&inviteCode=123",
           "scene": null
         },
         {
-          "id": -1,
-          "name": "购物车",
-          "pathName": "pages/cart/cart",
-          "query": "",
+          "name": "分享进入",
+          "pathName": "pages/index/index",
+          "query": "inviteCode=745693",
           "scene": null
         },
         {
-          "id": -1,
-          "name": "提现",
-          "pathName": "pages/withdraw/withdraw",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "提现记录",
-          "pathName": "pages/withdrawRecord/withdrawRecord",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "我的团队",
-          "pathName": "pages/myTeam/myTeam",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "成为团长",
-          "pathName": "pages/check/check",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "收货地址",
-          "pathName": "pages/addressList/addressList",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "编辑地址",
-          "pathName": "pages/addressEdit/addressEdit",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "留言",
-          "pathName": "pages/leaveMessage/leaveMessage",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "平台公告",
-          "pathName": "pages/noticeList/noticeList",
+          "name": "推广",
+          "pathName": "pages/spread/spread",
           "query": "",
           "scene": null
         },
@@ -138,42 +95,6 @@
           "name": "订单",
           "pathName": "pages/order/order",
           "query": "",
-          "scene": null
-        },
-        {
-          "name": "购物车",
-          "pathName": "pages/cart/cart",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "我的",
-          "pathName": "pages/personal/personal",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "确认订单",
-          "pathName": "pages/confirmOrder/confirmOrder",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "商品详情",
-          "pathName": "pages/goodDetail/goodDetail",
-          "query": "id=7",
-          "scene": null
-        },
-        {
-          "name": "分类",
-          "pathName": "pages/class/class",
-          "query": "id=7",
-          "scene": null
-        },
-        {
-          "name": "结算购物车",
-          "pathName": "pages/confirmOrder/confirmOrder",
-          "query": "type=cart&cartIdList=[5,4]",
           "scene": null
         }
       ]

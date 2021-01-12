@@ -29,3 +29,11 @@
   padding-left: 15px;
   justify-content: flex-start;
 }
+
+.header-wrap .header .route-wrap .title {
+  width: 400rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  overflow: hidden;
+}

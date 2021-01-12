@@ -18,28 +18,37 @@ function getWxCode() {
     })
   })
 }
-// 用code换取token
+// 用code换取token和其他信息
 async function code2Token() {
   try {
     const code = await getWxCode()
-    // console.log(code)
-    // return
-    const res = await flyForToken.get(authConfig.loginUrl, {
-      [authConfig.codeName]: code
-    })
+    const temp = {}
+    // 写入code
+    temp[authConfig.codeName] = code
+    // 如果需要推广，写入推广码
+    if (authConfig.haveInvite) {
+      temp[authConfig.inviteCodeName] = authConfig.inviteCode
+    }
+    const res = await flyForToken.get(authConfig.loginUrl, temp)
+    authConfig.clearSceneInfo()
     const tokenRes = res.data
-    return tokenRes.value.token
+    return {
+      token: tokenRes.value.token,
+      userInfo: tokenRes.value.user || undefined
+    }
+    // return tokenRes.value.token
   } catch (err) {
     console.log('用code换取token出错', err)
   }
 }
-// 换取token并存入本地localStorage
+// 换取token和个人信息并存入本地localStorage
 async function setTokenSync() {
   try {
     if (!token) {
       const res = await code2Token()
-      token = res
-      wx.setStorageSync('token', res)
+      token = res.token
+      wx.setStorageSync('token', res.token)
+      app.globalData.userInfo = res.userInfo
     }
     app.globalData.isLogin = true
     return token

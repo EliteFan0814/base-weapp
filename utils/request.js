@@ -8,10 +8,10 @@ fly.config = {
   headers: {
     'content-type': 'application/json'
   },
-  // baseURL: 'http://xiaocaiwa.test.fxcloud.net',
-  baseURL: 'http://192.168.0.129/',
+  baseURL: 'https://xcw.fxcloud.net',
+  // baseURL: 'http://192.168.0.112:8084/',
   parseJson: true,
-  timeout: 100000
+  timeout: 10000
 }
 
 // 请求拦截
@@ -43,14 +43,14 @@ fly.interceptors.response.use(
       return Promise.reject(response.data)
     }
     // 响应成功，数据正常，但是有特别的 message 信息需要展示
-    // if (response.data.errCode === -1) {
-    //   wx.showToast({
-    //     title: response.data.message,
-    //     icon: 'success',
-    //     duration: 1500
-    //   })
-    //   return Promise.resolve(response.data)
-    // }
+    if (response.data.errCode === 0 && response.data.message !== '操作成功') {
+      wx.showToast({
+        title: response.data.message,
+        icon: 'none',
+        duration: 1000
+      })
+      return Promise.resolve(response.data)
+    }
     // 响应成功，数据正常,无需展示 message 信息
     if (response.data.errCode === 0) {
       return response.data
@@ -58,9 +58,16 @@ fly.interceptors.response.use(
   },
   (err) => {
     console.log('响应拦截处有错误', err)
-    if (err.status === 900) {
+    if (err.status === 400) {
+      wx.showToast({
+        title: err.response.data.message,
+        icon: 'none'
+      })
       // userAuth.clearHaveToken() // 方式1
-      wx.removeStorageSync('token') // 方式2
+      // wx.removeStorageSync('token') // 方式2
+    } else if (err.status === 401) {
+      // 这里是无权限
+      console.log('401权限错误！')
     } else if (err.status === 404) {
       wx.navigateTo({
         url: '/pages/404/404'
@@ -73,7 +80,7 @@ fly.interceptors.response.use(
     } else {
       if (err.response.data) {
         wx.showToast({
-          title: err.response.data,
+          title: err.response.data.message,
           icon: 'none'
         })
       } else {

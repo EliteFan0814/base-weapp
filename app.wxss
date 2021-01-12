@@ -54,6 +54,9 @@
 .red {
   color: #fe2448;
 }
+.blue {
+  color: #0066cc;
+}
 .grey {
   color: #a6a6a6;
 }

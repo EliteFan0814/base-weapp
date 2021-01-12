@@ -1,18 +1,14 @@
-//app.js
+import authConfig from './utils/authConfig'
 App({
-  onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
+  onLaunch: function (options) {
+    console.log('options', options)
+    wx.setStorageSync('token', '')
+    authConfig.setSceneInfo(options)
     // 登录
-    wx.login({
-      success: (res) => {
-        // console.log('res', res)
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
+    // wx.login({
+    //   success: (res) => {
+    //   }
+    // })
     // 获取用户信息
     wx.getSetting({
       success: (res) => {
@@ -38,7 +34,9 @@ App({
   globalData: {
     isLogin: wx.getStorageSync('token') ? true : false,
     userInfo: null,
-    capsuleToTop: wx.getSystemInfoSync()['statusBarHeight'] + 6
+    selectedClassIndex: 0,
+    capsuleToTop: wx.getSystemInfoSync()['statusBarHeight'] + 6,
+    upImgUrl: 'https://xcw.fxcloud.net/api/Files/UploadFiles?isPublic=true'
   },
   // input双向绑定
   setData(e, _this) {
@@ -77,6 +75,33 @@ App({
           } else if (res.cancel) {
             reslove(false)
           }
+        }
+      })
+    })
+  },
+  // 小程序上传图片
+  wxUpImg(number = 1) {
+    const that = this
+    return new Promise((resolve, reject) => {
+      wx.chooseImage({
+        count: number,
+        success(res) {
+          const tempFilePaths = res.tempFilePaths
+          wx.uploadFile({
+            url: that.globalData.upImgUrl,
+            filePath: tempFilePaths[0],
+            name: 'files',
+            formData: {
+              user: 'test'
+            },
+            success(res) {
+              const data = JSON.parse(res.data)
+              resolve(data)
+            },
+            fail(err) {
+              reject(err)
+            }
+          })
         }
       })
     })

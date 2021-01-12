@@ -1,1 +1,8 @@
 /* pages/notice/notice.wxss */
+.container .content-wrap {
+  padding: 10rpx;
+}
+
+.container .content-wrap .content {
+  padding: 10rpx 30rpx;
+}

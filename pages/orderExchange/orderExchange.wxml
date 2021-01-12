@@ -1,0 +1,47 @@
+<!-- pages/order/order.wxml -->
+<view class="container">
+  <base-header title="订单" showLeft></base-header>
+  <van-tabs active="{{ active }}" sticky bind:click="handleChangeTab">
+    <van-tab wx:for="{{tabList}}" data-name="{{item.name}}" wx:key="*this" title="{{item.title}}" name="{{item.name}}"></van-tab>
+  </van-tabs>
+  <view class="order-list" wx:if="{{list.length}}">
+    <view class="order-item" wx:for="{{list}}" wx:key="id" bindtap="openDetail" data-id="{{item.id}}">
+      <view class="title flex">
+        <text>订单号：{{item.id}}</text>
+        <text class="red {{item.status  ? 'success' : ''}}">{{item.statusStr}}</text>
+      </view>
+      <view class="info">
+        <view class="goods-list">
+          <view class="goods-item flex" data-id="{{item.id}}">
+            <image src="{{item.hostGoodsPhoto}}" class="good-img"></image>
+            <view class="right-info flex-dc">
+              <view class="name omit-1">{{item.goodsName}}</view>
+              <!-- <view class="spec">规格：{{item.skuName}}</view> -->
+              <view class="price flex">
+                <view>
+                  <text>所需积分：</text>
+                  <text class="red">{{item.preIntegral}}</text>
+                </view>
+                <text class="number">x {{item.goodsCount}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="total flex">
+          <text class="left"></text>
+          <text class="right">
+            <text class="word">合计积分：</text>
+            <text class="red">{{item.totalIntegral}}</text>
+          </text>
+        </view>
+      </view>
+      <view class="operation flex">
+        <view class="btn-wrap">
+          <base-btn btn-name="联系平台" btn-style=" base-style" catch:tap="makePhone"></base-btn>
+          <base-btn btn-name="确认收货" btn-style="red base-style" wx:if="{{item.status === 10}}" catch:tap="confirm" data-id="{{item.id}}"></base-btn>
+        </view>
+      </view>
+    </view>
+  </view>
+  <base-no-list wx:else />
+</view>

@@ -12,6 +12,37 @@
       </block>
     </swiper>
   </view>
+  <!-- 限时秒杀 -->
+  <view wx:if="{{isSeckill}}" class="seckill-wrap">
+    <view class="seckill flex">
+      <view class="flex">
+        <view class="left-icon flex-cc">
+          <image src="/static/img/index/seckill.png"></image>
+          <view>限时秒杀</view>
+        </view>
+        <view class="time-wrap">
+          <view class="time-list flex-cc">
+            <view class="time-item flex-dc">
+              <view wx:if="{{seckillInfo.seckillBeginReduce||seckillInfo.seckillEndReduce}}" class="timer flex">
+                <view class="timer-text ">距{{isSeckillBegin?'结束':'开始'}}：</view>
+                <van-count-down use-slot time="{{ isSeckillBegin?seckillInfo.seckillEndReduce:seckillInfo.seckillBeginReduce }}" bind:change="onTimeChange" bind:finish="onTimeFinished">
+                  <view class="item-wrap flex">
+                    <text class="item">{{ timeData.hours }}</text>
+                    <text class="white">:</text>
+                    <text class="item">{{ timeData.minutes }}</text>
+                    <text class="white">:</text>
+                    <text class="item">{{ timeData.seconds }}</text>
+                  </view>
+                </van-count-down>
+              </view>
+              <view wx:else>秒杀已结束</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view bind:tap="openAllSecKill" data-period="{{seckillInfo.period}}" class=" active-btn">全部秒杀></view>
+    </view>
+  </view>
   <view class="sale-wrap">
     <view class="slogan">
       <view class="name">{{goodInfo.title}}</view>
@@ -27,27 +58,30 @@
     <view class="promise flex">
       <view class="left">
         <text class="fold">服务</text>
-        <text>品质承诺，极速物流，7天退货</text>
+        <text>品质承诺，极速物流</text>
       </view>
-      <van-icon name="arrow" />
+      <!-- <van-icon name="arrow" /> -->
     </view>
   </view>
   <view class="tab-wrap">
     <van-tabs active="{{ activeTab }}" bind:change="handleChangeTab" z-index="{{0}}">
       <van-tab title="商品详情" name="detail">
         <view class="good-detail">
-          <rich-text nodes="{{goodInfo.content}}"></rich-text>
+          <rich-text nodes="{{goodContent}}"></rich-text>
         </view>
       </van-tab>
       <van-tab title="购买记录" name="record">
-        <view class="buy-record frame">
-          <view wx:for="{{10}}" wx:key="id" class="record-item flex">
-            <image class="user-img"></image>
-            <view class="right-info">
-              <view>周星驰</view>
-              <view>油闷大虾5吨</view>
+        <view class="buy-record">
+          <block wx:if="{{buyRecord.length}}">
+            <view wx:for="{{buyRecord}}" wx:key="id" class="record-item flex">
+              <image class="user-img" src="{{item.wxHeaderHost||'/static/img/avatar.png'}}"></image>
+              <view class="right-info">
+                <view>{{item.wxName}}</view>
+                <view>购买产品：{{item.productName}} x {{item.count}}</view>
+              </view>
             </view>
-          </view>
+          </block>
+          <base-no-list wx:else title="暂无购买记录"></base-no-list>
         </view>
       </van-tab>
     </van-tabs>

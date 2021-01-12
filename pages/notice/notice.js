@@ -1,16 +1,27 @@
 // pages/notice/notice.js
+import request from '../../api/personal'
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    title: '公告详情'
+    info:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {},
+  onLoad: function (options) {
+    this.getInfo(options.id)
+  },
+
+  getInfo(id){
+    request.noticeInfo(id).then(res=>{
+      this.setData({
+        info: res.value
+      })
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

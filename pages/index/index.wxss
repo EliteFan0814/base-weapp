@@ -132,7 +132,6 @@
   margin-right: 15rpx;
   width: 281rpx;
   height: 231rpx;
-  background-color: #ff5100;
   border-radius: 18.12rpx;
 }
 
@@ -141,6 +140,7 @@
 }
 
 .container .goods-wrap .goods-list .goods-item .item-content .right-info .title {
+  font-weight: bolder;
   font-size: 28rpx;
 }
 
@@ -227,9 +227,14 @@
 }
 
 .container .rush-wrap .goods-wrap .goods-list .goods-item {
+  padding: 20rpx;
   border-radius: 18.12rpx;
   overflow: hidden;
   background-color: #fff;
+}
+
+.container .rush-wrap .goods-wrap .goods-list .goods-item .item-content {
+  margin-bottom: 0;
 }
 
 .container .rush-wrap .goods-wrap .goods-list .goods-item .item-content .right-info {
@@ -241,7 +246,7 @@
 }
 
 .container .rush-wrap .goods-wrap .goods-list .goods-item .other-user {
-  padding: 0 10rpx 10px;
+  margin: 20rpx -15rpx 0;
 }
 
 .container .rush-wrap .goods-wrap .goods-list .goods-item .other-user .img-list {

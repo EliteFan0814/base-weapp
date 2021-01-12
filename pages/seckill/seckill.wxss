@@ -1,13 +1,20 @@
 /* pages/seckill/seckill.wxss */
-.container .top-info {
+.container {
   position: relative;
-  margin-bottom: 15rpx;
 }
 
-.container .top-info .bg {
+.container .bg {
   position: absolute;
+  top: 0;
   width: 750rpx;
   display: block;
+}
+
+.container .top-info {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  margin-bottom: 15rpx;
 }
 
 .container .top-info .info-wrap .route-wrap {
@@ -39,7 +46,7 @@
 
 .container .top-info .info-wrap .time-list {
   position: absolute;
-  bottom: 0;
+  bottom: 15rpx;
   width: 100%;
   overflow-x: scroll;
 }
@@ -49,7 +56,7 @@
 }
 
 .container .top-info .info-wrap .time-list .time-item {
-  font-size: 26rpx;
+  font-size: 30rpx;
   width: 100rpx;
   flex-shrink: 0;
   text-align: center;
@@ -62,7 +69,7 @@
 }
 
 .container .top-info .info-wrap .time-list .active-item {
-  font-size: 28rpx;
+  font-size: 30rpx;
   font-weight: bolder;
 }
 
@@ -79,7 +86,6 @@
   margin-right: 15rpx;
   width: 281rpx;
   height: 231rpx;
-  background-color: #ff5100;
   border-radius: 18.12rpx;
 }
 

@@ -1,0 +1,215 @@
+/* pages/orderDetails/orderDetails.wxss */
+.container {
+  background: #EEEEEE;
+}
+
+.container .address {
+  margin: 20rpx;
+  padding: 20rpx 40rpx;
+  background: #fff;
+  border-radius: 15rpx;
+}
+
+.container .address .add {
+  width: 40rpx;
+  margin-right: 40rpx;
+}
+
+.container .address .name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.container .address .name .phone {
+  font-size: 24rpx;
+  color: #666;
+  margin-left: 30rpx;
+  font-weight: normal;
+}
+
+.container .address .address-text {
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 10rpx;
+}
+
+.container .order-item {
+  background-color: #fff;
+  margin: 20rpx;
+  padding: 20rpx;
+  border-radius: 15rpx;
+}
+
+.container .order-item .title {
+  margin-bottom: 20rpx;
+  justify-content: space-between;
+  font-size: 22rpx;
+  color: #999999;
+}
+
+.container .order-item .title .red {
+  font-size: 28rpx;
+  color: #fe2448;
+  opacity: 0.97;
+}
+
+.container .order-item > .info {
+  padding-bottom: 20rpx;
+}
+
+.container .order-item > .info .goods-list .goods-item {
+  align-items: stretch;
+  margin-bottom: 20rpx;
+}
+
+.container .order-item > .info .goods-list .goods-item .good-img {
+  width: 150rpx;
+  height: 150rpx;
+  background-color: #ffffff;
+  margin-right: 10rpx;
+}
+
+.container .order-item > .info .goods-list .goods-item .right-info {
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 26rpx;
+}
+
+.container .order-item > .info .goods-list .goods-item .right-info .name {
+  width: 500rpx;
+}
+
+.container .order-item > .info .goods-list .goods-item .right-info .spec {
+  color: #888888;
+}
+
+.container .order-item > .info .goods-list .goods-item .right-info .price {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.container .order-item > .info .goods-list .goods-item .right-info .price .number {
+  color: #999999;
+}
+
+.container .order-item > .info .more-btn {
+  justify-content: center;
+  border-top: 1px solid #eeeeee;
+}
+
+.container .order-item > .info .more-btn image {
+  width: 14rpx;
+  padding: 0 10rpx;
+}
+
+.container .order-item > .info .total {
+  justify-content: space-between;
+}
+
+.container .order-item > .info .total .left {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.container .order-item > .info .total .right {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bolder;
+}
+
+.container .order-item > .info .total .right .word {
+  font-weight: normal;
+  color: #666;
+}
+
+.container .order-item > .info .refund {
+  font-size: 22rpx;
+  color: #f88094;
+  text-align: right;
+  margin-top: 3rpx;
+}
+
+.container .order-item .operation {
+  justify-content: flex-end;
+}
+
+.container .order-item .operation .btn-wrap .base-style {
+  margin-left: 10rpx;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  border: solid 1rpx #999999;
+  background-color: #fff;
+  color: #999999;
+  padding: 10rpx 20rpx;
+  border-radius: 26.99rpx;
+  box-shadow: none;
+}
+
+.container .order-item .operation .btn-wrap .red {
+  border: solid 1rpx #fe2448;
+  color: #fe2448;
+}
+
+.container .order-item .operation .btn-wrap .success {
+  border: solid 1rpx #67C23A;
+  color: #67C23A;
+}
+
+.container .order-item .operation .btn-wrap .primary {
+  border: solid 1rpx #409EFF;
+  color: #409EFF;
+}
+
+.container > .info {
+  margin: 20rpx;
+  background: #fff;
+  border-radius: 15rpx;
+  padding: 20rpx 10rpx;
+}
+
+.container > .info .title {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.container > .info .field {
+  margin-top: 10rpx;
+  justify-content: space-between;
+}
+
+.container > .info .field .label {
+  color: #999;
+}
+
+.container > .info .field .val {
+  color: #333;
+}
+
+.container .refundDialog {
+  width: 70vw;
+  padding: 50rpx;
+  font-size: 26rpx;
+}
+
+.container .refundDialog .van-cell {
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.container .refundDialog .van-field__page {
+  margin-top: 10rpx;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.container .refundDialog .btn {
+  width: 156rpx;
+  height: 55rpx;
+  border-radius: 26.99rpx;
+  text-align: center;
+  line-height: 55rpx;
+  border: solid 1rpx #3d5afe;
+  color: #3d5afe;
+  font-size: 24rpx;
+  margin: 30rpx auto 0;
+}

@@ -1,8 +1,8 @@
 <!-- index.wxml -->
 <view class="container">
-  <base-header navOpacity="{{navOpacity}}" title="生鲜配送" showLeft="{{false}}"></base-header>
+  <base-header navOpacity="{{navOpacity}}" title="小菜娃" showLeft="{{false}}"></base-header>
   <view class="search-wrap">
-    <base-search navOpacity="{{navOpacity}}"></base-search>
+    <base-search navOpacity="{{navOpacity}}" bind:handleTap="openSearch"></base-search>
   </view>
   <view class="bg-img">
     <image src="/static/img/index/bg.png" style="height:{{150+capsuleToTop}}px"></image>
@@ -38,180 +38,42 @@
       </view> -->
   </view>
   <!-- 限时秒杀 -->
-  <view class="seckill-wrap">
-    <view class="seckill flex">
-      <view class="flex">
-        <view class="left-icon flex-cc">
-          <image src="/static/img/index/seckill.png"></image>
-          <view>限时秒杀</view>
-        </view>
-        <view class="time-wrap">
-          <view class="time-list flex-cc">
-            <view class="time-item flex-dc">
-              <view class="time-text">10点场疯抢中</view>
-              <view class="timer flex">
-                <view class="timer-text ">距结束：</view>
-                <van-count-down use-slot time="{{ time }}" bind:change="onTimeChange">
-                  <view class="item-wrap flex">
-                    <text class="item">{{ timeData.hours }}</text>
-                    <text class="white">:</text>
-                    <text class="item">{{ timeData.minutes }}</text>
-                    <text class="white">:</text>
-                    <text class="item">{{ timeData.seconds }}</text>
-                  </view>
-                </van-count-down>
-              </view>
-            </view>
+  <block>
+    <view class="seckill-wrap">
+      <view class="seckill flex">
+        <view class="flex">
+          <view class="left-icon flex-cc">
+            <image src="/static/img/index/seckill.png"></image>
+            <view>限时秒杀</view>
           </view>
-        </view>
-      </view>
-      <view bind:tap="openAllSecKill" class=" active-btn">全部秒杀></view>
-    </view>
-  </view>
-  <view class="goods-wrap frame">
-    <view class="goods-list">
-      <view bind:tap="openDetail" wx:for="{{seckillProd}}" wx:key="id" class="goods-item">
-        <view class="item-content flex">
-          <image src="{{item.thumbHost}}" class="good-img"></image>
-          <view class="right-info flex-ds">
-            <view class="title omit-1">{{item.title}}</view>
-            <view class="tag omit-1">
-              <text>{{item.tags}}</text>
-            </view>
-            <view class="sale-info flex">
-              <image src="/static/img/index/fire.png"></image>
-              <text>已售{{item.salesCount}}份/剩{{item.lastCount}}份</text>
-            </view>
-            <!-- <view class="timer flex">
-              <view class="end-text">距结束</view>
-              <van-count-down use-slot time="{{ time }}" bind:change="onTimeChange">
-                <view class="item-wrap flex">
-                  <text class="item">{{ timeData.hours }}</text>
-                  :
-                  <text class="item">{{ timeData.minutes }}</text>
-                  :
-                  <text class="item">{{ timeData.seconds }}</text>
+          <view class="time-wrap">
+            <view class="time-list flex-cc">
+              <view class="time-item flex-dc">
+                <view class="time-text">{{periodInfo.period}}场{{periodInfo.text}}</view>
+                <view class="timer flex">
+                  <view class="timer-text ">{{periodInfo.title}}：</view>
+                  <van-count-down use-slot time="{{ periodInfo.reduce }}" bind:change="onTimeChange" bind:finish="onTimeFinished">
+                    <view class="item-wrap flex">
+                      <text class="item">{{ timeData.hours }}</text>
+                      <text class="white">:</text>
+                      <text class="item">{{ timeData.minutes }}</text>
+                      <text class="white">:</text>
+                      <text class="item">{{ timeData.seconds }}</text>
+                    </view>
+                  </van-count-down>
                 </view>
-              </van-count-down>
-            </view> -->
-            <view class="price-wrap flex">
-              <view class="price">
-                <text>
-                  <text class="symbol">￥</text>
-                  <text class="price-num">18</text>
-                </text>
-                <text class="right">
-                  <text class="symbol">￥</text>
-                  <text class="price-num">18</text>
-                </text>
               </view>
-              <base-btn btn-name="立刻买"></base-btn>
             </view>
           </view>
         </view>
-        <view class="other-user flex">
-          <view class="img-list flex">
-            <view class="img-item flex">
-              <image src="https://dummyimage.com/36x36/000/fff"></image>
-              <view>李先生</view>
-            </view>
-            <view class="img-item flex">
-              <image src="https://dummyimage.com/36x36/222/fff"></image>
-              <view>李先生</view>
-            </view>
-            <view class="img-item flex">
-              <image src="https://dummyimage.com/36x36/777/fff"></image>
-              <view>李先生</view>
-            </view>
-          </view>
-          <view class="right-text">等36人刚刚购买了此商品</view>
-        </view>
+        <view bind:tap="openAllSecKill" data-period="{{periodInfo.period}}" class=" active-btn">全部秒杀></view>
       </view>
     </view>
-  </view>
-  <!-- 抢购和预告 -->
-  <view class="rush-wrap">
-    <view class="rush">
-      <van-tabs active="{{ active }}" bind:change="onChange" title-active-color="#fff" title-inactive-color="#ffb4c0" color="#fff" nav-class="nav-style">
-        <van-tab title="今日抢购"></van-tab>
-        <van-tab title="明日预告"></van-tab>
-      </van-tabs>
-    </view>
-    <view class="goods-wrap">
-      <view class="goods-list">
-        <view wx:for="{{1}}" wx:key="*this" class="goods-item">
+    <view class="goods-wrap frame">
+      <view wx:if="{{seckillProd.length}}" class="goods-list">
+        <view bind:tap="openSecKill" data-id="{{item.productId}}" data-period="{{periodInfo.period}}" wx:for="{{seckillProd}}" wx:key="id" class="goods-item">
           <view class="item-content flex">
-            <image src="https://dummyimage.com/281x231/000/fff" class="good-img"></image>
-            <view class="right-info flex-ds">
-              <view class="title omit-1">海外直采 泰国鲜虾大号</view>
-              <view class="tag omit-1">
-                <text>每天现杀</text>
-                <text>不隔离</text>
-                <text>生态散养</text>
-                <text>生态散养</text>
-                <text>生态散养</text>
-                <text>安全</text>
-                <text>生态散养</text>
-              </view>
-              <view class="sale-info flex">
-                <image src="/static/img/index/fire.png"></image>
-                <text>已售30021份/剩214份</text>
-              </view>
-              <!-- <view class="timer flex">
-                <view class="end-text">距结束</view>
-                <van-count-down use-slot time="{{ time }}" bind:change="onTimeChange">
-                  <view class="item-wrap flex">
-                    <text class="item">{{ timeData.hours }}</text>
-                    :
-                    <text class="item">{{ timeData.minutes }}</text>
-                    :
-                    <text class="item">{{ timeData.seconds }}</text>
-                  </view>
-                </van-count-down>
-              </view> -->
-              <view class="price-wrap flex">
-                <view class="price">
-                  <text>
-                    <text class="symbol">￥</text>
-                    <text class="price-num">18</text>
-                  </text>
-                  <text class="right">
-                    <text class="symbol">￥</text>
-                    <text class="price-num">18</text>
-                  </text>
-                </view>
-                <base-btn btn-name="立刻买"></base-btn>
-              </view>
-            </view>
-          </view>
-          <view class="other-user flex">
-            <view class="img-list flex">
-              <view class="img-item flex">
-                <image src="https://dummyimage.com/36x36/000/fff"></image>
-                <view>李先生</view>
-              </view>
-              <view class="img-item flex">
-                <image src="https://dummyimage.com/36x36/222/fff"></image>
-                <view>李先生</view>
-              </view>
-              <view class="img-item flex">
-                <image src="https://dummyimage.com/36x36/777/fff"></image>
-                <view>李先生</view>
-              </view>
-            </view>
-            <view class="right-text">等36人刚刚购买了此商品</view>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
-  <!-- 普通商品 -->
-  <view class="common-wrap frame">
-    <view class="goods-wrap">
-      <view class="goods-list">
-        <view wx:for="{{commonList}}" wx:key="id" class="goods-item">
-          <view class="item-content flex">
-            <image src="{{item.thumbHost}}" class="good-img"></image>
+            <image mode="aspectFill" src="{{item.thumbHost}}" class="good-img"></image>
             <view class="right-info flex-ds">
               <view class="title omit-1">{{item.title}}</view>
               <view class="tag omit-1">
@@ -219,7 +81,119 @@
               </view>
               <view class="sale-info flex">
                 <image src="/static/img/index/fire.png"></image>
-                <text>已售{{item.salesCount}}份/剩{{item.inventoryCount}}份</text>
+                <text>已售{{item.salesCount}}份/剩{{item.lastCount}}份</text>
+              </view>
+              <view class="price-wrap flex">
+                <view class="price">
+                  <text>
+                    <text class="symbol">￥</text>
+                    <text class="price-num">{{item.specialPrice}}</text>
+                  </text>
+                  <text class="right">
+                    <text class="symbol">￥</text>
+                    <text class="price-num">{{item.sourcePrice}}</text>
+                  </text>
+                </view>
+                <base-btn btn-name="立刻买"></base-btn>
+              </view>
+            </view>
+          </view>
+          <view wx:if="{{item.buyInfo.count}}" class="other-user flex">
+            <view class="img-list flex">
+              <view wx:for="{{item.buyInfo.records}}" wx:key="*this" wx:for-item="recordIntem" class="img-item flex">
+                <image src="{{recordIntem.hostHeader}}"></image>
+                <view>{{recordIntem.name}}</view>
+              </view>
+            </view>
+            <view class="right-text">等{{item.buyInfo.count}}人刚刚购买了此商品</view>
+          </view>
+        </view>
+      </view>
+      <view wx:else style="padding-bottom:20rpx;">
+        <base-no-list title="暂无秒杀商品" topDistance="50"></base-no-list>
+      </view>
+    </view>
+  </block>
+  <!-- 抢购和预告 -->
+  <view class="rush-wrap">
+    <view class="rush">
+      <van-tabs active="{{ activeTab }}" bind:change="handleChangeTab" title-active-color="#fff" title-inactive-color="#b4fdd7" color="#fff" nav-class="nav-style">
+        <van-tab title="今日抢购" name="today"></van-tab>
+        <van-tab title="明日预告" name="tomorrow"></van-tab>
+      </van-tabs>
+    </view>
+    <view class="goods-wrap">
+      <view class="goods-list">
+        <block wx:if="{{tabGoodsList.length}}">
+          <view bind:tap="buyTodayGood" data-id="{{item.id}}" wx:for="{{tabGoodsList}}" wx:key="id" class="goods-item rob">
+            <view class="item-content flex">
+              <image mode="aspectFill" src="{{item.thumbHost}}" class="good-img"></image>
+              <view class="right-info flex-ds">
+                <view class="title omit-1">{{item.title}}</view>
+                <view class="tag omit-1">
+                  <text>{{item.tags}}</text>
+                </view>
+                <view class="sale-info flex">
+                  <image src="/static/img/index/fire.png"></image>
+                  <text>已售{{item.salesCount}}份/剩{{item.lastCount}}份</text>
+                </view>
+                <!-- <view class="timer flex">
+                  <view class="end-text">距结束</view>
+                  <van-count-down use-slot time="{{ time }}" bind:change="onTimeChange">
+                    <view class="item-wrap flex">
+                      <text class="item">{{ timeData.hours }}</text>
+                      :
+                      <text class="item">{{ timeData.minutes }}</text>
+                      :
+                      <text class="item">{{ timeData.seconds }}</text>
+                    </view>
+                  </van-count-down>
+                </view> -->
+                <view class="price-wrap flex">
+                  <view class="price">
+                    <text>
+                      <text class="symbol">￥</text>
+                      <text class="price-num">{{item.specialPrice}}</text>
+                    </text>
+                    <text class="right">
+                      <text class="symbol">￥</text>
+                      <text class="price-num">{{item.sourcePrice}}</text>
+                    </text>
+                  </view>
+                  <base-btn btn-name="立刻买" disabled="{{activeTab === 'tomorrow'}}"></base-btn>
+                </view>
+              </view>
+            </view>
+            <view wx:if="{{activeTab === 'today'&&item.buyInfo.count}}" class="other-user flex">
+              <view class="img-list flex">
+                <view wx:for="{{item.buyInfo.records}}" wx:key="*this" wx:for-item="recordIntem" class="img-item flex">
+                  <image src="{{recordIntem.hostHeader}}"></image>
+                  <view>{{recordIntem.name}}</view>
+                </view>
+              </view>
+              <view class="right-text">等{{item.buyInfo.count}}人刚刚购买了此商品</view>
+            </view>
+          </view>
+        </block>
+        <base-no-list title="暂无商品" wx:else topDistance="80" titleColor="#fff"></base-no-list>
+      </view>
+    </view>
+  </view>
+  <!-- 普通商品 -->
+  <view class="common-wrap frame">
+    <view class="goods-wrap">
+      <view class="goods-list">
+        <view bind:tap="buyGood" data-id="{{item.id}}" wx:for="{{commonList}}" wx:key="id" class="goods-item">
+          <view class="item-content flex">
+            <image mode="aspectFill" src="{{item.thumbHost}}" class="good-img"></image>
+            <view class="right-info flex-ds">
+              <view class="title omit-1">{{item.title}}</view>
+              <view class="tag omit-1">
+                <text>{{item.tags}}</text>
+              </view>
+              <view class="sale-info flex">
+                <image src="/static/img/index/fire.png"></image>
+                <text>已售{{item.salesCount}}份/剩{{item.lastCount}}份</text>
               </view>
               <!-- <view class="timer flex">
                 <view class="end-text">距结束</view>
@@ -244,26 +218,18 @@
                     <text class="price-num">{{item.sourcePrice}}</text>
                   </text>
                 </view>
-                <base-btn catch:handleTap="buyGood" data-id="{{item.id}}" btn-name="立刻买"></base-btn>
+                <base-btn btn-name="立刻买"></base-btn>
               </view>
             </view>
           </view>
-          <view class="other-user flex">
+          <view wx:if="{{item.buyInfo.count}}" class="other-user flex">
             <view class="img-list flex">
-              <view class="img-item flex">
-                <image src="https://dummyimage.com/36x36/000/fff"></image>
-                <view>李先生</view>
-              </view>
-              <view class="img-item flex">
-                <image src="https://dummyimage.com/36x36/222/fff"></image>
-                <view>李先生</view>
-              </view>
-              <view class="img-item flex">
-                <image src="https://dummyimage.com/36x36/777/fff"></image>
-                <view>李先生</view>
+              <view wx:for="{{item.buyInfo.records}}" wx:key="*this" wx:for-item="recordIntem" class="img-item flex">
+                <image src="{{recordIntem.hostHeader}}"></image>
+                <view>{{recordIntem.name}}</view>
               </view>
             </view>
-            <view class="right-text">等36人刚刚购买了此商品</view>
+            <view class="right-text">等{{item.buyInfo.count}}人刚刚购买了此商品</view>
           </view>
         </view>
       </view>

@@ -10,10 +10,35 @@ Page({
     selAll: false,
     total: 0
   },
+  // 倒计时
+  onTimeChange(e) {
+    const { index } = app.tapData(e)
+    const tempKey = `cartList[${index}].timeData`
+    this.setData({
+      [tempKey]: e.detail
+    })
+  },
+  // 倒计时结束
+  onTimeFinished(e) {
+    const { index } = app.tapData(e)
+    const tempKey = `cartList[${index}].endReduce`
+    this.setData({
+      [tempKey]: 0
+    })
+  },
   getCartList() {
     request.getCartList().then((res) => {
+      res.value = res.value.map((item, index) => {
+        if (item.seckillSkuId) {
+          item.timeData = 0
+        }
+        return item
+      })
       this.setData({
-        cartList: res.value
+        cartList: res.value,
+        selected: [],
+        selAll: false,
+        total: 0
       })
       this.computeTotal()
     })
@@ -23,8 +48,18 @@ Page({
     this.setData({
       selected: event.detail
     })
-    console.log(this.data.selected)
-    if (this.data.cartList.length !== this.data.selected.length) {
+    const tempList = this.data.cartList
+    let filterNumber = 0
+    for (let i = 0; i < tempList.length; i++) {
+      if (!tempList[i].seckillSkuId) {
+        // 如果是普通商品直接＋1
+        filterNumber++
+      } else if (tempList[i].seckillSkuId && tempList[i].endReduce) {
+        // 如果是秒杀商品且没过期才＋1
+        filterNumber++
+      }
+    }
+    if (filterNumber !== this.data.selected.length) {
       this.setData({
         selAll: false
       })
@@ -42,8 +77,14 @@ Page({
     })
     let allIndex = []
     if (this.data.selAll) {
-      allIndex = this.data.cartList.map((item, index) => {
-        return index + ''
+      this.data.cartList.map((item, index) => {
+        if (!item.seckillSkuId) {
+          // 如果是普通商品直接返回 index
+          allIndex.push(index + '')
+        } else if (item.seckillSkuId && item.endReduce) {
+          // 如果是秒杀商品且没过期才返回 index
+          allIndex.push(index + '')
+        }
       })
     } else {
       allIndex = []
@@ -70,31 +111,32 @@ Page({
   },
   // 计算总金额
   computeTotal() {
-    const selectedItems = this.data.selected.map((item) => {
-      return this.data.cartList[Number(item)]
-    })
-    // const total = selectedItems
-    //   .reduce((a, b) => {
-    //     const theA = (a.count || 0) * (a.specialPrice || 0)
-    //     const theB = (b.count || 0) * (b.specialPrice || 0)
-    //     console.log(333)
-    //     console.log('a.count || 0', a.count || 0)
-    //     return theA * theB
-    //   }, 0)
-    let total = 0
-    selectedItems.map((item) => {
-      total = total + item.count * item.specialPrice
-    })
-    this.setData({
-      total: total.toFixed(2)
-    })
+    if (this.data.selected.length) {
+      const selectedItems = this.data.selected.map((item) => {
+        return this.data.cartList[Number(item)]
+      })
+
+      let total = 0
+      selectedItems.map((item) => {
+        total = total + item.count * item.specialPrice
+      })
+      this.setData({
+        total: total.toFixed(2)
+      })
+    } else {
+      this.setData({
+        total: 0
+      })
+    }
   },
-  cartDeleteByOne(e) {
-    const { id } = app.tapData(e)
-    request.cartDeleteByOne(id).then((res) => {
-      console.log(res)
-      this.getCartList()
-    })
+  async cartDeleteByOne(e) {
+    const res = await app.showModal('删除商品', '是否删除当前商品？')
+    if (res) {
+      const { id } = app.tapData(e)
+      request.cartDeleteByOne(id).then((res) => {
+        this.getCartList()
+      })
+    }
   },
   // 结算购物车订单
   confirmCartOrder() {

@@ -10,6 +10,10 @@ Component({
       type: String,
       value: '标题'
     },
+    titleColor: {
+      type: String,
+      value: '#000'
+    },
     navOpacity: {
       type: Number,
       value: 1
@@ -17,9 +21,17 @@ Component({
     showLeft: {
       type: Boolean,
       value: true
+    },
+    titleColor: {
+      type: String,
+      value: '#000'
+    },
+    iconColor: {
+      type: String,
+      value: '#000'
     }
   },
-
+  
   /**
    * 组件的初始数据
    */
@@ -48,7 +60,6 @@ Component({
     },
     getPages() {
       const pages = getCurrentPages()
-      console.log('pages.length', pages.length)
       if (pages.length <= 1) {
         this.setData({
           canBack: false

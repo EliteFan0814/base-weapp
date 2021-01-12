@@ -1,0 +1,83 @@
+<!-- pages/orderDetails/orderDetails.wxml -->
+<view class="container">
+  <base-header title="订单详情" showLeft></base-header>
+  <view class="address flex">
+    <image src="../../static/img/order/adr.png" class="add" mode="widthFix" />
+    <view wx:if="{{!info.selfPickUp}}">
+      <view class="name flex">
+        <view>收货人：{{info.contract}}</view>
+        <view class="phone">{{info.phone}}</view>
+      </view>
+      <view class="address-text">收货地址：{{info.address}}</view>
+    </view>
+    <view wx:else bind:tap="showAddress" data-info="{{selfGetInfo}}">
+      <view class="name flex">
+        <view>提货人：{{info.contract}} {{info.phone}}</view>
+      </view>
+      <view class="phone">自提点电话：{{selfGetInfo.pickUpPhone}}</view>
+      <view class="address-text">自提点地址：{{selfGetInfo.pickUpAddress}}</view>
+    </view>
+    <van-icon wx:if="{{info.selfPickUp}}" bind:tap="showAddress" data-info="{{selfGetInfo}}" class="right-icon" color="#999999" name="arrow" />
+  </view>
+  <view class="order-item">
+    <view class="title flex">
+      <text>订单号：{{info.id}}</text>
+      <text class="red">{{info.orderStatusStr}}</text>
+    </view>
+    <view class="info">
+      <view class="goods-list">
+        <view class="goods-item flex" wx:for="{{info.orderDetails}}" wx:key="index" wx:for-item="child" data-id="{{item.id}}">
+          <image src="{{child.hostProductThumb}}" class="good-img"></image>
+          <view class="right-info flex-dc">
+            <view class="name omit-1">{{child.productName}}</view>
+            <view class="spec">规格：{{child.skuName}}</view>
+            <view class="price flex">
+              <text>￥{{child.orderPrice}}</text>
+              <text class="number">x {{child.buyCount}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="total flex">
+        <text wx:if="{{info.selfPickUp}}" class="left">请到自提点自提</text>
+        <text wx:else class="left">{{info.selectSend}}前送达</text>
+        <text class="right">
+          <text class="word">合计：</text>
+          <text>￥{{info.totalMoney}}</text>
+        </text>
+      </view>
+      <view class="refund" wx:if="{{info.refundStatus >= 10}}">{{info.refundStatusStr}}</view>
+    </view>
+    <view class="operation flex">
+      <view class="btn-wrap">
+        <base-btn btn-name="联系平台" btn-style=" base-style" bindtap="makePhone"></base-btn>
+        <base-btn btn-name="立即付款" btn-style="red base-style" wx:if="{{info.payStatus == false && info.orderStatus != 50 && info.orderStatus != -1}}" bindtap="pay" data-id="{{info.id}}" isPushing="{{isPushing}}"></base-btn>
+        <base-btn btn-name="申请退款" btn-style="red base-style" wx:if="{{info.payStatus && info.orderStatus == 30 && (item.refundStatus == 0 || item.refundStatus == 20)}}" bindtap="refund" data-id="{{info.id}}"></base-btn>
+        <base-btn btn-name="确认收货" btn-style="red base-style" wx:if="{{info.orderStatus == 30}}" bindtap="confirm" data-id="{{info.id}}"></base-btn>
+        <base-btn btn-name="取消订单" btn-style=" base-style" wx:if="{{info.payStatus == false && info.orderStatus != 50 && info.orderStatus != -1}}" bindtap="cancelOrder" data-id="{{info.id}}"></base-btn>
+      </view>
+    </view>
+  </view>
+  <view class="info" wx:if="{{!info.selfPickUp&&info.orderStatus>=10}}">
+    <view class="title">配送信息</view>
+    <view class="field flex">
+      <view class="label">分拣站</view>
+      <view class="val">{{info.pickingArea}}</view>
+    </view>
+    <view class="field flex">
+      <view class="label">配送员</view>
+      <view class="val">{{info.sendName}}</view>
+    </view>
+    <view class="field flex">
+      <view class="label">联系电话</view>
+      <view class="val">{{info.sendMobile}}</view>
+    </view>
+  </view>
+  <van-popup show="{{refundDialog}}" round bind:close="refundCancel">
+    <view class="refundDialog">
+      <van-field value="{{ remark }}" wx:if="{{!isTrue}}" label="原因：" placeholder="请输入退款原因" border="{{ false }}" bind:change="inputChange" data-name="remark" />
+      <!-- ><van-field value="{{ refundMoney }}" wx:else  label="金额：" placeholder="请输入退款金额" border="{{ false }}" bind:change="radioChange" data-name="refundMoney"/>< -->
+      <view class="btn" bindtap="submit" data-item="{{item}}">提交</view>
+    </view>
+  </van-popup>
+</view>

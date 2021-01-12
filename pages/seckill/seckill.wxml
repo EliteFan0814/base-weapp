@@ -1,47 +1,31 @@
 <!-- pages/seckill/seckill.wxml -->
 <view class="container">
-  <base-header title="限时秒杀"></base-header>
+  <base-header title="限时秒杀" navOpacity="{{0}}" titleColor="#fff"></base-header>
+  <image src="/static/img/seckill/bg.png" class="bg" style="height:{{90+capsuleToTop}}px;"></image>
   <view class="top-info" style="height:{{90+capsuleToTop}}px;">
-    <image src="/static/img/seckill/bg.png" class="bg" style="height:{{90+capsuleToTop}}px;"></image>
+  <!-- <view class="top-info"> -->
     <view class="info-wrap" style="padding-top:{{capsuleToTop}}px;">
-      <!-- <view class="route-wrap">
-        <view class="item left">
-          <van-icon name="arrow-left" size="36rpx" />
-        </view>
-        <view class="item title">限时秒杀</view>
-        <view class="item right"></view>
-      </view> -->
       <view class="time-list flex">
-        <view class="time-item active-item">
-          <view class="time">00:00</view>
-          <view class="time-str">未开始</view>
-        </view>
-        <view wx:for="{{20}}" wx:key="*this" class="time-item">
-          <view class="time">00:00</view>
-          <view class="time-str">已开抢</view>
+        <view bind:tap="handleChange" data-index="{{index}}" wx:for="{{periodList}}" wx:key="period" class="time-item {{activeIndex === index?'active-item':''}}">
+          <view class="time">{{item.period}}</view>
+          <view class="time-str">{{item.statusStr}}</view>
         </view>
       </view>
     </view>
   </view>
-  <view class="goods-wrap frame">
-    <view class="goods-list">
-      <view wx:for="{{10}}" wx:key="*this" class="goods-item">
+  <view class="goods-wrap frame" style="margin-top:{{65}}px;">
+    <view wx:if="{{periodGoodsList.length}}" class="goods-list">
+      <view bind:tap="openSecKill" data-id="{{item.productId}}" wx:for="{{periodGoodsList}}" wx:key="id" class="goods-item">
         <view class="item-content flex">
-          <image src="https://dummyimage.com/281x231/000/fff" class="good-img"></image>
+          <image src="{{item.product.thumbHost}}" class="good-img"></image>
           <view class="right-info flex-ds">
-            <view class="title omit-1">海外直采 泰国鲜虾大号</view>
+            <view class="title omit-1">{{item.product.title}}</view>
             <view class="tag omit-1">
-              <text>每天现杀</text>
-              <text>不隔离</text>
-              <text>生态散养</text>
-              <text>生态散养</text>
-              <text>生态散养</text>
-              <text>安全</text>
-              <text>生态散养</text>
+              <text>{{item.product.tags}}</text>
             </view>
             <view class="sale-info flex">
               <image src="/static/img/index/fire.png"></image>
-              <text>已售30021份/剩214份</text>
+              <text>已售{{item.salseCount}}份/剩{{item.lastCount}}份</text>
             </view>
             <!-- <view class="timer flex">
               <view class="end-text">距结束</view>
@@ -59,35 +43,28 @@
               <view class="price">
                 <text>
                   <text class="symbol">￥</text>
-                  <text class="price-num">18</text>
+                  <text class="price-num">{{item.seckillPrice}}</text>
                 </text>
                 <text class="right">
                   <text class="symbol">￥</text>
-                  <text class="price-num">18</text>
+                  <text class="price-num">{{item.sourcePrice}}</text>
                 </text>
               </view>
               <base-btn btn-name="立刻买"></base-btn>
             </view>
           </view>
         </view>
-        <view class="other-user flex">
-          <view class="img-list flex">
-            <view class="img-item flex">
-              <image src="https://dummyimage.com/36x36/000/fff"></image>
-              <view>李先生</view>
+        <view wx:if="{{item.buyInfo.count}}" class="other-user flex">
+            <view class="img-list flex">
+              <view wx:for="{{item.buyInfo.records}}" wx:key="*this" wx:for-item="recordIntem" class="img-item flex">
+                <image src="{{recordIntem.hostHeader}}"></image>
+                <view>{{recordIntem.name}}</view>
+              </view>
             </view>
-            <view class="img-item flex">
-              <image src="https://dummyimage.com/36x36/222/fff"></image>
-              <view>李先生</view>
-            </view>
-            <view class="img-item flex">
-              <image src="https://dummyimage.com/36x36/777/fff"></image>
-              <view>李先生</view>
-            </view>
+            <view class="right-text">等{{item.buyInfo.count}}人刚刚购买了此商品</view>
           </view>
-          <view class="right-text">等36人刚刚购买了此商品</view>
-        </view>
       </view>
     </view>
+    <base-no-list wx:else title="暂无秒杀产品"></base-no-list>
   </view>
 </view>

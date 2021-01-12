@@ -1,6 +1,6 @@
 .base-btn {
   display: inline-block;
-  padding: 10rpx 30rpx;
+  padding: 15rpx 30rpx;
   background-color: #07c160;
   box-shadow: 0rpx 5rpx 15rpx 0rpx rgba(89, 117, 240, 0.3);
   border-radius: 39rpx;
@@ -12,5 +12,5 @@
 }
 
 .is-pushing {
-  background-color: #BBBBBB;
+  background-color: #bbbbbb;
 }

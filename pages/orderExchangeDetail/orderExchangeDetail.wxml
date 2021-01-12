@@ -1,0 +1,73 @@
+<!-- pages/orderDetails/orderDetails.wxml -->
+<view class="container">
+  <base-header title="订单详情" showLeft></base-header>
+  <view class="address flex">
+    <image src="../../static/img/order/adr.png" class="add" mode="widthFix" />
+    <view>
+      <view class="name flex">
+        <view>收货人：{{info.contact}}</view>
+        <view class="phone">{{info.phone}}</view>
+      </view>
+      <view class="address-text">收货地址：{{info.area}} {{info.address}}</view>
+    </view>
+  </view>
+  <view class="order-item">
+    <view class="title flex">
+      <text>订单号：{{info.id}}</text>
+      <text class="red">{{info.statusStr}}</text>
+    </view>
+    <view class="info">
+      <view class="goods-list">
+        <view class="goods-item flex">
+          <image src="{{info.hostGoodsPhoto}}" class="good-img"></image>
+          <view class="right-info flex-dc">
+            <view class="name omit-1">{{info.goodsName}}</view>
+            <!-- <view class="spec">规格：{{info.skuName}}</view> -->
+            <view class="price flex">
+              <view>
+                <text>所需积分：</text>
+                <text class="red">{{info.preIntegral}}</text>
+              </view>
+              <text class="number">x {{info.goodsCount}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="total flex">
+        <!-- <text class="left">{{info.serviceDate}}送达</text> -->
+        <text class="right">
+          <text class="word">合计积分：</text>
+          <text class="red">{{info.totalIntegral}}</text>
+        </text>
+      </view>
+    </view>
+    <view class="operation flex">
+      <view class="btn-wrap">
+        <base-btn btn-name="联系平台" btn-style=" base-style" bindtap="makePhone"></base-btn>
+        <base-btn btn-name="确认收货" btn-style="red base-style" wx:if="{{info.status == 10}}" bindtap="confirm" data-id="{{info.id}}"></base-btn>
+      </view>
+    </view>
+  </view>
+  <view class="info" wx:if="{{info.orderStatus>=10}}">
+    <view class="title">配送信息</view>
+    <view class="field flex">
+      <view class="label">分拣站</view>
+      <view class="val">{{info.pickingArea}}</view>
+    </view>
+    <view class="field flex">
+      <view class="label">配送员</view>
+      <view class="val">{{info.sendName}}</view>
+    </view>
+    <view class="field flex">
+      <view class="label">联系电话</view>
+      <view class="val">{{info.sendMobile}}</view>
+    </view>
+  </view>
+  <van-popup show="{{refundDialog}}" round bind:close="refundCancel">
+    <view class="refundDialog">
+      <van-field value="{{ remark }}" wx:if="{{!isTrue}}" label="原因：" placeholder="请输入退款原因" border="{{ false }}" bind:change="inputChange" data-name="remark" />
+      <!-- ><van-field value="{{ refundMoney }}" wx:else  label="金额：" placeholder="请输入退款金额" border="{{ false }}" bind:change="radioChange" data-name="refundMoney"/>< -->
+      <view class="btn" bindtap="submit" data-item="{{item}}">提交</view>
+    </view>
+  </van-popup>
+</view>

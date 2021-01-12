@@ -1,4 +1,5 @@
 <view class="container">
+	<base-header title="搜索结果"></base-header>
 	<view class="tablist">
 		<van-search class="search" use-action-slot value="{{keywords}}" shape="round" 
 		bind:change="changeKeywords" bind:search="searchNewGood" show-action bind:clear="clearKeywords" placeholder="请输入搜索关键词">
@@ -17,21 +18,58 @@
 				</view>
 			</view>
 		</view> -->
-	</view>
+	</view> 
 
-	<view id="scroll-init" wx:if="{{!showNoList}}" class="block">
-		<view class="block_item" wx:for="{{secondList}}" wx:key="index" bind:tap="togoodsdetail" data-id="{{item.goods_id}}">
-			<image mode="aspectFill" src="{{item.picurl}}" />
-			<view class="content">
-				<view class="content_title two-ellipsis">{{item.name}}</view>
-				<view class="content_money">
-					<view class="content_money-red">￥{{item.price}}</view>
-					<text>销量：{{item.sales_volume}}</text>
+	 	<view class="goods-list" wx:if="{{commonList.length}}">
+			<view bind:tap="buyGood" data-id="{{item.id}}" wx:for="{{commonList}}" wx:key="id" class="goods-item">
+				<view class="item-content flex">
+					<image mode="aspectFill" src="{{item.thumbHost}}" class="good-img"></image>
+					<view class="right-info flex-ds">
+						<view class="title omit-1">{{item.title}}</view>
+						<view class="tag omit-1">
+							<text>{{item.tags}}</text>
+						</view>
+						<view class="sale-info flex">
+							<image  src="/static/img/index/fire.png"></image>
+							<text>已售{{item.salesCount}}份/剩{{item.lastCount}}份</text>
+						</view>
+
+						<view class="price-wrap flex">
+							<view class="price">
+								<text>
+									<text class="symbol">￥</text>
+									<text class="price-num">{{item.specialPrice}}</text>
+								</text>
+								<text class="right">
+									<text class="symbol">￥</text>
+									<text class="price-num">{{item.sourcePrice}}</text>
+								</text>
+							</view>
+							<base-btn btn-name="立刻买"></base-btn>
+						</view>
+					</view>
+				</view>
+				<view class="other-user flex">
+					<view class="img-list flex">
+						<view class="img-item flex">
+							<image src="https://dummyimage.com/36x36/000/fff"></image>
+							<view>李先生</view>
+						</view>
+						<view class="img-item flex">
+							<image src="https://dummyimage.com/36x36/222/fff"></image>
+							<view>李先生</view>
+						</view>
+						<view class="img-item flex">
+							<image src="https://dummyimage.com/36x36/777/fff"></image>
+							<view>李先生</view>
+						</view>
+					</view>
+					<view class="right-text">等36人刚刚购买了此商品</view>
 				</view>
 			</view>
 		</view>
-	</view>
-	<view wx:else style="margin-top: 240rpx;">
-		<base-no-list title="这个分类还没有商品看看其他的吧" />
-	</view>
+
+		<base-no-list wx:else title="暂无商品,看看其他的吧" widthWrap="100%" />
+	<!--<view wx:else style="margin-top: 240rpx;">
+	</view> -->
 </view>

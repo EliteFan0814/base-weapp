@@ -1,6 +1,7 @@
 /* pages/check/check.wxss */
 .container {
   .check-wrap {
+    margin-top: 20rpx;
     .card-form {
       .card-wrap {
         margin-bottom: 50rpx;
@@ -12,12 +13,26 @@
           font-size: 26rpx;
           color: #bbb;
           .card-img {
-            width: 500rpx;
+            width: 400rpx;
           }
         }
       }
       .check-btn{
-
+        .base-btn {
+          display: inline-block;
+          padding: 20rpx 200rpx;
+          background-color: #07c160;
+          box-shadow: 0rpx 5rpx 15rpx 0rpx rgba(89, 117, 240, 0.3);
+          border-radius: 39rpx;
+          font-size: 28rpx;
+          line-height: 29rpx;
+          letter-spacing: 2rpx;
+          color: #ffffff;
+          text-align: center;
+        }
+        .is-pushing{
+          background-color: #BBBBBB;
+        }
       }
     }
   }

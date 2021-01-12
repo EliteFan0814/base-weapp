@@ -7,7 +7,7 @@
 		</view>
 		<view class="menu">
 				<view class="menu_title">
-						<text>历史搜索：</text>
+						<text>历史记录：</text>
 						<text class="small" wx:if="{{historyList.length != 0}}" bind:tap="cloes">清除历史</text>
 				</view>
 				<view wx:if="{{historyList.length != 0}}">
@@ -17,7 +17,7 @@
 				</view>
 				<view wx:else class="noSearch">暂无搜索记录</view>
 		</view>
-		<view class="menu">
+		<!-- <view class="menu">
 				<view class="menu_title">
 						<text>热门搜索：</text>
 				</view>
@@ -27,5 +27,5 @@
 						</view>
 				</view>
 				<view wx:else class="noSearch">暂无热门搜索</view>
-		</view>
+		</view> -->
 </view>

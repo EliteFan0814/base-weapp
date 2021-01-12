@@ -3,6 +3,10 @@
   background-color: #f5f5f5;
 }
 
+.container .rich-img {
+  width: 100%;
+}
+
 .container .red {
   font-size: 34.72rpx;
   color: #fe2448;
@@ -16,24 +20,20 @@
 }
 
 .container .btn-style {
-  font-size: 24rpx;
+  font-size: 28rpx;
   width: 160rpx;
-  padding: 15rpx 20rpx;
+  padding: 20rpx 25rpx;
   box-shadow: none;
 }
 
 .container .style-left {
-  border-radius: 31rpx 0rpx 0rpx 31rpx;
+  border-radius: 35rpx 0rpx 0rpx 35rpx;
   background-color: #666666;
 }
 
 .container .style-right {
-  border-radius: 0rpx 31rpx 31rpx 0rpx;
+  border-radius: 0rpx 35rpx 35rpx 0rpx;
   background-color: #07c160;
-}
-
-.container .swiper-wrap {
-  margin-bottom: 10px;
 }
 
 .container .swiper-wrap swiper {
@@ -46,10 +46,57 @@
   height: 690rpx;
 }
 
+.container .seckill-wrap .seckill {
+  justify-content: space-between;
+  padding: 16rpx 30rpx;
+  background-color: #07c160;
+  color: #fff;
+}
+
+.container .seckill-wrap .seckill .left-icon {
+  margin-right: 20rpx;
+}
+
+.container .seckill-wrap .seckill .left-icon image {
+  width: 47rpx;
+  height: 44rpx;
+  margin-right: 10rpx;
+}
+
+.container .seckill-wrap .seckill .left-icon view {
+  width: 60rpx;
+  font-size: 30rpx;
+  line-height: 36rpx;
+}
+
+.container .seckill-wrap .seckill .time-wrap .time-item {
+  margin: 0 10rpx;
+}
+
+.container .seckill-wrap .seckill .time-wrap .time-item .time-text {
+  font-size: 30rpx;
+  line-height: 30rpx;
+}
+
+.container .seckill-wrap .seckill .time-wrap .time-item .item-wrap {
+  font-size: 30rpx;
+  line-height: 30rpx;
+  color: #fff;
+}
+
+.container .seckill-wrap .seckill .active-btn {
+  font-size: 30rpx;
+  color: #fff;
+  padding: 6rpx 15rpx;
+  border-radius: 25.5rpx;
+  background-color: #fff;
+  color: #07c160;
+}
+
 .container .sale-wrap {
   background-color: #fff;
   margin-bottom: 10rpx;
-  padding: 0rpx 30rpx 20rpx;
+  padding: 10rpx 30rpx 20rpx;
 }
 
 .container .sale-wrap .slogan {
@@ -92,18 +139,23 @@
 }
 
 .container .tab-wrap {
-  padding-bottom: 80rpx;
+  padding-bottom: 100rpx;
 }
 
 .container .tab-wrap .good-detail {
+  background: #fff;
+  margin: 10rpx 0 0;
   padding: 10rpx;
+}
+
+.container .tab-wrap .buy-record {
+  padding-bottom: 15rpx;
 }
 
 .container .tab-wrap .buy-record .record-item {
   background-color: #fff;
-  margin: 10rpx;
-  border-radius: 15rpx;
-  padding: 10rpx;
+  margin: 10rpx 0;
+  padding: 10rpx 15rpx;
 }
 
 .container .tab-wrap .buy-record .record-item .user-img {
@@ -111,6 +163,11 @@
   height: 100rpx;
   display: block;
   border-radius: 50%;
+  margin-right: 15rpx;
+}
+
+.container .tab-wrap .buy-record .record-item .right-info > view {
+  padding: 5rpx 0;
 }
 
 .container .operation-wrap {
@@ -120,7 +177,7 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  padding: 10rpx 30rpx;
+  padding: 15rpx 20rpx;
 }
 
 .container .operation-wrap .operate-item {
@@ -135,13 +192,14 @@
 }
 
 .container .operation-wrap .operate-item .serve-btn {
+  background-color: transparent;
   color: #333333;
   font-size: 22rpx;
   line-height: 32rpx;
 }
 
 .container .detail-wrap {
-  padding: 20rpx 30rpx;
+  padding: 20rpx 30rpx 30rpx;
   position: relative;
 }
 

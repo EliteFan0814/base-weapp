@@ -1,0 +1,26 @@
+/* pages/spread/spread.wxss */
+.container {
+  height: 100vh;
+  overflow: hidden;
+  .bg-img {
+    width: 100%;
+  }
+  .qr-wrap {
+    // border: 1px solid red;
+    box-shadow: 0px 0px 8px -1px rgba(0,0,0,0.88);
+    right: 30rpx;
+    bottom: 200rpx;
+    position: fixed;
+    width: 250rpx;
+    height: 250rpx;
+    color: #222;
+    background-color: #fff;
+    border-radius: 15rpx;
+    .qr {
+      width: 150rpx;
+      height: 150rpx;
+      border: 1px solid red;
+      margin-bottom: 20rpx;
+    }
+  }
+}

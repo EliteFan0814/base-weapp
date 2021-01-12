@@ -13,11 +13,52 @@
       font-size: 28rpx;
       justify-content: space-between;
     }
+
+    .van-dropdown-menu {
+      box-shadow: none;
+    }
+    .remark{
+      margin: 0 30rpx;
+      justify-content: flex-end;
+      color: #999;
+      font-size: 22rpx;
+      .money{
+        color: #fe2448;
+        margin-left: 10rpx;
+      }
+    }
+
+    .field{
+      margin: 0 30rpx;
+      padding: 20rpx 0;
+      justify-content: space-between;   
+      // border-bottom: 1px solid #f2f2f2;
+      .label{
+        font-size: 28rpx;
+      }
+      .upload{
+        padding: 100rpx;
+        border: 1px dotted #d9d9d9;
+      }
+      .qrcode{
+        width: 100rpx;
+        height: 100rpx;
+      }
+    }
+
     .btn{
-      padding-top: 400rpx;
-      .btn-style{
-        font-size: 30rpx;
-        padding: 20rpx 40rpx;
+      padding-top: 200rpx;
+      .base-btn {
+        display: inline-block;
+        padding: 20rpx 200rpx;
+        background-color: #07c160;
+        box-shadow: 0rpx 5rpx 15rpx 0rpx rgba(89, 117, 240, 0.3);
+        border-radius: 39rpx;
+        font-size: 28rpx;
+        line-height: 29rpx;
+        letter-spacing: 2rpx;
+        color: #ffffff;
+        text-align: center;
       }
     }
   }

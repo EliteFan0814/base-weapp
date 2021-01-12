@@ -1,0 +1,149 @@
+<!-- pages/goodDetail/goodDetail.wxml -->
+<view class="container">
+  <base-header title="商品详情"></base-header>
+  <view class="swiper-wrap">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{swiperList}}" wx:key="*this">
+        <swiper-item>
+          <view class="swiper-item">
+            <image src="{{item}}"></image>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <!-- 限时秒杀 -->
+  <!-- <view wx:if="{{isSeckill}}" class="seckill-wrap">
+    <view class="seckill flex">
+      <view class="flex">
+        <view class="left-icon flex-cc">
+          <image src="/static/img/index/seckill.png"></image>
+          <view>限时秒杀</view>
+        </view>
+        <view class="time-wrap">
+          <view class="time-list flex-cc">
+            <view class="time-item flex-dc">
+              <view wx:if="{{seckillInfo.seckillBeginReduce||seckillInfo.seckillEndReduce}}" class="timer flex">
+                <view class="timer-text ">距{{isSeckillBegin?'结束':'开始'}}：</view>
+                <van-count-down use-slot time="{{ isSeckillBegin?seckillInfo.seckillEndReduce:seckillInfo.seckillBeginReduce }}" bind:change="onTimeChange" bind:finish="onTimeFinished">
+                  <view class="item-wrap flex">
+                    <text class="item">{{ timeData.hours }}</text>
+                    <text class="white">:</text>
+                    <text class="item">{{ timeData.minutes }}</text>
+                    <text class="white">:</text>
+                    <text class="item">{{ timeData.seconds }}</text>
+                  </view>
+                </van-count-down>
+              </view>
+              <view wx:else>秒杀已结束</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view bind:tap="openAllSecKill" class=" active-btn">全部秒杀></view>
+    </view>
+  </view> -->
+  <view class="sale-wrap">
+    <view class="slogan">
+      <view class="name">{{goodInfo.name}}</view>
+      <!-- <view class="tag">{{goodInfo.tags}}</view> -->
+    </view>
+    <view class="price-wrap flex">
+      <view class="price flex">
+        <view class="red">所需积分：{{goodInfo.integral}}</view>
+        <view class="grey">￥{{goodInfo.price}}</view>
+      </view>
+      <view class="sale-num">剩余{{goodInfo.lastCount}}份</view>
+    </view>
+    <view class="promise flex">
+      <view class="left">
+        <text class="fold">服务</text>
+        <text>品质承诺，极速物流</text>
+      </view>
+      <!-- <van-icon name="arrow" /> -->
+    </view>
+  </view>
+  <view class="buy-num flex">
+    <text>兑换数量：</text>
+    <van-stepper wx:if="{{goodInfo.exchangeLimit}}" bind:change="handleBuyNum" value="{{ selectedNumber }}" max="{{goodInfo.exchangeLimit}}" input-width="40px" button-size="32px" />
+    <van-stepper wx:else bind:change="handleBuyNum" value="{{ selectedNumber }}" input-width="40px" button-size="32px" />
+  </view>
+  <view class="tab-wrap">
+    <view class="good-detail">
+      <rich-text nodes="{{goodContent}}"></rich-text>
+    </view>
+    <!-- <van-tabs active="{{ activeTab }}" bind:change="handleChangeTab" z-index="{{0}}">
+      <van-tab title="商品详情" name="detail">
+      </van-tab>
+      <van-tab title="兑换记录" name="record">
+        <view class="buy-record frame">
+          <block wx:if="{{buyRecord.length}}">
+            <view wx:for="{{buyRecord}}" wx:key="id" class="record-item flex">
+              <image class="user-img" src="{{item.wxHeaderHost||'/static/img/avatar.png'}}"></image>
+              <view class="right-info">
+                <view>{{item.wxName}}</view>
+                <view>兑换产品：{{item.productName}} x {{item.count}}</view>
+              </view>
+            </view>
+          </block>
+          <base-no-list wx:else title="暂无兑换记录"></base-no-list>
+        </view>
+      </van-tab>
+    </van-tabs> -->
+  </view>
+  <view bind:tap="handleBuy" data-num="{{selectedNumber}}" data-prod="{{goodInfo}}" data-spec="{{selectedSpec}}" class="operation-wrap flex-cc">
+    <text>立即兑换</text>
+    <!-- <view bind:tap="openIndex" class="operate-item flex-dc">
+      <image src="/static/img/goodDetail/index.png"></image>
+      <text>首页</text>
+    </view>
+    <view bind:tap="openCart" class="operate-item flex-dc">
+      <image src="/static/img/goodDetail/cart.png"></image>
+      <text>购物车</text>
+    </view>
+    <view class="operate-item flex-dc">
+      <button open-type='contact' class="serve-btn flex-dc">
+        <image src="/static/img/goodDetail/serve.png"></image>
+        <text>客服</text>
+      </button>
+    </view>
+    <view class="operate-item">
+      <base-btn bind:tap="handleClose" btn-name="加入购物车" btn-style="btn-style style-left"></base-btn>
+      <base-btn bind:tap="handleClose" btn-name="立即兑换" btn-style="btn-style"></base-btn>
+    </view> -->
+    <!-- 弹框兑换 -->
+  </view>
+  <van-popup bind:close="handleClose" show="{{ showDialog }}" closeable position="bottom" custom-style="border-radius:30rpx 30rpx 0 0;">
+    <view class="detail-wrap">
+      <view class="good-wrap flex">
+        <image class="spec-img" src="{{goodInfo.thumbHost}}"></image>
+        <view class="right-text">
+          <view class="name">{{goodInfo.title}}</view>
+          <view class="price">
+            <text class="red">￥{{selectedSpec.specialPrice}}</text>
+            <text class="grey">原价：{{selectedSpec.sourcePrice}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="spec-wrap">
+        <view class="item-wrap">
+          <view class="spec-name">商品规格：</view>
+          <view class="spec-list flex">
+            <view bind:tap="handleSelect" data-info="{{item}}" wx:for="{{goodSpec}}" wx:key="id" class="spec-item {{item.id === selectedId?'active-item':''}}">
+              {{item.name}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="buy-num flex">
+        <text>兑换数量：</text>
+        <van-stepper wx:if="{{selectedSpec.buyLimit}}" bind:change="handleBuyNum" value="{{ selectedNumber }}" max="{{selectedSpec.buyLimit}}" input-width="40px" button-size="32px" />
+        <van-stepper wx:else bind:change="handleBuyNum" value="{{ selectedNumber }}" input-width="40px" button-size="32px" />
+      </view>
+      <view class="btn-wrap flex-cc">
+        <!-- <base-btn btn-name="加入购物车" bind:handleTap="handleCart" data-num="{{selectedNumber}}" data-info="{{selectedSpec}}" btn-style="btn-style style-left"></base-btn> -->
+        <base-btn btn-name="立即兑换" bind:handleTap="handleBuy" data-num="{{selectedNumber}}" data-prod="{{goodInfo}}" data-spec="{{selectedSpec}}" btn-style="btn-style"></base-btn>
+      </view>
+    </view>
+  </van-popup>
+</view>

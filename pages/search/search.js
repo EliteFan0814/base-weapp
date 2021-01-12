@@ -18,7 +18,7 @@ Page({
         })
       },
     })
-    this.getHotList()
+    // this.getHotList()
   },
   onChange(e) {
     this.setData({

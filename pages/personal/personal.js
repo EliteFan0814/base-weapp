@@ -8,35 +8,89 @@ Page({
     capsuleToTop: app.globalData.capsuleToTop,
     orderList: [
       { img: '/static/img/personal/pending.png', name: '待付款', value: 0 },
-      { img: '/static/img/personal/stocking.png', name: '备货中', value: 1 },
-      { img: '/static/img/personal/sending.png', name: '配送中', value: 2 },
-      { img: '/static/img/personal/end.png', name: '已完成', value: 3 }
+      { img: '/static/img/personal/stocking.png', name: '备货中', value: 10 },
+      { img: '/static/img/personal/sending.png', name: '配送中', value: 20 },
+      { img: '/static/img/personal/end.png', name: '已完成', value: 30 }
     ],
     operateList: [
+      { name: '积分商城', url: '/pages/integral/integral', isServe: false, haveValue: true },
+      { name: '积分订单', url: '/pages/orderExchange/orderExchange', isServe: false, haveValue: false },
+      { name: '积分流水', url: '/pages/exchangeRecord/exchangeRecord', isServe: false, haveValue: false },
       { name: '收货地址管理', url: '/pages/addressList/addressList', isServe: false },
       { name: '平台客服', url: '', isServe: true },
       { name: '留言反馈', url: '/pages/leaveMessage/leaveMessage', isServe: false },
-      { name: '平台公告', url: '/pages/noticeList/noticeList', isServe: false },
-      { name: '成为团长', url: '/pages/check/check', isServe: false }
+      { name: '平台公告', url: '/pages/noticeList/noticeList', isServe: false }
+      // { name: '成为团长', url: '/pages/check/check', isServe: false }
       // { name: '设置', url: '/pages/addressList/addressList', isServe: false }
     ],
+    spread: {
+      name: '我要推广',
+      url: '/pages/spread/spread',
+      isServe: false
+    },
     userInfo: {
       wxHeader: '',
-      wxName: ''
+      wxName: '',
+      isLeader: ''
     },
+    isLeader: undefined,
+    isSign: undefined,
     account: {},
-    navOpacity: 0
+    navOpacity: 0,
+    teamStatus: '',
+    integral: 0,
+    signDays: 0
   },
+  // 处理签到
+  handleSign() {
+    if (this.data.isSign) {
+      return app.toastFail('今日已签到！')
+    } else {
+      request
+        .handleSign()
+        .then((res) => {
+          this.setData({
+            isSign: true
+          })
+          this.getSignDays()
+        })
+        .catch((err) => {})
+    }
+  },
+  //
   getUserInfo() {
     request
       .getUserInfo()
       .then((res) => {
+        let { value, account } = res.value
         this.setData({
-          userInfo: res.value.value,
-          account: res.value.account
+          userInfo: value,
+          isSign: value.isSign,
+          integral: value.memberIntegral,
+          account: account,
+          isLeader: value.isLeader
         })
       })
       .catch((err) => {})
+  },
+  // 获取签到天数
+  getSignDays() {
+    request
+      .getSignDays()
+      .then((res) => {
+        this.setData({
+          signDays: res.value
+        })
+        this.getUserInfo()
+      })
+      .catch((err) => {})
+  },
+  applyStatus() {
+    request.applyStatus().then((res) => {
+      this.setData({
+        teamStatus: res.value
+      })
+    })
   },
   // 点击获取微信昵称头像并更新到后台
   getWxUserInfo: function (e) {
@@ -80,17 +134,45 @@ Page({
     }
   },
   openTeam() {
-    wx.navigateTo({ url: '/pages/myTeam/myTeam' })
+    let url = `/pages/myTeam/myTeam`
+    if (this.data.teamStatus === 0) return app.toastFail('正在审核中！')
+    if (!this.data.userInfo.isLeader) {
+      url = `/pages/check/check`
+    }
+    wx.navigateTo({ url })
+  },
+  openOrder(e) {
+    wx.navigateTo({ url: `/pages/order/order?status=${e.currentTarget.dataset.status}` })
+  },
+  openAccount() {
+    let url = `/pages/teamAccount/teamAccount`
+    if (this.data.teamStatus === 0) return app.toastFail('正在审核中！')
+    if (!this.data.userInfo.isLeader) {
+      url = `/pages/check/check`
+    }
+    wx.navigateTo({ url })
   },
   // 打开操作板
   openOperate(e) {
     const { info } = app.tapData(e)
-    if (!info.isServe){
+    // if (info.name == '成为团长') {
+    //   if (this.data.userInfo.isLeader) {
+    //     return app.toastFail('当前已是团长')
+    //   } else if (this.data.teamStatus === 0) {
+    //     return app.toastFail('正在审核中')
+    //   }
+    // }
+    if (!info.isServe) {
       wx.navigateTo({
         url: info.url
       })
-
     }
+  },
+  // 申请成为团长
+  openApply() {
+    wx.navigateTo({
+      url: '/pages/check/check'
+    })
   },
   onPageScroll: function (e) {
     let a = e.scrollTop / 60
@@ -99,45 +181,13 @@ Page({
       navOpacity: a
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    this.getUserInfo()
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {},
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {}
+  onShow: function () {
+    this.applyStatus()
+    this.getUserInfo()
+    this.getSignDays()
+  }
 })
