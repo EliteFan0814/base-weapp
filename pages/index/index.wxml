@@ -65,28 +65,22 @@
           </view>
         </view>
       </view>
-      <view class=" active-btn">全部秒杀></view>
+      <view bind:tap="openAllSecKill" class=" active-btn">全部秒杀></view>
     </view>
   </view>
   <view class="goods-wrap frame">
     <view class="goods-list">
-      <view bind:tap="openDetail" wx:for="{{1}}" wx:key="*this" class="goods-item">
+      <view bind:tap="openDetail" wx:for="{{seckillProd}}" wx:key="id" class="goods-item">
         <view class="item-content flex">
-          <image src="https://dummyimage.com/281x231/000/fff" class="good-img"></image>
+          <image src="{{item.thumbHost}}" class="good-img"></image>
           <view class="right-info flex-ds">
-            <view class="title omit-1">海外直采 泰国鲜虾大号</view>
+            <view class="title omit-1">{{item.title}}</view>
             <view class="tag omit-1">
-              <text>每天现杀</text>
-              <text>不隔离</text>
-              <text>生态散养</text>
-              <text>生态散养</text>
-              <text>生态散养</text>
-              <text>安全</text>
-              <text>生态散养</text>
+              <text>{{item.tags}}</text>
             </view>
             <view class="sale-info flex">
               <image src="/static/img/index/fire.png"></image>
-              <text>已售30021份/剩214份</text>
+              <text>已售{{item.salesCount}}份/剩{{item.lastCount}}份</text>
             </view>
             <!-- <view class="timer flex">
               <view class="end-text">距结束</view>
@@ -225,7 +219,7 @@
               </view>
               <view class="sale-info flex">
                 <image src="/static/img/index/fire.png"></image>
-                <text>已售{{item.salesCount}}份/剩{{item.lastCount}}份</text>
+                <text>已售{{item.salesCount}}份/剩{{item.inventoryCount}}份</text>
               </view>
               <!-- <view class="timer flex">
                 <view class="end-text">距结束</view>

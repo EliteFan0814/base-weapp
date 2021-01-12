@@ -1,15 +1,16 @@
 <!-- pages/seckill/seckill.wxml -->
 <view class="container">
+  <base-header title="限时秒杀"></base-header>
   <view class="top-info" style="height:{{90+capsuleToTop}}px;">
     <image src="/static/img/seckill/bg.png" class="bg" style="height:{{90+capsuleToTop}}px;"></image>
     <view class="info-wrap" style="padding-top:{{capsuleToTop}}px;">
-      <view class="route-wrap">
+      <!-- <view class="route-wrap">
         <view class="item left">
           <van-icon name="arrow-left" size="36rpx" />
         </view>
         <view class="item title">限时秒杀</view>
         <view class="item right"></view>
-      </view>
+      </view> -->
       <view class="time-list flex">
         <view class="time-item active-item">
           <view class="time">00:00</view>

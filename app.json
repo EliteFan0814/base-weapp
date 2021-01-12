@@ -16,7 +16,9 @@
     "pages/addressEdit/addressEdit",
     "pages/leaveMessage/leaveMessage",
     "pages/noticeList/noticeList",
-    "pages/notice/notice"
+    "pages/notice/notice",
+    "pages/search/search",
+    "pages/searchResults/searchResults"
   ],
   "window": {
     "backgroundTextStyle": "light",

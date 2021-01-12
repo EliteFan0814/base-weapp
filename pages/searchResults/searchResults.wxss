@@ -1,0 +1,142 @@
+.tablist {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.tablist .tab {
+  background: white;
+  /* box-shadow: -5rpx 10rpx 10rpx #f5f5f5; */
+}
+
+.tab {
+  box-sizing: border-box;
+  padding: 10rpx 40rpx;
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  width: 100%;
+}
+
+.tab_item {
+  margin-right: 30rpx;
+  display: flex;
+  align-items: center;
+}
+
+.tab_item text {
+  margin-right: 15rpx;
+  color: #999999;
+}
+.tab_item text.tab-active{
+  color: #00D71B;
+
+}
+.array-wrap{
+  display: flex;
+  align-items: center;
+}
+
+.tab_item-right {
+  margin-left: auto;
+  margin-right: 0;
+}
+.tab_item .tab-img{
+  width: 16rpx;
+  height: 11rpx;
+}
+.block {
+  margin-top: 160rpx;
+  display: flex;
+  padding: 30rpx 20rpx;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.block_item {
+  display: flex;
+  flex-direction: column;
+  width: 345rpx;
+  margin: 5rpx 0;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.06);
+  border-radius: 15rpx;
+  height: 460rpx;
+}
+
+.block_item:last-child {
+  border: 0;
+}
+
+.block_item image {
+  width: 100%;
+  height: 280rpx;
+  border-radius: 8rpx 8rpx 0rpx 0rpx;
+}
+
+.block_item .content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20rpx;
+}
+
+.block_item .content_title {
+  font-size: 28rpx;
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  letter-spacing: 1rpx;
+}
+
+.block_item .content_money {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 30rpx;
+}
+
+.block_item .content_money-red {
+  color: #ff3f3f;
+}
+
+.block_item .content_money-red::first-letter {
+  font-size: 24rpx;
+}
+
+.block_item .content_money text {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.screen {
+  display: flex;
+  margin: 30rpx;
+  flex-wrap: wrap;
+}
+
+.screen .title {
+  font-size: 30rpx;
+  width: 100%;
+  padding-bottom: 15rpx;
+}
+
+.screen_item {
+  margin: 15rpx;
+  background: #eee;
+  font-size: 26rpx;
+  padding: 5rpx 20rpx;
+  color: #666;
+  border-radius: 30rpx;
+}
+
+.screen_item-sel {
+  background: #0ccd79;
+  color: white;
+}
+
+.tab-class {
+  color: #0ccd79 !important;
+}

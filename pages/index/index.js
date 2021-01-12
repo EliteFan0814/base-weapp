@@ -34,18 +34,6 @@ Page({
     })
   },
 
-  onLoad: function () {
-    this.getCarousel()
-    this.getClassList()
-    this.getCommonList()
-  },
-  onPageScroll: function (e) {
-    let a = e.scrollTop / 60
-    if (a >= 1) a = 1
-    this.setData({
-      navOpacity: a
-    })
-  },
   //  方法
   // 获取轮播图
   getCarousel() {
@@ -76,6 +64,20 @@ Page({
       }
     })
   },
+  // 限时秒杀
+  getSeckillList() {
+    request.getSeckillList().then((res) => {
+      this.setData({
+        seckillProd: res.value
+      }).catch((err) => {})
+    })
+  },
+  // 全部秒杀
+  openAllSecKill() {
+    wx.navigateTo({
+      url: '/pages/seckill/seckill'
+    })
+  },
   onReachBottom() {
     if (this.data.page < this.data.totalPage) {
       this.data.page += 1
@@ -85,14 +87,13 @@ Page({
   // 获取分类列表
   getClassList() {
     request.getClassList().then((res) => {
-      res.value = res.value.concat(res.value).concat(res.value).concat(res.value).concat(res.value).concat(res.value)
-      // res.value = res.value
+      // res.value = res.value.concat(res.value).concat(res.value).concat(res.value).concat(res.value).concat(res.value)
+      res.value = res.value
       const filterArr = this.sliceArray(res.value, 10)
       this.setData({
         classList: filterArr,
         classPages: filterArr.length
       })
-      console.log(222, this.data.classList)
     })
   },
   //
@@ -201,6 +202,20 @@ Page({
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
+    })
+  },
+
+  onLoad: function () {
+    this.getCarousel()
+    this.getClassList()
+    this.getSeckillList()
+    this.getCommonList()
+  },
+  onPageScroll: function (e) {
+    let a = e.scrollTop / 60
+    if (a >= 1) a = 1
+    this.setData({
+      navOpacity: a
     })
   }
 })

@@ -13,9 +13,13 @@ const requestApi = {
   getPeriodList() {
     return fly.get('/api/Seckill/GetAllPeriod')
   },
-  // 今日抢购 明日预告 限时秒杀
+  // 今日抢购 明日预告
   getProdList(status) {
     return fly.get('/api/ProductInfo/GetRecommendProduct', { status })
+  },
+  // 限时秒杀
+  getSeckillList() {
+    return fly.get('/api/Seckill/GetSeckillProduct')
   },
   // 产品列表
   getCommonList(page, pageSize = 10) {

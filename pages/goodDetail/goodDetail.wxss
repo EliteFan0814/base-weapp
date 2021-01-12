@@ -91,6 +91,28 @@
   color: #4d4d4d;
 }
 
+.container .tab-wrap {
+  padding-bottom: 80rpx;
+}
+
+.container .tab-wrap .good-detail {
+  padding: 10rpx;
+}
+
+.container .tab-wrap .buy-record .record-item {
+  background-color: #fff;
+  margin: 10rpx;
+  border-radius: 15rpx;
+  padding: 10rpx;
+}
+
+.container .tab-wrap .buy-record .record-item .user-img {
+  width: 100rpx;
+  height: 100rpx;
+  display: block;
+  border-radius: 50%;
+}
+
 .container .operation-wrap {
   background-color: #fff;
   box-sizing: border-box;

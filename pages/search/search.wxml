@@ -1,0 +1,31 @@
+<view class="container">
+		<base-header title="搜索"></base-header>
+		<view class="header">
+				<van-search class="search" use-action-slot value="{{value}}" shape="round" bind:search="onSearch" bind:change="onChange" show-action placeholder="请输入搜索关键词">
+						<view slot="action" catch:tap="onSearch">搜索</view>
+				</van-search>
+		</view>
+		<view class="menu">
+				<view class="menu_title">
+						<text>历史搜索：</text>
+						<text class="small" wx:if="{{historyList.length != 0}}" bind:tap="cloes">清除历史</text>
+				</view>
+				<view wx:if="{{historyList.length != 0}}">
+						<view class="menu_item" wx:for="{{historyList}}" wx:key="*this" bind:tap="clickItem" data-item="{{item}}">
+								{{ item }}
+						</view>
+				</view>
+				<view wx:else class="noSearch">暂无搜索记录</view>
+		</view>
+		<view class="menu">
+				<view class="menu_title">
+						<text>热门搜索：</text>
+				</view>
+				<view wx:if="{{hotList.length}}">
+						<view class="menu_item" wx:for="{{hotList}}" wx:key="index" bind:tap="clickItem" data-item="{{item}}">
+								{{ item }}
+						</view>
+				</view>
+				<view wx:else class="noSearch">暂无热门搜索</view>
+		</view>
+</view>

@@ -17,7 +17,12 @@ Page({
     goodSpec: [],
     selectedId: undefined,
     selectedNumber: 1,
-    selectedSpec: {}
+    selectedSpec: {},
+    activeTab: 'detail'
+  },
+  //
+  handleChangeTab(e) {
+    console.log(e)
   },
   getGoodInfo() {
     request.getGoodInfo(this.data.id).then((res) => {

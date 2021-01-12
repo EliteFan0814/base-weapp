@@ -1,0 +1,37 @@
+<view class="container">
+	<view class="tablist">
+		<van-search class="search" use-action-slot value="{{keywords}}" shape="round" 
+		bind:change="changeKeywords" bind:search="searchNewGood" show-action bind:clear="clearKeywords" placeholder="请输入搜索关键词">
+			<view slot="action" catch:tap="searchNewGood">搜索</view>
+		</van-search>
+		<!-- <view class="tab">
+			<view wx:for="{{sortList}}" wx:key="index" class="tab_item" data-index="{{index}}" bind:tap="sortSelect">
+				<text class="{{selectIndex == index?'tab-active':''}}">{{item.name}}</text>
+				<view wx:if="{{selectIndex == index}}" class="array-wrap">
+					<image wx:if="{{item.isSortUp}}" class="tab-img" src="../../static/icon/array-up.png"></image>
+					<image wx:else class="tab-img" src="../../static/icon/array-down.png"></image>
+				</view>
+				<view wx:else class="array-wrap">
+					<image wx:if="{{item.isSortUp}}" class="tab-img" src="../../static/icon/array-up-unactive.png"></image>
+					<image wx:else class="tab-img" src="../../static/icon/array-down-unactive.png"></image>
+				</view>
+			</view>
+		</view> -->
+	</view>
+
+	<view id="scroll-init" wx:if="{{!showNoList}}" class="block">
+		<view class="block_item" wx:for="{{secondList}}" wx:key="index" bind:tap="togoodsdetail" data-id="{{item.goods_id}}">
+			<image mode="aspectFill" src="{{item.picurl}}" />
+			<view class="content">
+				<view class="content_title two-ellipsis">{{item.name}}</view>
+				<view class="content_money">
+					<view class="content_money-red">￥{{item.price}}</view>
+					<text>销量：{{item.sales_volume}}</text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view wx:else style="margin-top: 240rpx;">
+		<base-no-list title="这个分类还没有商品看看其他的吧" />
+	</view>
+</view>

@@ -75,6 +75,28 @@
       }
     }
   }
+  .tab-wrap {
+    padding-bottom: 80rpx;
+    .good-detail {
+      padding: 10rpx;
+    }
+    .buy-record {
+      .record-item {
+        background-color: #fff;
+        margin: 10rpx;
+        border-radius: 15rpx;
+        padding: 10rpx;
+        .user-img {
+          width: 100rpx;
+          height: 100rpx;
+          display: block;
+          border-radius: 50%;
+        }
+        .right-info {
+        }
+      }
+    }
+  }
   .operation-wrap {
     background-color: #fff;
     box-sizing: border-box;

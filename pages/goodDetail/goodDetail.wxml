@@ -32,15 +32,23 @@
       <van-icon name="arrow" />
     </view>
   </view>
-  <view class="detain-wrap">
-    <van-tabs active="{{ active }}" bind:change="onChange" z-index="{{0}}">
-      <van-tab title="商品详情">
+  <view class="tab-wrap">
+    <van-tabs active="{{ activeTab }}" bind:change="handleChangeTab" z-index="{{0}}">
+      <van-tab title="商品详情" name="detail">
         <view class="good-detail">
           <rich-text nodes="{{goodInfo.content}}"></rich-text>
         </view>
       </van-tab>
-      <van-tab title="购买记录">
-        <view class="buy-record"></view>
+      <van-tab title="购买记录" name="record">
+        <view class="buy-record frame">
+          <view wx:for="{{10}}" wx:key="id" class="record-item flex">
+            <image class="user-img"></image>
+            <view class="right-info">
+              <view>周星驰</view>
+              <view>油闷大虾5吨</view>
+            </view>
+          </view>
+        </view>
       </van-tab>
     </van-tabs>
   </view>
