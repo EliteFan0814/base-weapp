@@ -83,6 +83,7 @@
     "base-no-list": "baseComponents/base-no-list/base-no-list",
     "base-search": "baseComponents/base-search/base-search",
     "base-pre-img": "baseComponents/base-pre-img/base-pre-img",
+    "base-class-swiper": "baseComponents/base-class-swiper/base-class-swiper",
     "wxparser": "plugin://wxparserPlugin/wxparser",
     "van-count-down": "@vant/weapp/count-down/index",
     "van-tab": "@vant/weapp/tab/index",
@@ -101,6 +102,7 @@
     "van-checkbox": "@vant/weapp/checkbox/index",
     "van-checkbox-group": "@vant/weapp/checkbox-group/index",
     "van-datetime-picker": "@vant/weapp/datetime-picker/index",
-    "van-search": "@vant/weapp/search/index"
+    "van-search": "@vant/weapp/search/index",
+    "van-dialog": "@vant/weapp/dialog/index"
   }
 }

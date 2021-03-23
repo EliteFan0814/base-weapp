@@ -7,10 +7,10 @@ Page({
   data: {
     capsuleToTop: app.globalData.capsuleToTop,
     orderList: [
-      { img: '/static/img/personal/pending.png', name: '待付款', value: 0 },
-      { img: '/static/img/personal/stocking.png', name: '备货中', value: 10 },
-      { img: '/static/img/personal/sending.png', name: '配送中', value: 20 },
-      { img: '/static/img/personal/end.png', name: '已完成', value: 30 }
+      { img: '/static/img/personal/pending.png', name: '待付款', value: 0, num: 0 },
+      { img: '/static/img/personal/stocking.png', name: '备货中', value: 10, num: 0 },
+      { img: '/static/img/personal/sending.png', name: '配送中', value: 20, num: 0 },
+      { img: '/static/img/personal/end.png', name: '已完成', value: 30, num: 0 }
     ],
     operateList: [
       { name: '积分商城', url: '/pages/integral/integral', isServe: false, haveValue: true },
@@ -39,7 +39,11 @@ Page({
     navOpacity: 0,
     teamStatus: '',
     integral: 0,
-    signDays: 0
+    signDays: 0,
+    infoAuth: app.globalData.infoAuth,
+    mobileAuth: app.globalData.mobileAuth,
+    showAuth: false,
+    setByPage: undefined
   },
   // 处理签到
   handleSign() {
@@ -57,6 +61,16 @@ Page({
         .catch((err) => {})
     }
   },
+  getRedNum() {
+    request.getRedNum().then((res) => {
+      console.log(res)
+      this.setData({
+        ['orderList[0].num']: res.value.unPay.unPayCount,
+        ['orderList[1].num']: res.value.delivering.deliveringCount,
+        ['orderList[2].num']: res.value.unTakeStock.unTakeStockCount
+      })
+    })
+  },
   //
   getUserInfo() {
     request
@@ -68,10 +82,83 @@ Page({
           isSign: value.isSign,
           integral: value.memberIntegral,
           account: account,
-          isLeader: value.isLeader
+          isLeader: value.isLeader,
+          infoAuth: value.infoAuth,
+          mobileAuth: value.mobileAuth
         })
+        if (!this.data.setByPage) {
+          if (!(this.data.infoAuth && this.data.mobileAuth)) {
+            this.setData({
+              showAuth: true
+            })
+          }
+        }
       })
       .catch((err) => {})
+  },
+  // 点击获取微信昵称头像并更新到后台
+  getWxUserInfoByPage: function (e) {
+    let user = e.detail.userInfo
+    console.log(e.detail.userInfo)
+    if (!this.data.infoAuth) {
+      request
+        .bindWx(user.nickName, user.avatarUrl)
+        .then((res) => {
+          app.globalData.infoAuth = true
+          this.setData({
+            infoAuth: true,
+            setByPage: true
+          })
+          this.getUserInfo()
+        })
+        .catch((err) => {})
+    } else {
+    }
+  },
+  // 点击获取微信昵称头像并更新到后台
+  getWxUserInfo: function (e) {
+    let user = e.detail.userInfo
+    console.log(e.detail.userInfo)
+    if (!this.data.infoAuth) {
+      request
+        .bindWx(user.nickName, user.avatarUrl)
+        .then((res) => {
+          app.globalData.infoAuth = true
+          this.setData({
+            infoAuth: true,
+            setByPage: false
+          })
+          this.getUserInfo()
+        })
+        .catch((err) => {})
+    } else {
+    }
+  },
+  alertInfo() {
+    app.toastFail('请先授权头像昵称')
+  },
+  // 获取并绑定手机号
+  getPhoneNumber(e) {
+    if (e.detail.errMsg.indexOf('ok') > -1) {
+      request
+        .bindPhone(e.detail.encryptedData, e.detail.iv)
+        .then((res) => {
+          app.toastSuccess('绑定成功')
+          this.setData({
+            mobileAuth: true,
+            showAuth: false
+          })
+          this.getUserInfo()
+        })
+        .catch((err) => {})
+    } else {
+      app.toastFail('拒绝绑定手机，可能影响小程序正常使用')
+    }
+  },
+  closeDialog() {
+    this.setData({
+      showAuth: false
+    })
   },
   // 获取签到天数
   getSignDays() {
@@ -93,46 +180,37 @@ Page({
     })
   },
   // 点击获取微信昵称头像并更新到后台
-  getWxUserInfo: function (e) {
-    let user = e.detail.userInfo
-    console.log(e.detail.userInfo)
-    if (!this.data.userInfo.wxName) {
-      request
-        .bindWx(user.nickName, user.avatarUrl)
-        .then((res) => {
-          console.log(res)
-          this.getUserInfo()
-          // if (res.code == 1) {
-          //   app.globalData.userInfo = user
-          //   this.setData({
-          //     hasUserInfo: true
-          //   })
-          //   this.getInfo()
-          // } else {
-          //   this.toastFail(res.msg)
-          // }
-        })
-        .catch((err) => {})
-    } else {
-      this.setData({
-        hasUserInfo: true
-      })
-    }
-  },
+  // getWxUserInfo: function (e) {
+  //   let user = e.detail.userInfo
+  //   console.log(e.detail.userInfo)
+  //   if (!this.data.userInfo.wxName) {
+  //     request
+  //       .bindWx(user.nickName, user.avatarUrl)
+  //       .then((res) => {
+  //         console.log(res)
+  //         this.getUserInfo()
+  //       })
+  //       .catch((err) => {})
+  //   } else {
+  //     this.setData({
+  //       hasUserInfo: true
+  //     })
+  //   }
+  // },
   // 获取并绑定手机号
-  getPhoneNumber(e) {
-    if (e.detail.errMsg.indexOf('ok') > -1) {
-      request
-        .bindPhone(e.detail.encryptedData, e.detail.iv)
-        .then((res) => {
-          app.toastSuccess('绑定成功')
-          this.getUserInfo()
-        })
-        .catch((err) => {})
-    } else {
-      app.toastFail('拒绝绑定手机，可能影响小程序正常使用')
-    }
-  },
+  // getPhoneNumber(e) {
+  //   if (e.detail.errMsg.indexOf('ok') > -1) {
+  //     request
+  //       .bindPhone(e.detail.encryptedData, e.detail.iv)
+  //       .then((res) => {
+  //         app.toastSuccess('绑定成功')
+  //         this.getUserInfo()
+  //       })
+  //       .catch((err) => {})
+  //   } else {
+  //     app.toastFail('拒绝绑定手机，可能影响小程序正常使用')
+  //   }
+  // },
   openTeam() {
     let url = `/pages/myTeam/myTeam`
     if (this.data.teamStatus === 0) return app.toastFail('正在审核中！')
@@ -189,5 +267,6 @@ Page({
     this.applyStatus()
     this.getUserInfo()
     this.getSignDays()
+    this.getRedNum()
   }
 })

@@ -12,6 +12,10 @@ Component({
       type: String,
       value: '暂无任何订单'
     }, 
+    titleColor:{
+      type: String,
+      value: '#999999'
+    },
     widthSize: {
       type: Number,
       value: 278

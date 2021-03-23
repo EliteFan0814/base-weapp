@@ -34,6 +34,8 @@ App({
   globalData: {
     isLogin: wx.getStorageSync('token') ? true : false,
     userInfo: null,
+    infoAuth: false,
+    mobileAuth: false,
     selectedClassIndex: 0,
     capsuleToTop: wx.getSystemInfoSync()['statusBarHeight'] + 6,
     upImgUrl: 'https://xcw.fxcloud.net/api/Files/UploadFiles?isPublic=true'

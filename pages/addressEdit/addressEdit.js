@@ -8,7 +8,7 @@ Page({
    */
   data: {
     autosize: {
-      maxHeight: 100,
+      maxHeight: 100
     },
     isGetPositionAuth: false,
     title: '',
@@ -51,6 +51,7 @@ Page({
   // 未授权定位则打开授权设置页面
   showAuthPosition() {
     wxPosition.isAuthPosition().then((res) => {
+      console.log('res', res)
       if (res) {
         this.setData({ isGetPositionAuth: true })
       }
@@ -108,8 +109,11 @@ Page({
   onLoad: async function (o) {
     const res = await wxPosition.asyncGetPosition()
     if (res) {
+      console.log(res)
       this.setData({
-        isGetPositionAuth: true
+        isGetPositionAuth: true,
+        ['info.longitude']: res.longitude,
+        ['info.latitude']: res.latitude
       })
     }
     if (o.type === 'edit') {

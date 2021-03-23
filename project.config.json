@@ -4,7 +4,7 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": false,
+    "urlCheck": true,
     "es6": true,
     "enhance": true,
     "postcss": true,
@@ -29,24 +29,18 @@
       "disablePlugins": [],
       "outputPath": ""
     },
-    "enableEngineNative": false,
     "bundle": false,
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
     "userConfirmedBundleSwitch": false,
-    "packNpmManually": true,
-    "packNpmRelationList": [
-      {
-        "packageJsonPath": "./package.json",
-        "miniprogramNpmDistDir": "./"
-      }
-    ],
+    "packNpmManually": false,
+    "packNpmRelationList": [],
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.1",
-  "projectname": "shengxian_member",
+  "projectname": "shengxian_my",
   "debugOptions": {
     "hidedInDevtools": []
   },
@@ -95,6 +89,23 @@
           "name": "订单",
           "pathName": "pages/order/order",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "商品详情",
+          "pathName": "pages/goodDetail/goodDetail",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "购物车",
+          "pathName": "pages/cart/cart",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "地方大师傅",
+          "pathName": "pages/personal/personal",
           "scene": null
         }
       ]

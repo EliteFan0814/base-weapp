@@ -140,6 +140,27 @@ Page({
       }
     })
   },
+  //
+  scrollGetList() {
+    if (this.data.page < this.data.totalPage) {
+      this.data.page += 1
+      request.getClassItemList(this.data.page, 10, this.data.activeId).then((res) => {
+        this.data.totalPage = res.value.totalPage
+        let tempCommon = this.data.classItemList
+        res.value.data = res.value.data.map((item, index) => {
+          if (item.isSeckill) {
+            item.timeData = 0
+          }
+          return item
+        })
+        const resList = res.value.data
+        tempCommon.push(...resList)
+        this.setData({
+          classItemList: tempCommon
+        })
+      })
+    }
+  },
   // 处理点击分类
   handleClickNav(e) {
     const id = this.data.classList[e.detail.index].id
@@ -153,18 +174,21 @@ Page({
     })
     this.getClassItemList()
   },
-  onReachBottom() {
-    if (this.data.page < this.data.totalPage) {
-      this.data.page += 1
-      this.getCommonList('down')
-    }
-  },
+  // onReachBottom() {
+  //   if (this.data.page < this.data.totalPage) {
+  //     this.data.page += 1
+  //     this.getClassItemList('down')
+  //   }
+  // },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.setData({
-      selectedClassIndex: app.globalData.selectedClassIndex || 0
+      selectedClassIndex: app.globalData.selectedClassIndex || 0,
+      page: 1,
+      totalPage: 0,
+      classItemList: []
     })
     this.getClassList()
   },

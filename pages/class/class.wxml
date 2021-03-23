@@ -6,7 +6,7 @@
     <view class="content-wrap">
       <van-tree-select items="{{ classList }}" main-active-class="active-class" height="55vw" main-active-index="{{ selectedClassIndex }}" bind:click-nav="handleClickNav">
         <view slot="content">
-          <view wx:if="{{classItemList.length}}" class="goods-list">
+          <scroll-view wx:if="{{classItemList.length}}" scroll-y="true" style="height: calc(100vh - 115px);" bindscrolltolower="scrollGetList"  class="goods-list">
             <view bind:tap="buyGoods" data-id="{{item.id}}" wx:for="{{classItemList}}" wx:key="id" class="goods-item">
               <view wx:if="{{item.isSeckill}}">
                 <view wx:if="{{item.seckillInfo.seckillEndReduce}}" class=" more-info flex">
@@ -47,7 +47,7 @@
                 </view>
               </view>
             </view>
-          </view>
+          </scroll-view>
           <base-no-list wx:else title="暂无商品" topDistance="{{50}}"></base-no-list>
         </view>
       </van-tree-select>

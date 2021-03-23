@@ -1,0 +1,29 @@
+<!-- baseComponents/base-class-swiper/base-class-swiper.wxml -->
+<view class="base-class-wrap">
+  <swiper wx:if="{{classList.length>1}}" bindchange="changeSwiper" style="height:{{swiperHeight}}px" indicator-dots="{{false}}" autoplay="{{false}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{classList}}" wx:for-item="pageItem" wx:for-index="pageIndex" wx:key="*this">
+      <swiper-item>
+        <view class="class-list">
+          <view bind:tap="openClassPage" wx:for="{{pageItem}}" wx:key="id" data-pageIndex="{{pageIndex}}" data-index="{{index}}" class="class-item">
+            <image class="class-img" src="{{item.thumbHost}}"></image>
+            <text class="omit-1">{{item.name}}</text>
+          </view>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+  <block wx:else>
+    <block wx:for="{{classList}}" wx:for-item="pageItem" wx:for-index="pageIndex" wx:key="*this">
+      <view class="class-list">
+        <view bind:tap="openClassPage" wx:for="{{pageItem}}" wx:key="id" data-pageIndex="{{pageIndex}}" data-index="{{index}}" class="class-item">
+          <image class="class-img" src="{{item.thumbHost}}"></image>
+          <text class="omit-1">{{item.name}}</text>
+        </view>
+      </view>
+    </block>
+  </block>
+  <!-- 下方指示点 -->
+  <view wx:if="{{showDots&&classList.length>1}}" class="dots-wrap">
+    <view wx:for="{{classList}}" wx:key="*this" class="dot-item {{index === currentPage?'active-item':''}}"></view>
+  </view>
+</view>

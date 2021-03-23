@@ -130,6 +130,23 @@
   font-size: 22rpx;
 }
 
+.container .personal-wrap .order-list .order-item {
+  position: relative;
+}
+
+.container .personal-wrap .order-list .order-item .red-num {
+  position: absolute;
+  top: -15rpx;
+  right: -15rpx;
+  width: 30rpx;
+  height: 30rpx;
+  background-color: red;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: 30rpx;
+  color: #fff;
+}
+
 .container .personal-wrap .order-list .order-item .order-icon {
   width: 36rpx;
   height: 32rpx;
@@ -221,4 +238,53 @@
 .container .personal-wrap .operate-list .operate-item .serve-btn::after {
   content: '';
   border: none;
+}
+
+.container .dialog-wrap {
+  padding: 15rpx;
+  background-color: #fff;
+}
+
+.container .dialog-wrap .title {
+  font-size: 34rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container .dialog-wrap .title > view {
+  text-align: center;
+  width: 33.33%;
+}
+
+.container .dialog-wrap .title .right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.container .dialog-wrap .title .right .close {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.container .dialog-wrap .top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.container .dialog-wrap .top .sub-title {
+  font-size: 24rpx;
+}
+
+.container .dialog-wrap .content-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container .dialog-wrap .content-wrap .bind-btn {
+  margin-bottom: 20rpx;
 }

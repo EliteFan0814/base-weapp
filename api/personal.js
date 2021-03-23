@@ -62,6 +62,9 @@ const requestApi = {
   // 推广
   spread() {
     return fly.get('/api/Wx/QrInfo', {})
+  },
+  getRedNum() {
+    return fly.get('/api/ProductOrder/OrderCountTotal')
   }
 }
 export default requestApi

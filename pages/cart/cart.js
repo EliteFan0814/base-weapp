@@ -1,4 +1,6 @@
 import request from '../../api/cart'
+import personal from '../../api/personal'
+
 const app = getApp()
 Page({
   /**
@@ -8,7 +10,10 @@ Page({
     selected: [],
     cartList: [],
     selAll: false,
-    total: 0
+    total: 0,
+    showAuth: false,
+    infoAuth: false,
+    mobileAuth: false
   },
   // 倒计时
   onTimeChange(e) {
@@ -24,6 +29,76 @@ Page({
     const tempKey = `cartList[${index}].endReduce`
     this.setData({
       [tempKey]: 0
+    })
+  },
+  //
+  getUserInfo() {
+    personal
+      .getUserInfo()
+      .then((res) => {
+        let { value, account } = res.value
+        this.setData({
+          infoAuth: value.infoAuth,
+          mobileAuth: value.mobileAuth
+        })
+        if (!(this.data.infoAuth && this.data.mobileAuth)) {
+          this.setData({
+            showAuth: true
+          })
+        }
+      })
+      .catch((err) => {})
+  },
+  // 点击获取微信昵称头像并更新到后台
+  getWxUserInfo: function (e) {
+    let user = e.detail.userInfo
+    console.log(e.detail.userInfo)
+    if (!this.data.infoAuth) {
+      personal
+        .bindWx(user.nickName, user.avatarUrl)
+        .then((res) => {
+          app.globalData.infoAuth = true
+          this.setData({
+            infoAuth: true
+          })
+          // this.getUserInfo()
+          // if (res.code == 1) {
+          //   app.globalData.userInfo = user
+          //   this.setData({
+          //     hasUserInfo: true
+          //   })
+          //   this.getInfo()
+          // } else {
+          //   this.toastFail(res.msg)
+          // }
+        })
+        .catch((err) => {})
+    } else {
+    }
+  },
+  alertInfo() {
+    app.toastFail('请先授权头像昵称')
+  },
+  // 获取并绑定手机号
+  getPhoneNumber(e) {
+    if (e.detail.errMsg.indexOf('ok') > -1) {
+      personal
+        .bindPhone(e.detail.encryptedData, e.detail.iv)
+        .then((res) => {
+          app.toastSuccess('绑定成功')
+          this.setData({
+            mobileAuth: true,
+            showAuth: false
+          })
+        })
+        .catch((err) => {})
+    } else {
+      app.toastFail('拒绝绑定手机，可能影响小程序正常使用')
+    }
+  },
+  closeDialog() {
+    this.setData({
+      showAuth: false
     })
   },
   getCartList() {
@@ -43,12 +118,15 @@ Page({
       this.computeTotal()
     })
   },
+
   // 处理选择
   handleSelect(event) {
     this.setData({
       selected: event.detail
     })
     const tempList = this.data.cartList
+    console.log('tempList', tempList)
+    // 计算出能选的一共有几个
     let filterNumber = 0
     for (let i = 0; i < tempList.length; i++) {
       if (!tempList[i].seckillSkuId) {
@@ -59,6 +137,7 @@ Page({
         filterNumber++
       }
     }
+
     if (filterNumber !== this.data.selected.length) {
       this.setData({
         selAll: false
@@ -153,6 +232,7 @@ Page({
    */
   onLoad: function (options) {
     this.getCartList()
+    this.getUserInfo()
   },
 
   /**
@@ -164,6 +244,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.getUserInfo()
     this.getCartList()
   },
 

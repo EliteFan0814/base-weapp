@@ -47,23 +47,6 @@
       }
     }
   }
-  .class-wrap {
-    .class-list {
-      display: flex;
-      flex-wrap: wrap;
-      // justify-content: space-between;
-      .class-item {
-        width: 20%;
-        font-size: 24rpx;
-        margin-bottom: 15rpx;
-        image {
-          width: 80rpx;
-          height: 80rpx;
-          border-radius: 18.12rpx;
-        }
-      }
-    }
-  }
   .seckill-wrap {
     margin-bottom: 10px;
     .seckill {

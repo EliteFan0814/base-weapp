@@ -66,10 +66,10 @@ Page({
   },
   // 展示自提地址
   showAddress(e) {
-    const { info } = app.tapData(e)
-    const locationTemp = info.pickUpLatlng.split(',')
-    const address = info.pickUpAddress
     if (this.data.isGetPositionAuth) {
+      const { info } = app.tapData(e)
+      const locationTemp = info.pickUpLatlng.split(',')
+      const address = info.pickUpAddress
       wx.getLocation({
         type: 'gcj02', //返回可以用于wx.openLocation的经纬度
         success(res) {

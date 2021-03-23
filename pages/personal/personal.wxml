@@ -7,26 +7,26 @@
       <view class="info-wrap" style="padding-top:{{capsuleToTop}}px;">
         <view class="user flex">
           <view class="img-wrap">
-            <image class="avatar" src="{{userInfo.wxHeader}}"></image>
-            <view wx:if="{{!userInfo.mobileAuth}}" class="shadow">
+            <image class="avatar" src="{{infoAuth?userInfo.wxHeader:'/static/img/avatar.png'}}"></image>
+            <view wx:if="{{infoAuth&&!mobileAuth}}" class="shadow">
               <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class="bind-phone-btn">
                 绑定手机
               </button>
             </view>
           </view>
-          <view wx:if="{{userInfo.infoAuth}}" class="info">
+          <view wx:if="{{infoAuth}}" class="info">
             <view class="name flex">
               <view>{{userInfo.wxName}}</view>
               <view class="grade">{{userInfo.isLeaderStr}}</view>
             </view>
-            <view class="phone">{{userInfo.mobileAuth?userInfo.mobile:'请绑定手机号'}}</view>
+            <view class="phone">{{mobileAuth?userInfo.mobile:'请绑定手机号'}}</view>
           </view>
           <view wx:else class="no-bind">
-            <button class="bind-btn" type="default" size="mini" open-type="getUserInfo" bindgetuserinfo="getWxUserInfo">
+            <button class="bind-btn" type="default" size="mini" open-type="getUserInfo" bindgetuserinfo="getWxUserInfoByPage">
               授权头像昵称
             </button>
           </view>
-          <view wx:if="{{userInfo.infoAuth&&userInfo.mobileAuth}}" bind:tap="handleSign" class="sign flex">
+          <view wx:if="{{infoAuth&&mobileAuth}}" bind:tap="handleSign" class="sign flex">
             <view wx:if="{{!isSign}}" class=" flex-dc">
               <image src="/static/img/personal/sign.png"></image>
               <text>今日未签到</text>
@@ -49,6 +49,7 @@
     </view>
     <view class="order-list frame flex">
       <view wx:for="{{orderList}}" wx:key="index" class="order-item flex-dc" bindtap="openOrder" data-status="{{item.value}}">
+        <view wx:if="{{item.num}}" class="red-num">{{item.num}}</view>
         <image src="{{item.img}}" class="order-icon"></image>
         <text>{{item.name}}</text>
       </view>
@@ -101,4 +102,33 @@
       </view>
     </view>
   </view>
+  <van-dialog use-slot show="{{ showAuth }}" showConfirmButton="{{false}}">
+    <view class="dialog-wrap">
+      <view class="title">
+        <view></view>
+        <view>您还未授权</view>
+        <view bind:tap="closeDialog" class="right">
+          <image src="/static/img/icon/close.svg" class="close"></image>
+        </view>
+      </view>
+      <view class="top">
+        <view class="sub-title">请先授权再进行操作</view>
+      </view>
+      <view class="content-wrap">
+        <button wx:if="{{!infoAuth}}" class="bind-btn" type="default" size="mini" open-type="getUserInfo" bindgetuserinfo="getWxUserInfo">
+          授权头像昵称
+        </button>
+        <button wx:else class="bind-btn" type="primary" size="mini">已授权头像昵称</button>
+        <block wx:if="{{!mobileAuth}}">
+          <button wx:if="{{infoAuth}}" class="bind-btn" type="default" size="mini" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+            绑定手机
+          </button>
+          <button wx:else class="bind-btn" type="default" size="mini" bind:tap="alertInfo">绑定手机</button>
+        </block>
+        <block wx:else>
+          <button class="bind-btn" type="primary" size="mini">已绑定手机号</button>
+        </block>
+      </view>
+    </view>
+  </van-dialog>
 </view>

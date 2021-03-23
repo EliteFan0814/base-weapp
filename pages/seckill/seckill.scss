@@ -40,7 +40,9 @@
       .time-list {
         position: absolute;
         bottom: 15rpx;
-        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        justify-content: space-between;
         overflow-x: scroll;
         &::-webkit-scrollbar {
           display: none;

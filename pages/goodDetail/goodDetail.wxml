@@ -140,4 +140,34 @@
       </view>
     </van-popup>
   </view>
+  
+  <van-dialog use-slot show="{{ showAuth }}" showConfirmButton="{{false}}">
+    <view class="dialog-wrap">
+      <view class="title">
+        <view></view>
+        <view>您还未授权</view>
+        <view bind:tap="closeDialog" class="right">
+          <image src="/static/img/icon/close.svg" class="close"></image>
+        </view>
+      </view>
+      <view class="top">
+        <view class="sub-title">请先授权再进行操作</view>
+      </view>
+      <view class="content-wrap">
+        <button wx:if="{{!infoAuth}}" class="bind-btn" type="default" size="mini" open-type="getUserInfo" bindgetuserinfo="getWxUserInfo">
+          授权头像昵称
+        </button>
+        <button wx:else class="bind-btn" type="primary" size="mini">已授权头像昵称</button>
+        <block wx:if="{{!mobileAuth}}">
+          <button wx:if="{{infoAuth}}" class="bind-btn" type="default" size="mini" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+            绑定手机
+          </button>
+          <button wx:else class="bind-btn" type="default" size="mini" bind:tap="alertInfo">绑定手机</button>
+        </block>
+        <block wx:else>
+          <button class="bind-btn" type="primary" size="mini">已绑定手机号</button>
+        </block>
+      </view>
+    </view>
+  </van-dialog>
 </view>

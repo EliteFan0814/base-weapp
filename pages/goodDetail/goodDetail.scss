@@ -228,4 +228,44 @@
       }
     }
   }
+  .dialog-wrap {
+    padding: 15rpx;
+    background-color: #fff;
+    .title {
+      font-size: 34rpx;
+      margin-bottom: 20rpx;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      > view {
+        text-align: center;
+        width: 33.33%;
+      }
+      .right {
+        display: flex;
+        justify-content: flex-end;
+        .close {
+          width: 50rpx;
+          height: 50rpx;
+        }
+      }
+    }
+    .top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20rpx;
+      .sub-title {
+        font-size: 24rpx;
+      }
+    }
+    .content-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .bind-btn {
+        margin-bottom: 20rpx;
+      }
+    }
+  }
 }

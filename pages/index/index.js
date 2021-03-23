@@ -10,18 +10,13 @@ Page({
     interval: 3000,
     duration: 500,
     swiperList: [],
-    classList: [],
-    classPages: 0,
-    // periodDate: undefined,
-    // periodText: '',
+    classArr: [],
     periodInfo: {
       period: '',
       reduce: 0,
       text: '',
       timeSpan: ''
     },
-    // time: 0,
-    // timeSpan: '',
     timeData: {},
     userInfo: {},
     todayProd: [],
@@ -49,23 +44,6 @@ Page({
       activeTab: e.detail.name
     })
     this.get2Day()
-  },
-  // 打开相应分类
-  openClass(e) {
-    console.log(1)
-    const { index, pageindex } = app.tapData(e)
-    console.log(2)
-    app.globalData.selectedClassIndex = index + pageindex * 10
-    console.log(3)
-    wx.switchTab({
-      url: '/pages/class/class',
-      success: function (e) {
-        var page = getCurrentPages().pop()
-
-        if (page == undefined || page == null) return
-        page.onLoad()
-      }
-    })
   },
 
   //  方法
@@ -161,11 +139,8 @@ Page({
   getClassList() {
     request.getClassList().then((res) => {
       // res.value = res.value.concat(res.value).concat(res.value).concat(res.value).concat(res.value).concat(res.value)
-      res.value = res.value
-      const filterArr = this.sliceArray(res.value, 10)
       this.setData({
-        classList: filterArr,
-        classPages: filterArr.length
+        classArr: res.value
       })
     })
   },
@@ -194,15 +169,6 @@ Page({
       .catch((err) => {})
   },
 
-  //分类分页处理
-  sliceArray(targetArray, number) {
-    const page = Math.ceil(targetArray.length / number)
-    const returnArr = []
-    for (let i = 0; i < page; i++) {
-      returnArr[i] = targetArray.slice(i * number, (i + 1) * number)
-    }
-    return returnArr
-  },
   // 打开商品详情
   openDetail(e) {
     wx.navigateTo({

@@ -71,6 +71,7 @@ const requestApi = {
   // 获取自提地址
   getSelfGetInfo() {
     return fly.get('/api/SystemSettings/GetPickUpInfo')
-  }
+  },
+
 }
 export default requestApi

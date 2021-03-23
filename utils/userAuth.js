@@ -49,6 +49,9 @@ async function setTokenSync() {
       token = res.token
       wx.setStorageSync('token', res.token)
       app.globalData.userInfo = res.userInfo
+      app.globalData.infoAuth = res.userInfo.infoAuth
+      app.globalData.mobileAuth = res.userInfo.mobileAuth
+      console.log(app.globalData)
     }
     app.globalData.isLogin = true
     return token

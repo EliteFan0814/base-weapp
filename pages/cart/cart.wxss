@@ -101,3 +101,52 @@
 .container .operation .right .all .grey {
   margin-right: 10rpx;
 }
+
+.container .dialog-wrap {
+  padding: 15rpx;
+  background-color: #fff;
+}
+
+.container .dialog-wrap .title {
+  font-size: 34rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container .dialog-wrap .title > view {
+  text-align: center;
+  width: 33.33%;
+}
+
+.container .dialog-wrap .title .right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.container .dialog-wrap .title .right .close {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.container .dialog-wrap .top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.container .dialog-wrap .top .sub-title {
+  font-size: 24rpx;
+}
+
+.container .dialog-wrap .content-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container .dialog-wrap .content-wrap .bind-btn {
+  margin-bottom: 20rpx;
+}

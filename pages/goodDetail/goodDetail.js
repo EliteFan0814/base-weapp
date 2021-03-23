@@ -1,5 +1,7 @@
 import request from '../../api/good'
 import index from '../../api/index'
+import personal from '../../api/personal'
+
 const app = getApp()
 Page({
   /**
@@ -26,7 +28,9 @@ Page({
     selectedSpec: {},
     activeTab: 'detail',
     goodContent: '',
-    buyRecord: []
+    buyRecord: [],
+    infoAuth: false,
+    mobileAuth: false
   },
   //
   getBuyRecord() {
@@ -41,10 +45,8 @@ Page({
     console.log(e)
   },
   getGoodInfo() {
-    // request.getGoodInfo(this.data.id).then((res) => {
     request.getGoodInfoAll(this.data.id).then((res) => {
       const temp = res.value.content ? res.value.content.replace(/\<img/gi, '<img class="rich-img" ') : ''
-      console.log('res.value', res.value)
       this.setData({
         goodInfo: res.value,
         goodContent: temp,
@@ -56,6 +58,76 @@ Page({
         selectedSpec: res.value.skus[0],
         selectedId: res.value.skus[0].id
       })
+    })
+  },
+  //
+  getUserInfo() {
+    personal
+      .getUserInfo()
+      .then((res) => {
+        let { value, account } = res.value
+        this.setData({
+          infoAuth: value.infoAuth,
+          mobileAuth: value.mobileAuth
+        })
+        if (!(this.data.infoAuth && this.data.mobileAuth)) {
+          this.setData({
+            showAuth: true
+          })
+        }
+      })
+      .catch((err) => {})
+  },
+  // 点击获取微信昵称头像并更新到后台
+  getWxUserInfo: function (e) {
+    let user = e.detail.userInfo
+    console.log(e.detail.userInfo)
+    if (!this.data.infoAuth) {
+      personal
+        .bindWx(user.nickName, user.avatarUrl)
+        .then((res) => {
+          app.globalData.infoAuth = true
+          this.setData({
+            infoAuth: true
+          })
+          // this.getUserInfo()
+          // if (res.code == 1) {
+          //   app.globalData.userInfo = user
+          //   this.setData({
+          //     hasUserInfo: true
+          //   })
+          //   this.getInfo()
+          // } else {
+          //   this.toastFail(res.msg)
+          // }
+        })
+        .catch((err) => {})
+    } else {
+    }
+  },
+  alertInfo() {
+    app.toastFail('请先授权头像昵称')
+  },
+  // 获取并绑定手机号
+  getPhoneNumber(e) {
+    if (e.detail.errMsg.indexOf('ok') > -1) {
+      personal
+        .bindPhone(e.detail.encryptedData, e.detail.iv)
+        .then((res) => {
+          app.toastSuccess('绑定成功')
+          this.setData({
+            mobileAuth: true,
+            showAuth: false
+          })
+        })
+        .catch((err) => {})
+    } else {
+      app.toastFail('拒绝绑定手机，可能影响小程序正常使用')
+    }
+  },
+  closeDialog() {
+    this.setData({
+      showAuth: false
     })
   },
   // 处理倒计时
@@ -150,17 +222,23 @@ Page({
     })
   },
   handleClose() {
-    if (this.data.isSeckill) {
-      if (this.data.isSeckillBegin) {
+    if (this.data.infoAuth && this.data.mobileAuth) {
+      if (this.data.isSeckill) {
+        if (this.data.isSeckillBegin) {
+          this.setData({
+            showDialog: !this.data.showDialog
+          })
+        } else {
+          app.toastFail('秒杀暂未开始！')
+        }
+      } else {
         this.setData({
           showDialog: !this.data.showDialog
         })
-      } else {
-        app.toastFail('秒杀暂未开始！')
       }
     } else {
       this.setData({
-        showDialog: !this.data.showDialog
+        showAuth: true
       })
     }
   },
@@ -172,6 +250,7 @@ Page({
     this.getGoodInfo()
     // this.getGoodSpec()
     this.getBuyRecord()
+    this.getUserInfo()
   },
 
   /**

@@ -1,0 +1,58 @@
+.base-class-wrap {
+  padding: 10rpx 0;
+}
+
+.base-class-wrap .class-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.base-class-wrap .class-list .class-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+  font-size: 24rpx;
+  margin-bottom: 10rpx;
+}
+
+.base-class-wrap .class-list .class-item .class-img {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 18.12rpx;
+}
+
+.base-class-wrap .class-list .class-item .omit-1 {
+  text-align: center;
+  width: 120rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.base-class-wrap .dots-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.base-class-wrap .dots-wrap .dot-item {
+  width: 17rpx;
+  height: 17rpx;
+  background-color: #cccccc;
+  border-radius: 50%;
+  margin: 0 8rpx;
+}
+
+.base-class-wrap .dots-wrap .dot-item:first-child {
+  margin-left: 0;
+}
+
+.base-class-wrap .dots-wrap .dot-item:last-child {
+  margin-right: 0;
+}
+
+.base-class-wrap .dots-wrap .active-item {
+  background-color: #333;
+}

@@ -12,7 +12,7 @@
       <block wx:for="{{swiperList}}" wx:key="*this">
         <swiper-item>
           <view class="swiper-item">
-            <image src="{{item.hostPic}}"></image>
+            <image mode="aspectFill" src="{{item.hostPic}}"></image>
           </view>
         </swiper-item>
       </block>
@@ -20,22 +20,7 @@
   </view>
   <!-- 产品分类 -->
   <view class="class-wrap">
-    <swiper indicator-dots="{{true}}" autoplay="{{false}}" interval="{{interval}}" duration="{{duration}}">
-      <block wx:for="{{classList}}" wx:for-item="pageItem" wx:for-index="pageIndex" wx:key="*this">
-        <swiper-item>
-          <view class="class-list">
-            <view bind:tap="openClass" wx:for="{{pageItem}}" wx:key="id" data-pageIndex="{{pageIndex}}" data-index="{{index}}" class="class-item flex-dc">
-              <image src="{{item.thumbHost}}"></image>
-              <text>{{item.name}}</text>
-            </view>
-          </view>
-        </swiper-item>
-      </block>
-    </swiper>
-    <!-- <view bind:tap="openClass" wx:for="{{classList}}" wx:key="*this" data-index="{{index}}" class="class-item flex-dc">
-        <image src="https://dummyimage.com/90x90/000/fff"></image>
-        <text>生鲜</text>
-      </view> -->
+    <base-class-swiper classArr="{{classArr}}"></base-class-swiper>
   </view>
   <!-- 限时秒杀 -->
   <block>
